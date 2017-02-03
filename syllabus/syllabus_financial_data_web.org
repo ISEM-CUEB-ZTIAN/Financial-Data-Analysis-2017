@@ -22,19 +22,17 @@
 
   | Name:   | Zongye Huang (黄宗晔)           | Zheng Tian (田峥)            |
   | Email:  | zongyeh@163.com                 | ztian_cueb@163.com           |
-  | Office: | Chengming Building (诚明楼) 215 | Angong Building (安工楼) 215 |
-  | Tel:    | 8395-1643                       | 8395-1054                    |
+  | Office: | Chengming Building (诚明楼) 325 | Angong Building (安工楼) 215 |
 
 
 ** Office hours
 Office hours are tentatively scheduled as follows,
 
-*** TODO Add Zongye's office hour here
-| Zongye Huang |         |                     |        |                     |
-| Zheng Tian   | Tuesday | 9:30 am -- 11:30 am | Friday | 9:30 am -- 11:30 am |
+| Zongye Huang | Friday | 10:10 am -- 11:10 am |
+| Zheng Tian   | Friday | 9:30 am -- 11:30 am  |
 
 You are welcomed to stop by our offices at any other time. But making
-an appointment by email or phone in advance is highly recommended.
+an appointment by email in advance is highly recommended.
 
 
 * Course description
@@ -61,10 +59,9 @@ manipulate, and analyze financial data with real applications.
 
 - Analysis of Financial Time Series, 3rd Edition, by Ruey S. Tsay.
   (金融时间序列分析)
-  https://www.amazon.cn/dp/0470414359/ref=sr_1_fkmr0_2?ie=UTF8&qid=1486067026&sr=8-2-fkmr0&keywords=Analysis+of+Financial+Time+Series%2C+3rd+Edition%2C+by+Ruey+S.+Tsay
 
 - An Introduction to Analysis of Financial Data with R, 1st Edition,
-  by Ruey S. Tsay (金融数据分析导论:基于R语言) https://www.amazon.cn/An-Introduction-to-Analysis-of-Financial-Data-with-R-Tsay-Ruey-S/dp/0470890819/ref=pd_sim_14_1?ie=UTF8&psc=1&refRID=PD43V5MGW9BPSD9TSWWH
+  by Ruey S. Tsay (金融数据分析导论:基于R语言)
 
 
 * Course materials
@@ -74,9 +71,8 @@ manipulate, and analyze financial data with real applications.
 Lecture notes will contain all contents to be taught in class, which
 are the basis for homework and exams. Previewing and reviewing them
 will be greatly helpful for learning this course besides reading
-textbooks. All lecture notes will be uploaded online and sent by email before
-each session. Please give us your accessible email address as soon as
-possible.
+textbooks. All lecture notes will be uploaded to Baidu Cloud from
+where you can download. 
 
 ** Data
 
@@ -133,11 +129,12 @@ Course projects can be carried out individually or by study group, the
 latter of which is preferred. An explanation of study group is in the
 next subsection.
 
-The final product of the project include: (1) a research report, (2)
+The final products of the project include: (1) a research report, (2)
 data and code used in the project, and (3) a documentation written in
 R Markdown that can be used to reproduce your results. Complete
 explanations regarding research reports and documentation will be
 given in class.
+
 
 ** The requirements for group working
 
@@ -162,6 +159,7 @@ to collaborate with teammates not only mentally but also
 practically. GitHub Classroom is a good platform to practice teamwork,
 at which you can work on the same file simultaneously and see the
 contribution of each team member. (shirking is easily spotted there!)
+
 
 ** Exams
 
@@ -203,18 +201,18 @@ contribution of each team member. (shirking is easily spotted there!)
 The following table is a tentative schedule for this course. Change
 will be made contingent on actual progress.
 
-| Instructors  | Topics                             | Time           |
-|--------------+------------------------------------+----------------|
-| Zongye Huang | Introduction to financial data     | Weeks 1 to 2   |
-|              | Stationary time series             | Weeks 3 to 5   |
-|              | Nonstationary time series          | Weeks 6 to 7   |
-|              | Midterm exam                       | Week 8         |
-|--------------+------------------------------------+----------------|
-| Zheng Tian   | Conditional heteroskedastic models | Weeks 9 to 12  |
-|              | Value at Risk                      | Weeks 13 to 15 |
-|              | Review and Q&A                     | Week 16        |
-|--------------+------------------------------------+----------------|
-|              | Final exam                         | Week 17        |
+| Instructors  | Topics                                  | Time           |
+|--------------+-----------------------------------------+----------------|
+| Zongye Huang | Introduction to financial data          | Weeks 1 to 2   |
+|              | Linear models for financial time series | Weeks 3 to 5   |
+|              | Case studies of linear time series      | Weeks 6 to 7   |
+|              | Midterm exam                            | Week 8         |
+|--------------+-----------------------------------------+----------------|
+| Zheng Tian   | Conditional heteroskedastic models      | Weeks 9 to 13  |
+|              | Value at Risk                           | Weeks 14 to 15  |
+|              | Review and Q&A                          | Week 16        |
+|--------------+-----------------------------------------+----------------|
+|              | Final exam                              | Week 17        |
 
 
 * Policy on academic dishonesty
