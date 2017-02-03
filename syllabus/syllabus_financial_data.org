@@ -1,0 +1,231 @@
+#+TITLE: Syllabus for Financial Data Analysis
+#+AUTHOR: Zongye Huang and Zheng Tian
+#+DATE: Spring semester, 2017
+#+OPTIONS: toc:nil H:2 num:1
+#+OPTIONS: ^:{}
+#+LATEX_CLASS_OPTIONS: [a4paper,11pt]
+#+LATEX_HEADER: \usepackage[margin=1in]{geometry}
+#+LATEX_HEADER: \usepackage{setspace}
+#+LATEX_HEADER: \singlespace
+#+LATEX_HEADER: \usepackage{CJK}
+#+LATEX_HEADER: \usepackage{parskip}
+# #+LATEX_HEADER: \usepackage[UTF8]{ctex}
+
+
+* Basic information
+
+** Time and location
+
+  | Odd weeks  | Monday  | 13:30 -- 15:20 | Mingbian Building (\begin{CJK}{UTF8}{gbsn}明辨楼\end{CJK}) 511 |
+  |            | Tuesday | 15:40 -- 17:30 | Buoxue Building (\begin{CJK}{UTF8}{gbsn}博学楼\end{CJK}) 316   |
+  | Even weeks | Tuesday | 15:40 -- 17:30 | Buoxue Building (\begin{CJK}{UTF8}{gbsn}博学楼\end{CJK}) 316   |
+
+
+** Instructor information
+
+  | Name:   | Zongye Huang (\begin{CJK}{UTF8}{gbsn}黄宗晔\end{CJK})           | Zheng Tian (\begin{CJK}{UTF8}{gbsn}田峥\end{CJK})            |
+  | Email:  | zongyeh@163.com                                                 | ztian_cueb@163.com                                           |
+  | Office: | Chengming Building (\begin{CJK}{UTF8}{gbsn}诚明楼\end{CJK}) 215 | Angong Building (\begin{CJK}{UTF8}{gbsn}安工楼\end{CJK}) 215 |
+  | Tel:    | 8395-1643                                                       | 8395-1054                                                    |
+
+
+** Office hours
+Office hours are tentatively scheduled as follows,
+
+*** TODO Add Zongye's office hour here
+| Zongye Huang |         |                     |        |                     |
+| Zheng Tian   | Tuesday | 9:30 am -- 11:30 am | Friday | 9:30 am -- 11:30 am |
+
+You are welcomed to stop by our offices at any other time. But making
+an appointment by email or phone in advance is highly recommended.
+
+
+* Course description
+
+Financial data analysis is a required upper-division course for
+undergraduate students majored in financial economics. In this course,
+we introduce basic econometric methods applied to financial data, with
+the following goals: (1) familiarizing students with the features of
+financial data, (2) equipping students with econometric models to
+analyze the trend of financial time series and make prediction, and
+(3) enabling students to implement these techniques using computer
+software, primarily R programming language.
+
+This course weighs equally on both theoretical and practical
+learning. As for theories regarding financial time series, we will
+learn such topics as linear time series models for stationary series,
+such as AR, MA, ARMA, and for unit-root non-stationary series;
+volatility analysis, for example, ARCH, GARCH models; and risk
+analysis, primarily VaR. Practical learning involves using R to read,
+manipulate, and analyze financial data with real applications.
+
+
+* Textbooks
+
+- Analysis of Financial Time Series, 3rd Edition, by Ruey S. Tsay.
+  (\begin{CJK}{UTF8}{gbsn}金融时间序列分析\end{CJK})
+  https://www.amazon.cn/dp/0470414359/ref=sr_1_fkmr0_2?ie=UTF8&qid=1486067026&sr=8-2-fkmr0&keywords=Analysis+of+Financial+Time+Series%2C+3rd+Edition%2C+by+Ruey+S.+Tsay
+
+- An Introduction to Analysis of Financial Data with R, 1st Edition,
+  by Ruey S. Tsay (\begin{CJK}{UTF8}{gbsn}金融数据分析导论:基于R语言
+  \end{CJK}) https://www.amazon.cn/An-Introduction-to-Analysis-of-Financial-Data-with-R-Tsay-Ruey-S/dp/0470890819/ref=pd_sim_14_1?ie=UTF8&psc=1&refRID=PD43V5MGW9BPSD9TSWWH
+
+
+* Course materials
+
+** Lecture notes
+
+Lecture notes will contain all contents to be taught in class, which
+are the basis for homework and exams. Previewing and reviewing them
+will be greatly helpful for learning this course besides reading
+textbooks. All lecture notes will be uploaded online and sent by email before
+each session. Please give us your accessible email address as soon as
+possible.
+
+** Data
+
+We will use large amounts of financial data. All data sets will be
+maintained in Baidu Cloud (or GitHub) from which you can download.
+
+** Software
+
+R is the primary software we will use to analyze financial data. You
+can download (or update to the latest version of) R at
+https://mirrors.tuna.tsinghua.edu.cn/CRAN/. RStudio is the GUI
+(graphic user interface) of R. We will use it to edit R code and write
+empirical reports. Download it at
+https://www.rstudio.com/products/rstudio/download/.
+
+GitHub is a platform for maintaining projects and collaborating with
+team members. Basic knowledge about GitHub and Git (a version control
+system) is necessary. In this semester, we are planning to use GitHub
+to manage and submit course projects. Please first register a free
+account at https://github.com/. A short tutorial is available upon
+finishing registration. A complete tutorial for Git and GitHub will be
+offered in class. If you are interested, try to install Git according to
+this instruction
+https://git-scm.com/book/en/v2/Getting-Started-Installing-Git.
+
+
+* Course assignments
+
+** Homework
+
+- Homework helps students understand fundamentals
+  theoretical models and practice programming skills.
+
+- You can finish your homework by either handwriting or typesetting
+  using word process software, e.g., Microsoft Word, LaTeX, and the
+  like. Typesetting rather than handwriting is highly recommended.
+
+- Homework must be submitted on the due day that will be announced in
+  class. A grace period for late submission can be granted by request
+  in advance. If granted, you must turn in your homework within one
+  week after the due day. Late submission of homework is subject to
+  reducing score to a lower level. No submission at all will result in
+  no score on homework.
+
+
+** Course project
+
+Course projects help student train research and writing skills as well
+as team working spirit. You can choose any topic and use any data set
+that are related to this course to complete a mini research
+project.
+
+Course projects can be carried out individually or by study group, the
+latter of which is preferred. An explanation of study group is in the
+next subsection.
+
+The final product of the project include: (1) a research report, (2)
+data and code used in the project, and (3) a documentation written in
+R Markdown that can be used to reproduce your results. Complete
+explanations regarding research reports and documentation will be
+given in class.
+
+** The requirements for group working
+
+Admittedly, some questions in homework may be difficult and completing
+a whole set of homework may be time consuming. Therefore, we allow you
+to form study groups to do homework. Sharing knowledge and helping
+fellow students are meritorious, and the spirit of team working is
+desirable in many careers.
+
+The formation of study groups is totally voluntary. The size of each
+group should not exceed four students, and each student should only
+join one group. Please send us the information of your study group no
+later than March 6th.
+
+High resemblance of completed homework within each group is
+permitted. However, homework that is highly alike between groups will
+be treated as shirking, resulting in lower scores for all persons
+involved.
+
+Study groups are also course project groups. We want you to learn how
+to collaborate with teammates not only mentally but also
+practically. GitHub Classroom is a good platform to practice teamwork,
+at which you can work on the same file simultaneously and see the
+contribution of each team member. (shirking is easily spotted there!)
+
+** Exams
+
+*** The mid-term exam
+- The mid-term exam is tentatively scheduled in Week 8, which will
+  cover all contents that Prof. Huang teaches.
+- It will be a closed-book test. But you are allowed to bring a
+  one-sided "cheat sheet", on which you can write down some notes that
+  help you remember some important definitions and formulae. You are
+  allowed to write on only one side on the cheat sheet.
+- If you miss the mid-term exam, a make-up test can be arranged. You
+  must notify me of your absence in advance with a valid excuse.
+
+*** The final exam
+- The final exam is in Week 17, covering all content that Prof. Tian
+  teaches.
+- It will also be a closed-book, and a one-side cheat sheet will be
+  allowed.
+- The time and location are to be arranged and announced by the
+  university.
+- The make-up test will follow the rule of the university.
+
+
+** Grade distribution
+
+| Assignments    | Scores |
+|----------------+--------|
+| Homework       |     20 |
+| Course project |     20 |
+| Midterm exam   |     30 |
+| Final exam     |     30 |
+|----------------+--------|
+| total          |    100 |
+#+TBLFM: @6$2=vsum(@2$2..@5$2)
+
+
+* Course outline
+
+The following table is a tentative schedule for this course. Change
+will be made contingent on actual progress.
+
+| Instructors  | Topics                             | Time           |
+|--------------+------------------------------------+----------------|
+| Zongye Huang | Introduction to financial data     | Weeks 1 to 2   |
+|              | Stationary time series             | Weeks 3 to 5   |
+|              | Nonstationary time series          | Weeks 6 to 7   |
+|              | Midterm exam                       | Week 8         |
+|--------------+------------------------------------+----------------|
+| Zheng Tian   | Conditional heteroskedastic models | Weeks 9 to 12  |
+|              | Value at Risk                      | Weeks 13 to 15 |
+|              | Review and Q&A                     | Week 16        |
+|--------------+------------------------------------+----------------|
+|              | Final exam                         | Week 17        |
+
+
+* Policy on academic dishonesty
+
+Academic dishonesty is defined to include but is not limited to the
+following: plagiarism; cheating and dishonest practices in connection
+with examinations, papers and projects; forgery, misrepresentation and
+fraud. Such behavior will not be tolerated and will be handled
+according to university guidelines.
+

@@ -1,0 +1,743 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2017-02-02 Thu 17:08 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Syllabus for Financial Data Analysis</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Zongye Huang and Zheng Tian" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.js"></script>
+<script type="text/javascript" src="http://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
+<link rel="stylesheet" type="text/css" href="file:///Users/ztian/.emacs.d/css/theorems.css"/>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Syllabus for Financial Data Analysis</h1>
+
+<div id="outline-container-org4796407" class="outline-2">
+<h2 id="org4796407"><span class="section-number-2">1</span> Basic information</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-orgef3f2a6" class="outline-3">
+<h3 id="orgef3f2a6">Time and location</h3>
+<div class="outline-text-3" id="text-orgef3f2a6">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Odd weeks</td>
+<td class="org-left">Monday</td>
+<td class="org-left">13:30 &#x2013; 15:20</td>
+<td class="org-left">Mingbian Building (明辨楼) 511</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Tuesday</td>
+<td class="org-left">15:40 &#x2013; 17:30</td>
+<td class="org-left">Buoxue Building (博学楼) 316</td>
+</tr>
+
+<tr>
+<td class="org-left">Even weeks</td>
+<td class="org-left">Tuesday</td>
+<td class="org-left">15:40 &#x2013; 17:30</td>
+<td class="org-left">Buoxue Building (博学楼) 316</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+<div id="outline-container-orgad7330e" class="outline-3">
+<h3 id="orgad7330e">Instructor information</h3>
+<div class="outline-text-3" id="text-orgad7330e">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Name:</td>
+<td class="org-left">Zongye Huang (黄宗晔)</td>
+<td class="org-left">Zheng Tian (田峥)</td>
+</tr>
+
+<tr>
+<td class="org-left">Email:</td>
+<td class="org-left">zongyeh@163.com</td>
+<td class="org-left">ztian_cueb@163.com</td>
+</tr>
+
+<tr>
+<td class="org-left">Office:</td>
+<td class="org-left">Chengming Building (诚明楼) 215</td>
+<td class="org-left">Angong Building (安工楼) 215</td>
+</tr>
+
+<tr>
+<td class="org-left">Tel:</td>
+<td class="org-left">8395-1643</td>
+<td class="org-left">8395-1054</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+<div id="outline-container-org5fdeb19" class="outline-3">
+<h3 id="org5fdeb19">Office hours</h3>
+<div class="outline-text-3" id="text-org5fdeb19">
+<p>
+Office hours are tentatively scheduled as follows,
+</p>
+</div>
+
+<ul class="org-ul"><li><a id="org4808399"></a><span class="todo TODO">TODO</span> Add Zongye's office hour here<br  /><div class="outline-text-4" id="text-org4808399">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">Zongye Huang</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">Zheng Tian</td>
+<td class="org-left">Tuesday</td>
+<td class="org-left">9:30 am &#x2013; 11:30 am</td>
+<td class="org-left">Friday</td>
+<td class="org-left">9:30 am &#x2013; 11:30 am</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+You are welcomed to stop by our offices at any other time. But making
+an appointment by email or phone in advance is highly recommended.
+</p>
+</div></li></ul>
+</div>
+</div>
+
+
+<div id="outline-container-orge8430d5" class="outline-2">
+<h2 id="orge8430d5"><span class="section-number-2">2</span> Course description</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Financial data analysis is a required upper-division course for
+undergraduate students majored in financial economics. In this course,
+we introduce basic econometric methods applied to financial data, with
+the following goals: (1) familiarizing students with the features of
+financial data, (2) equipping students with econometric models to
+analyze the trend of financial time series and make prediction, and
+(3) enabling students to implement these techniques using computer
+software, primarily R programming language.
+</p>
+
+<p>
+This course weighs equally on both theoretical and practical
+learning. As for theories regarding financial time series, we will
+learn such topics as linear time series models for stationary series,
+such as AR, MA, ARMA, and for unit-root non-stationary series;
+volatility analysis, for example, ARCH, GARCH models; and risk
+analysis, primarily VaR. Practical learning involves using R to read,
+manipulate, and analyze financial data with real applications.
+</p>
+</div>
+</div>
+
+
+<div id="outline-container-orgb7ff614" class="outline-2">
+<h2 id="orgb7ff614"><span class="section-number-2">3</span> Textbooks</h2>
+<div class="outline-text-2" id="text-3">
+<ul class="org-ul">
+<li>Analysis of Financial Time Series, 3rd Edition, by Ruey S. Tsay.
+(金融时间序列分析)
+<a href="https://www.amazon.cn/dp/0470414359/ref=sr_1_fkmr0_2?ie=UTF8&amp;qid=1486067026&amp;sr=8-2-fkmr0&amp;keywords=Analysis+of+Financial+Time+Series,+3rd+Edition,+by+Ruey+S.+Tsay">https://www.amazon.cn/dp/0470414359/ref=sr_1_fkmr0_2?ie=UTF8&amp;qid=1486067026&amp;sr=8-2-fkmr0&amp;keywords=Analysis+of+Financial+Time+Series,+3rd+Edition,+by+Ruey+S.+Tsay</a></li>
+
+<li>An Introduction to Analysis of Financial Data with R, 1st Edition,
+by Ruey S. Tsay (金融数据分析导论:基于R语言) <a href="https://www.amazon.cn/An-Introduction-to-Analysis-of-Financial-Data-with-R-Tsay-Ruey-S/dp/0470890819/ref=pd_sim_14_1?ie=UTF8&amp;psc=1&amp;refRID=PD43V5MGW9BPSD9TSWWH">https://www.amazon.cn/An-Introduction-to-Analysis-of-Financial-Data-with-R-Tsay-Ruey-S/dp/0470890819/ref=pd_sim_14_1?ie=UTF8&amp;psc=1&amp;refRID=PD43V5MGW9BPSD9TSWWH</a></li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org030b3cf" class="outline-2">
+<h2 id="org030b3cf"><span class="section-number-2">4</span> Course materials</h2>
+<div class="outline-text-2" id="text-4">
+</div><div id="outline-container-orgbfe8647" class="outline-3">
+<h3 id="orgbfe8647">Lecture notes</h3>
+<div class="outline-text-3" id="text-orgbfe8647">
+<p>
+Lecture notes will contain all contents to be taught in class, which
+are the basis for homework and exams. Previewing and reviewing them
+will be greatly helpful for learning this course besides reading
+textbooks. All lecture notes will be uploaded online and sent by email before
+each session. Please give us your accessible email address as soon as
+possible.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4d79cbb" class="outline-3">
+<h3 id="org4d79cbb">Data</h3>
+<div class="outline-text-3" id="text-org4d79cbb">
+<p>
+We will use large amounts of financial data. All data sets will be
+maintained in Baidu Cloud (or GitHub) from which you can download.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org73bd9dc" class="outline-3">
+<h3 id="org73bd9dc">Software</h3>
+<div class="outline-text-3" id="text-org73bd9dc">
+<p>
+R is the primary software we will use to analyze financial data. You
+can download (or update to the latest version of) R at
+<a href="https://mirrors.tuna.tsinghua.edu.cn/CRAN/">https://mirrors.tuna.tsinghua.edu.cn/CRAN/</a>. RStudio is the GUI
+(graphic user interface) of R. We will use it to edit R code and write
+empirical reports. Download it at
+<a href="https://www.rstudio.com/products/rstudio/download/">https://www.rstudio.com/products/rstudio/download/</a>.
+</p>
+
+<p>
+GitHub is a platform for maintaining projects and collaborating with
+team members. Basic knowledge about GitHub and Git (a version control
+system) is necessary. In this semester, we are planning to use GitHub
+to manage and submit course projects. Please first register a free
+account at <a href="https://github.com/">https://github.com/</a>. A short tutorial is available upon
+finishing registration. A complete tutorial for Git and GitHub will be
+offered in class. If you are interested, try to install Git according to
+this instruction
+<a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">https://git-scm.com/book/en/v2/Getting-Started-Installing-Git</a>.
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgd53adf9" class="outline-2">
+<h2 id="orgd53adf9"><span class="section-number-2">5</span> Course assignments</h2>
+<div class="outline-text-2" id="text-5">
+</div><div id="outline-container-org8bd7e05" class="outline-3">
+<h3 id="org8bd7e05">Homework</h3>
+<div class="outline-text-3" id="text-org8bd7e05">
+<ul class="org-ul">
+<li>Homework helps students understand fundamentals
+theoretical models and practice programming skills.</li>
+
+<li>You can finish your homework by either handwriting or typesetting
+using word process software, e.g., Microsoft Word, LaTeX, and the
+like. Typesetting rather than handwriting is highly recommended.</li>
+
+<li>Homework must be submitted on the due day that will be announced in
+class. A grace period for late submission can be granted by request
+in advance. If granted, you must turn in your homework within one
+week after the due day. Late submission of homework is subject to
+reducing score to a lower level. No submission at all will result in
+no score on homework.</li>
+</ul>
+</div>
+</div>
+
+
+<div id="outline-container-org97781eb" class="outline-3">
+<h3 id="org97781eb">Course project</h3>
+<div class="outline-text-3" id="text-org97781eb">
+<p>
+Course projects help student train research and writing skills as well
+as team working spirit. You can choose any topic and use any data set
+that are related to this course to complete a mini research
+project.
+</p>
+
+<p>
+Course projects can be carried out individually or by study group, the
+latter of which is preferred. An explanation of study group is in the
+next subsection.
+</p>
+
+<p>
+The final product of the project include: (1) a research report, (2)
+data and code used in the project, and (3) a documentation written in
+R Markdown that can be used to reproduce your results. Complete
+explanations regarding research reports and documentation will be
+given in class.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgcf72bf0" class="outline-3">
+<h3 id="orgcf72bf0">The requirements for group working</h3>
+<div class="outline-text-3" id="text-orgcf72bf0">
+<p>
+Admittedly, some questions in homework may be difficult and completing
+a whole set of homework may be time consuming. Therefore, we allow you
+to form study groups to do homework. Sharing knowledge and helping
+fellow students are meritorious, and the spirit of team working is
+desirable in many careers.
+</p>
+
+<p>
+The formation of study groups is totally voluntary. The size of each
+group should not exceed four students, and each student should only
+join one group. Please send us the information of your study group no
+later than March 6th.
+</p>
+
+<p>
+High resemblance of completed homework within each group is
+permitted. However, homework that is highly alike between groups will
+be treated as shirking, resulting in lower scores for all persons
+involved.
+</p>
+
+<p>
+Study groups are also course project groups. We want you to learn how
+to collaborate with teammates not only mentally but also
+practically. GitHub Classroom is a good platform to practice teamwork,
+at which you can work on the same file simultaneously and see the
+contribution of each team member. (shirking is easily spotted there!)
+</p>
+</div>
+</div>
+
+<div id="outline-container-org5a2c6ee" class="outline-3">
+<h3 id="org5a2c6ee">Exams</h3>
+<div class="outline-text-3" id="text-org5a2c6ee">
+</div><ul class="org-ul"><li><a id="orgf640347"></a>The mid-term exam<br  /><div class="outline-text-4" id="text-orgf640347">
+<ul class="org-ul">
+<li>The mid-term exam is tentatively scheduled in Week 8, which will
+cover all contents that Prof. Huang teaches.</li>
+<li>It will be a closed-book test. But you are allowed to bring a
+one-sided "cheat sheet", on which you can write down some notes that
+help you remember some important definitions and formulae. You are
+allowed to write on only one side on the cheat sheet.</li>
+<li>If you miss the mid-term exam, a make-up test can be arranged. You
+must notify me of your absence in advance with a valid excuse.</li>
+</ul>
+</div></li>
+
+<li><a id="org3a5cbb3"></a>The final exam<br  /><div class="outline-text-4" id="text-org3a5cbb3">
+<ul class="org-ul">
+<li>The final exam is in Week 17, covering all content that Prof. Tian
+teaches.</li>
+<li>It will also be a closed-book, and a one-side cheat sheet will be
+allowed.</li>
+<li>The time and location are to be arranged and announced by the
+university.</li>
+<li>The make-up test will follow the rule of the university.</li>
+</ul>
+</div></li></ul>
+</div>
+
+
+<div id="outline-container-orgdf979a8" class="outline-3">
+<h3 id="orgdf979a8">Grade distribution</h3>
+<div class="outline-text-3" id="text-orgdf979a8">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Assignments</th>
+<th scope="col" class="org-right">Scores</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Homework</td>
+<td class="org-right">20</td>
+</tr>
+
+<tr>
+<td class="org-left">Course project</td>
+<td class="org-right">20</td>
+</tr>
+
+<tr>
+<td class="org-left">Midterm exam</td>
+<td class="org-right">30</td>
+</tr>
+
+<tr>
+<td class="org-left">Final exam</td>
+<td class="org-right">30</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">total</td>
+<td class="org-right">100</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org480617f" class="outline-2">
+<h2 id="org480617f"><span class="section-number-2">6</span> Course outline</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+The following table is a tentative schedule for this course. Change
+will be made contingent on actual progress.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Instructors</th>
+<th scope="col" class="org-left">Topics</th>
+<th scope="col" class="org-left">Time</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Zongye Huang</td>
+<td class="org-left">Introduction to financial data</td>
+<td class="org-left">Weeks 1 to 2</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Stationary time series</td>
+<td class="org-left">Weeks 3 to 5</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Nonstationary time series</td>
+<td class="org-left">Weeks 6 to 7</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Midterm exam</td>
+<td class="org-left">Week 8</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">Zheng Tian</td>
+<td class="org-left">Conditional heteroskedastic models</td>
+<td class="org-left">Weeks 9 to 12</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Value at Risk</td>
+<td class="org-left">Weeks 13 to 15</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Review and Q&amp;A</td>
+<td class="org-left">Week 16</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">Final exam</td>
+<td class="org-left">Week 17</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+<div id="outline-container-orgbc6fe67" class="outline-2">
+<h2 id="orgbc6fe67"><span class="section-number-2">7</span> Policy on academic dishonesty</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+Academic dishonesty is defined to include but is not limited to the
+following: plagiarism; cheating and dishonest practices in connection
+with examinations, papers and projects; forgery, misrepresentation and
+fraud. Such behavior will not be tolerated and will be handled
+according to university guidelines.
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: Spring semester, 2017</p>
+<p class="author">Author: Zongye Huang and Zheng Tian</p>
+<p class="date">Created: 2017-02-02 Thu 17:08</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
