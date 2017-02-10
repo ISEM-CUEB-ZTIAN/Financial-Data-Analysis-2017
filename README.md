@@ -1,6 +1,5 @@
----
-title: "Financial Data Analysis 2017"
----
+**Financial Data Analysis 2017**
+
 
 This repository contains the course materials for Financial Data
 Analysis taught at the International School of Economics and
