@@ -1,5 +1,5 @@
 #+TITLE: Financial Data Analysis
-#+OPTIONS: toc:t H:2
+#+OPTIONS: toc:t H:2 num:nil
 
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="css/readtheorg.css" />
 
