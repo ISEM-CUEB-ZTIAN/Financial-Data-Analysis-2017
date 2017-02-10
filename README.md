@@ -6,4 +6,4 @@ Analysis taught at the International School of Economics and
 Management, Capital University of Economics and Business, in the
 second semester of the 2016-2017 academic year.
 
-The website for this course is at <https://isem-cueb-ztian.github.io/financial_data_analysis_2017/>.
+The website for this course is at <https://isem-cueb-ztian.github.io/Financial_Data_Analysis_2017/>.
