@@ -1,0 +1,22 @@
+#+TITLE: Financial Data Analysis
+#+OPTIONS: toc:t H:2
+
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="css/readtheorg.css" />
+
+* Syllabus
+
+Please first read the syllabus carefully. [[file:syllabus/syllabus_financial_data_web.org][Syllabus]]
+
+* Lectures
+
+** Lecture 1
+
+Lecture 1: Financial data. Read [[file:lecturenotes/lecture_1.org][Lecture notes]].
+
+* Assignments
+
+** Homework 1
+
+Do the homework. [[file:assignments/hw1.org][Homework 1]].
+
+** Course project

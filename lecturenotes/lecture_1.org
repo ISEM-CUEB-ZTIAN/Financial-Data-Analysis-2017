@@ -1,5 +1,18 @@
 #+TITLE: Lecture 1 Introduction
+#+OPTIONS: toc:1 H:3 num:2
+
+
+#+HTML_MATHJAX: align: left indent: 5em tagside: left font: Neo-Euler
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../css/readtheorg.css" />
+
 
 * Introduction
 
+
+The first lecture is about financial data.
+
 * Financial Data
+
+** The data for asset returns
+
+$r_t$ is the return of a financial asset at time t.

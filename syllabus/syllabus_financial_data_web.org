@@ -1,12 +1,13 @@
 #+TITLE: Syllabus for Financial Data Analysis
 #+AUTHOR: Zongye Huang and Zheng Tian
 #+DATE: Spring semester, 2017
-#+OPTIONS: toc:nil H:2 num:1
+#+OPTIONS: toc:1 H:2 num:1
 #+OPTIONS: ^:{}
 
-#+SETUPFILE: theme-readtheorg.setup
+# #+SETUPFILE: theme-readtheorg.setup
 #+HTML_MATHJAX: align: left indent: 5em tagside: left font: Neo-Euler
 # #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="file:///Users/ztian/.emacs.d/css/theorems.css"/>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../css/readtheorg.css" />
 
 
 * Basic information
@@ -72,7 +73,7 @@ Lecture notes will contain all contents to be taught in class, which
 are the basis for homework and exams. Previewing and reviewing them
 will be greatly helpful for learning this course besides reading
 textbooks. All lecture notes will be uploaded to Baidu Cloud from
-where you can download. 
+where you can download.
 
 ** Data
 

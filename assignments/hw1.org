@@ -1,4 +1,11 @@
-This is homework 1. 
+#+TITLE: Homework 1
+#+OPTIONS: toc:nil
+
+#+HTML_MATHJAX: align: left indent: 5em tagside: left font: Neo-Euler
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../css/readtheorg.css" />
+
+
+This is homework 1.
 
 * Question 1
 
