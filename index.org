@@ -11,7 +11,7 @@ Please first read the syllabus carefully. [[file:syllabus/syllabus_financial_dat
 
 ** Lecture 1
 
-Lecture 1: Financial data. Read [[file:lecturenotes/lecture_1.org][Lecture notes]].
+Lecture 1: Financial data. Read the lecture notes in [[file:lecturenotes/lecture_1.org][html]] or [[file:lecturenotes/lecture_1.pdf][pdf]]. 
 
 * Assignments
 
