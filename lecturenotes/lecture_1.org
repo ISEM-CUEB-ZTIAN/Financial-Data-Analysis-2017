@@ -1,4 +1,4 @@
-#+TITLE: Lecture 1 Introduction
+#+TITLE: Lecture 1. Review on the Linear Time Series Model
 #+OPTIONS: toc:1 H:3 num:2
 #+OPTIONS: tex:dvipng
 # #+HTML_MATHJAX: align: left indent: 5em tagside: left font: Neo-Euler
@@ -7,11 +7,17 @@
 
 * Introduction
 
+* Weak Stationarity
 
-The first lecture is about financial data.
+* The ACF and the Ljung-Box Test
 
-* Financial Data
+* The AR Model
 
-** The data for asset returns
+* The MA Model
 
-$r_t$ is the return of a financial asset at time t.
+* The ARMA Model
+
+* Random Walk and Unit-Root Nonstationarity
+
+
+
