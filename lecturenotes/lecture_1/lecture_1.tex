@@ -1,0 +1,305 @@
+% Created 2017-04-01 Sat 19:01
+% Intended LaTeX compiler: pdflatex
+\documentclass[a4paper,11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{parskip}
+\usepackage{mathtools}
+\usepackage{hyperref}
+\hypersetup{colorlinks,citecolor=black,filecolor=black,linkcolor=black,urlcolor=black}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{color}
+\newtheorem{mydef}{Definition}
+\newtheorem{mythm}{Theorem}
+\newcommand{\dx}{\mathrm{d}}
+\newcommand{\var}{\mathrm{Var}}
+\newcommand{\cov}{\mathrm{Cov}}
+\newcommand{\corr}{\mathrm{Corr}}
+\newcommand{\pr}{\mathrm{Pr}}
+\newcommand{\rarrowd}[1]{\xrightarrow{\text{ \textit #1 }}}
+\DeclareMathOperator*{\plim}{plim}
+\newcommand{\plimn}{\plim_{n \rightarrow \infty}}
+\usepackage{marginnote}
+\newcommand{\mymarginnote}[2]{\marginnote{\setstretch{1.0}\parbox[t]{\marginparwidth}{\scriptsize \textcolor{#1}{#2}}}}
+\usepackage{todo}
+\setcounter{secnumdepth}{2}
+\author{Zheng Tian}
+\date{\today}
+\title{Lecture 1. Review on the Linear Time Series Model}
+\hypersetup{
+ pdfauthor={Zheng Tian},
+ pdftitle={Lecture 1. Review on the Linear Time Series Model},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 25.1.1 (Org mode 9.0.3)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\setcounter{tocdepth}{1}
+\tableofcontents
+
+
+
+\section{Introduction}
+\label{sec:org0f1543c}
+
+This lecture reviews what we have learned about the linear time series
+models, namely, AR, MA, and ARMA models. These models are the
+foundation of what we are going to learn in the following lectures. The
+review is far from comprehensive but gives you a big picture regarding
+these models and links them with what to be learned next. 
+
+
+\section{Financial Time Series Data}
+\label{sec:org325285c}
+
+This course mainly concerns the time series of the returns to
+financial assets. Let \(P_t\) be the price of an financial asset at time
+\(t\). Then, what we are mostly interested is the following
+
+\[ r_t = ln(P_t) - ln(P_{t-1}) \]
+
+\(\{r_t\}\) is the series of asset return for \(t = 1, \ldots, T\). 
+
+
+\section{Weak Stationarity}
+\label{sec:orgce3229e}
+
+The foundation of time series analysis is the concept of stationarity. Mostly, we
+focus on weak stationarity. 
+
+A series \(\{r_t\}\) is weakly stationary if
+\begin{enumerate}
+\item \(E(r_t) = \mu < \infty\) where \(\mu\) is a constant
+\item \(\cov(r_t, r_{t-\ell}) = \gamma_{\ell} < \infty\), which only depends on \(\ell\).
+\end{enumerate}
+
+It follows that \(\var(r_t) = \gamma_0 < \infty\), which is also a
+constant. 
+
+
+\section{The ACF and the Ljung-Box Test}
+\label{sec:org3906545}
+
+We can use the autocorrelation function (ACF) to characterize the influence
+the past value of the series \(r_{t-i}\) for \(i = 1, \ldots, T\) on the
+current value \(r_t\). 
+
+\begin{itemize}
+\item The lag-\(\ell\) ACF of the series \(\{r_t\}\) is
+\[ \rho_{\ell} = \frac{\cov(r_t, r_{t-\ell})}{\sqrt{\var(r_t)\var(r_{t-\ell})}} = \frac{\gamma_{\ell}}{\gamma_0} \]
+
+\item The sample lag-\(\ell\) ACF is computed as 
+\[ \hat{\rho}_{\ell} = \frac{\sum_{t=\ell+1}^T (r_t -
+  \bar{r})(r_{t-\ell} - \bar{r})}{\sum_{t=1}^T (r_t - \bar{r})^2},\; 0
+  \leq \ell < T-1 \]
+
+\item The Ljung-Box test is commonly used to test the existence of
+autocorrelation in \(\{r_t\}\). 
+
+The null hypothesis is 
+\[ H_0: \rho_1 = \cdots = \rho_m = 0,\; H_1: \rho_i \neq 0 \text{
+  for some } i \in \{1, \ldots, m\} \]
+
+The test statistic is 
+\[ Q(m) = T(T+2)\sum_{\ell=1}^m \frac{\hat{\rho}^2_{\ell}}{T-\ell}
+  \sim \chi^2(m) \]
+When \(Q(m) > \chi^2_{\alpha}\), where \(\chi^2_{\alpha}\) is the
+critical value at the significance level of \(\alpha\) of a
+chi-squared distribution with \(m\) degree of freedom.
+\end{itemize}
+
+\subsection{{\bfseries\sffamily TODO} Replicate Figure 2.1 and 2.2}
+\label{sec:org798fe60}
+
+
+\section{The Linear Time Series Models}
+\label{sec:orgc696503}
+
+\subsection{The ARMA Model}
+\label{sec:orgdcdbf2c}
+
+Autoregressive moving-average models \(\mathrm{ARMA}(p, q)\)
+encompass autoregressive models \(\mathrm{AR}(p)\) and
+moving-average models \(\mathrm{MA}(q)\). 
+
+A general \(\mathrm{ARMA}(p, q)\) model is in the form of
+\begin{equation}
+\label{eq:armapq}
+r_t = \phi_0 + \sum_{i=1}^p \phi_i r_{t-i} + a_t - \sum_{i=1}^q \theta_i a_{t-i}
+\end{equation}
+where \(\{a_t\}\) is a white noise series, i.e., \(a_t \sim
+\mathrm{i.i.d.}(0, \sigma^2_a)\). 
+
+From the general \(\mathrm{ARMA}(p, q)\) model, we know that \(\mathrm{AR}(p)\) models are
+simply \(\mathrm{ARMA}(p, 0)\) and \(\mathrm{MA}(q)\) models are \(\mathrm{ARMA}(0, q)\) for \(p, q >
+0\). 
+
+What we are interested in these models can be summarized by the
+following items:
+\begin{itemize}
+\item The stationarity condition
+\item The statistical properties
+\begin{itemize}
+\item The unconditional mean, \(E(r_t)\)
+\item The unconditional variance, \(\var(r_t)\).
+\item The ACF, \(\rho_{\ell}\) for \(\ell > 0\).
+\end{itemize}
+\item Estimation and model checking
+\item Forecasting
+\end{itemize}
+
+
+\subsection{The stationarity condition}
+\label{sec:orga6457de}
+
+\begin{itemize}
+\item The characteristic equation of all \(\mathrm{ARMA}(p, q)\) models is
+\begin{equation}
+\label{eq-chareq}
+\alpha^p + \phi_1 \alpha^{p-1} + \cdots + \phi_p = 0
+\end{equation}
+The solutions to this equation are the characteristic roots.
+
+\item The weak stationarity requires that the characteristic roots be less
+than one in modulus. 
+\begin{itemize}
+\item If the root is a real number, \(\alpha^{*}\), then weak stationarity
+requires \(|\alpha^{*}| < 1\).
+\item If the root is a complex number, \(\alpha^{*} = a + bi\) where \(i =
+    \sqrt{-1}\), then weak stationarity requires \(r = \sqrt{a^2 + b^2} < 1\).
+\end{itemize}
+
+\item \(\mathrm{AR}(p)\) and \(\mathrm{ARMA}(p,q)\) share the same
+characteristic equation as Equation \eqref{eq-chareq} so that their
+stationarity conditions are also the same.
+
+\item \(\mathrm{MA}(q)\) models are always weakly stationary as long as the
+\(\{a_t\}\) series is white noise.
+\end{itemize}
+
+\subsubsection*{{\bfseries\sffamily TODO} Draw a unit circle}
+\label{sec:org1932bf8}
+
+
+\subsection{The AR Model}
+\label{sec:orgc461db7}
+
+We review the properties of \(\mathrm{AR}(p)\) model using the simple
+\(\mathrm{AR}(1)\) process, 
+\begin{equation}
+\label{eq-ar1}
+r_t = \phi_0 + \phi_1 r_{t-1} + a_t,\; a_t \sim i.i.d.(0, \sigma^2_a)
+\end{equation}
+
+\subsubsection*{The stationarity condition}
+\label{sec:org9463fb2}
+
+The characteristic equation of Equation \eqref{eq-ar1} is
+\[ \alpha - \phi_1 = 0 \]
+The characteristic root is simply \(\alpha = \phi_1\). Thus, the
+stationarity condition of an \(\mathrm{AR}(1)\) process is
+\(|\phi_1|<1\). 
+
+Remember that when we derive the unconditional mean, variance and ACF
+of \(r_t\), we always assume that \(\{r_t\}\) is weakly stationary that is
+\(|\phi_1| < 1\). 
+
+\subsubsection*{The expectations}
+\label{sec:orgd4a20ad}
+
+\begin{itemize}
+\item The unconditional mean of \(r_t\) is
+\[ E(r_t) = \mu = \frac{\phi_0}{1 - \phi_1} \]
+Because \(\{r_t\}\) is weakly stationary, its mean is constant over
+time.
+
+\item The conditional mean of \(r_t\) given the information at \(t-1\) is
+\[ E(r_t \mid r_{t-1}) = \phi_0 + \phi_1 r_{t-1} \]
+\end{itemize}
+
+\subsubsection*{The variance}
+\label{sec:orgdc34cfd}
+
+\begin{itemize}
+\item The unconditional variance of \(r_t\) is 
+\[ \var(r_t) = \frac{\sigma^2_a}{1 - \phi_1^2} \]
+The unconditional variance is also a constant because of weak
+stationarity. The existence of the unconditional mean and variance
+of \(r_t\) requires \(|\phi_1| < 1\), which is also the sufficient
+condition for weak stationarity.
+
+\item The conditional variance of \(r_t\) given \(r_{t-1}\) is
+\[ \var(r_t \mid r_{t-1}) = \var(a_t) = \sigma^2_a \]
+\end{itemize}
+
+\subsubsection*{The ACF}
+\label{sec:org952224a}
+
+The ACF of \(\mathrm{AR}(1)\) is
+\[\rho_0 = 1,\; \rho_{\ell} = \phi_1 \rho_{\ell-1}, \text{ for }
+\ell>0 \]
+It says that the ACF of a weakly stationary AR(1) series decays
+exponentially with rate \(\phi_1\) and starting value \(\rho_0=1\). 
+
+\begin{itemize}
+\item {\bfseries\sffamily TODO} Insert Figure 2.3
+\label{sec:org8f1e13d}
+\end{itemize}
+
+\subsubsection*{The ACF for the general AR(p) model}
+\label{sec:orgd956dff}
+
+For a general \(AR(p)\) model, 
+\begin{equation}
+\label{eq-arp}
+r_t = \phi_0 + \sum_{i=1}^p \phi_i r_{t-i} + a_t,\; a_t \sim i.i.d.(0, \sigma^2_a)
+\end{equation}
+
+\begin{itemize}
+\item The unconditional mean is 
+\[ E(r_t) = \frac{\phi_0}{1 - \sum_{i=1}^p \phi_i} \]
+
+\item The ACF of \{\(r_t\)\} is governed by the following difference equation
+\[ \rho_{\ell} = \phi_1 \rho_{\ell-1} + \phi_2 \rho_{\ell-2} +
+  \cdots + \rho_{\ell-p} \]
+Rewritten with the lag operator \(B\), we have
+\[ (1 - \phi_1 B - \cdots - \phi_p B^p) \rho_{\ell} = 0 \]
+where \(1 - \phi_1 B - \cdots - \phi_p B^p=0\) is the inverse
+characteristic equation.
+
+\item An \(\mathrm{AR}(p)\) series is weakly stationary when all the roots
+of the inverse characteristic equation are greater than one in
+modulus.
+\end{itemize}
+
+
+\subsection{{\bfseries\sffamily TODO} The MA Model}
+\label{sec:org8f7c15f}
+
+
+
+\section{{\bfseries\sffamily TODO} Random Walk and Unit-Root Nonstationarity}
+\label{sec:orgb7ed07b}
+
+
+
+\section{{\bfseries\sffamily TODO} The Basic R functions for Financial Data}
+\label{sec:orgb75e331}
+\end{document}
