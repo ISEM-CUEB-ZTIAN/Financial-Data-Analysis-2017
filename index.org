@@ -1,7 +1,12 @@
 #+TITLE: Financial Data Analysis
-#+OPTIONS: toc:t H:2 num:nil
+#+OPTIONS: toc:2 H:2 num:1
 
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="css/readtheorg.css" />
+
+* Introduction
+
+This website contains the teaching materials for the second half of
+the course of Financial Data Analysis in the spring semester, 2017. 
 
 * Syllabus
 
@@ -9,14 +14,22 @@ Please first read the syllabus carefully. [[file:syllabus/syllabus_financial_dat
 
 * Lectures
 
-** Lecture 1
+** Lecture 1: Review on Linear Time Series Models and R Applications
 
-Lecture 1: Financial data. Read the lecture notes in [[file:lecturenotes/lecture_1.org][html]] or [[file:lecturenotes/lecture_1.pdf][pdf]]. 
+- Review on Linear Time Series Models ([[file:lecturenotes/lecture_1/lecture_1.pdf][pdf]])
+- Basic R Functions of Handling Financial Data ([[file:lecturenotes/lecture_1/rdocs/quantmod-vignette.pdf][pdf]] and [[file:lecturenotes/lecture_1/rdocs.zip][zip file]])
+- A Brief R Markdown Tutorial ([[file:lecturenotes/rmarkdown_tutorial/rmarkdown_tutorial.pdf][pdf]] and [[file:lecturenotes/rmarkdown_tutorial/rmarkdown.zip][zip]]) and a cheat sheet of R
+  Markdown ([[file:lecturenotes/rmarkdown_tutorial/rmarkdown_cheatsheet.pdf][pdf]])
+
+** TODO Lecture 2: Modeling volatility
+
+- Modeling volatility ([[file:lecturenotes/lecture_2/lecture_2.pdf][pdf]])
+- A brief Git and GitHub tutorial ([[file:lecturenotes/git_tutorial/git_tutorial.pdf][pdf]])
+- Installers for Git and GitHub:
+  Download from: https://pan.baidu.com/s/1miLo5b6, Password: c7um
 
 * Assignments
 
-** Homework 1
-
-Do the homework. [[file:assignments/hw1.org][Homework 1]].
-
 ** Course project
+
+- A template of the course project ([[file:course_project/project_report_template.pdf][pdf]] and [[file:course_project/project_report_template.Rmd][Rmarkdown]]). 

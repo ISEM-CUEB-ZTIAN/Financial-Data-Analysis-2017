@@ -1,0 +1,39 @@
+
+@book{enders_applied_2014,
+	title = {Applied {Econometric} {Time} {Series}, 4th {Edition}},
+	isbn = {978-1-118-91866-1},
+	abstract = {Applied Econometric Time Series, 4th Edition demonstrates modern techniques for developing models capable of forecasting, interpreting, and testing hypotheses concerning economic data. In this text, Dr. Walter Enders commits to using a learn-by-doing approach to help readers master time-series analysis efficiently and effectively.},
+	language = {en},
+	publisher = {Wiley Global Education},
+	author = {Enders, Walter},
+	month = nov,
+	year = {2014},
+	note = {Google-Books-ID: GP1EBQAAQBAJ},
+	keywords = {Business \& Economics / Econometrics, Business \& Economics / Economics / General}
+}
+
+@book{tsay_analysis_2010,
+	address = {Cambridge, Mass},
+	edition = {3 edition},
+	title = {Analysis of {Financial} {Time} {Series}},
+	isbn = {978-0-470-41435-4},
+	abstract = {This book provides a broad, mature, and systematic introduction to current financial econometric models and their applications to modeling and prediction of financial time series data. It utilizes real-world examples and real financial data throughout the book to apply the models and methods described.    The author begins with basic characteristics of financial time series data before covering three main topics:  Analysis and application of univariate financial time series The return series of multiple assets Bayesian inference in finance methods  Key features of the new edition include additional coverage of modern day topics such as arbitrage, pair trading, realized volatility, and credit risk modeling; a smooth transition from S-Plus to R; and expanded empirical financial data sets. The overall objective of the book is to provide some knowledge of financial time series, introduce some statistical tools useful for analyzing these series and gain experience in financial applications of various econometric methods.},
+	language = {English},
+	publisher = {Wiley},
+	author = {Tsay, Ruey S.},
+	month = aug,
+	year = {2010}
+}
+
+@book{tsay_introduction_2012,
+	address = {Hoboken, New Jersey},
+	edition = {1 edition},
+	title = {An {Introduction} to {Analysis} of {Financial} {Data} with {R}},
+	isbn = {978-0-470-89081-3},
+	abstract = {A complete set of statistical tools for beginning financial analysts from a leading authority Written by one of the leading experts on the topic, An Introduction to Analysis of Financial Data with R explores basic concepts of visualization of financial data. Through a fundamental balance between theory and applications, the book supplies readers with an accessible approach to financial econometric models and their applications to real-world empirical research. The author supplies a hands-on introduction to the analysis of financial data using the freely available R software package and case studies to illustrate actual implementations of the discussed methods. The book begins with the basics of financial data, discussing their summary statistics and related visualization methods. Subsequent chapters explore basic time series analysis and simple econometric models for business, finance, and economics as well as related topics including:  Linear time series analysis, with coverage of exponential smoothing for forecasting and methods for model comparison Different approaches to calculating asset volatility and various volatility models High-frequency financial data and simple models for price changes, trading intensity, and realized volatility Quantitative methods for risk management, including value at risk and conditional value at risk Econometric and statistical methods for risk assessment based on extreme value theory and quantile regression  Throughout the book, the visual nature of the topic is showcased through graphical representations in R, and two detailed case studies demonstrate the relevance of statistics in finance. A related website features additional data sets and R scripts so readers can create their own simulations and test their comprehension of the presented techniques. An Introduction to Analysis of Financial Data with R is an excellent book for introductory courses on time series and business statistics at the upper-undergraduate and graduate level. The book is also an excellent resource for researchers and practitioners in the fields of business, finance, and economics who would like to enhance their understanding of financial data and today's financial markets.},
+	language = {English},
+	publisher = {Wiley},
+	author = {Tsay, Ruey S.},
+	month = oct,
+	year = {2012}
+}

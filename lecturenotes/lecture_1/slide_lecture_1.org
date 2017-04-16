@@ -1,0 +1,50 @@
+#+TITLE: Lecture 1. Review on Linear Time Series Models
+#+OPTIONS: toc:2 H:3 num:2
+
+#+STARTUP: beamer
+#+OPTIONS: toc:1 H:2
+#+LATEX_CLASS: beamer
+#+LATEX_CLASS_OPTIONS: [presentation,10pt]
+#+BEAMER_THEME: CambridgeUS
+#+BEAMER_COLOR_THEME: beaver
+#+COLUMNS: %45ITEM %10BEAMER_env(Env) %10BEAMER_act(Act) %4BEAMER_col(Col) %8BEAMER_opt(Opt)
+#+PROPERTY: BEAMER_col_ALL 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 0.0 :ETC
+
+#+LATEX_HEADER: \usepackage[margin=1in]{geometry}
+# #+LATEX_HEADER: \usepackage[top=1.5cm, bottom=1.5cm, outer=5cm, inner=2cm, heightrounded, marginparwidth=2.5cm, marginparsep=1cm]{geometry}
+#+LATEX_HEADER: \usepackage{setspace}
+#+LATEX_HEADER: \onehalfspacing
+#+LATEX_HEADER: \usepackage{parskip}
+#+LATEX_HEADER: \usepackage{mathtools}
+#+LATEX_HEADER: \usepackage{hyperref}
+#+LATEX_HEADER: \hypersetup{colorlinks,citecolor=black,filecolor=black,linkcolor=black,urlcolor=black}
+#+LATEX_HEADER: \usepackage{graphicx}
+#+LATEX_HEADER: \usepackage{tabularx}
+#+LATEX_HEADER: \usepackage{color}
+
+#+LATEX_HEADER: \newtheorem{mydef}{Definition}
+#+LATEX_HEADER: \newtheorem{mythm}{Theorem}
+#+LATEX_HEADER: \newcommand{\dx}{\mathrm{d}}
+#+LATEX_HEADER: \newcommand{\var}{\mathrm{Var}}
+#+LATEX_HEADER: \newcommand{\cov}{\mathrm{Cov}}
+#+LATEX_HEADER: \newcommand{\corr}{\mathrm{Corr}}
+#+LATEX_HEADER: \newcommand{\pr}{\mathrm{Pr}}
+#+LATEX_HEADER: \newcommand{\rarrowd}[1]{\xrightarrow{\text{ \textit #1 }}}
+#+LATEX_HEADER: \DeclareMathOperator*{\plim}{plim}
+#+LATEX_HEADER: \newcommand{\plimn}{\plim_{n \rightarrow \infty}}
+#+LATEX_HEADER: \usepackage{marginnote}
+#+LATEX_HEADER: \newcommand{\mymarginnote}[2]{\marginnote{\setstretch{1.0}\parbox[t]{\marginparwidth}{\scriptsize \textcolor{#1}{#2}}}}
+#+LATEX_HEADER: \usepackage{todo}
+
+
+* Financial Time Series Data
+
+This course mainly concerns time-series data of the returns to
+financial assets. Let $P_t$ be the price of an financial asset at time
+$t$. Then, what we are mostly interested is the following
+
+\[ r_t = ln(P_t) - ln(P_{t-1}) \]
+
+$\{r_t\}$ is the series of asset returns for $t = 1, \ldots, T$.
+
+
