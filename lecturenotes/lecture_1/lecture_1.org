@@ -1,0 +1,517 @@
+#+TITLE: Lecture 1. Review on Linear Time Series Models
+#+AUTHOR: Zheng Tian
+#+EMAIL:
+#+DATE: 
+#+OPTIONS: toc:2 H:3 num:2
+
+#+LATEX_CLASS: article
+#+LATEX_CLASS_OPTIONS: [a4paper,11pt]
+#+LATEX_HEADER: \usepackage[margin=1in]{geometry}
+#+LATEX_HEADER: \usepackage{setspace}
+#+LATEX_HEADER: \onehalfspacing
+#+LATEX_HEADER: \usepackage{parskip}
+#+LATEX_HEADER: \usepackage{mathtools}
+#+LATEX_HEADER: \usepackage{hyperref}
+#+LATEX_HEADER: \hypersetup{colorlinks,citecolor=black,filecolor=black,linkcolor=black,urlcolor=black}
+#+LATEX_HEADER: \usepackage{graphicx}
+#+LATEX_HEADER: \usepackage{tabularx}
+#+LATEX_HEADER: \usepackage{color}
+#+LATEX_HEADER: \usepackage[font={footnotesize}]{caption}
+
+#+LATEX_HEADER: \newtheorem{mydef}{Definition}
+#+LATEX_HEADER: \newtheorem{mythm}{Theorem}
+#+LATEX_HEADER: \newcommand{\dx}{\mathrm{d}}
+#+LATEX_HEADER: \newcommand{\var}{\mathrm{Var}}
+#+LATEX_HEADER: \newcommand{\cov}{\mathrm{Cov}}
+#+LATEX_HEADER: \newcommand{\corr}{\mathrm{Corr}}
+#+LATEX_HEADER: \newcommand{\pr}{\mathrm{Pr}}
+#+LATEX_HEADER: \newcommand{\rarrowd}[1]{\xrightarrow{\text{ \textit #1 }}}
+#+LATEX_HEADER: \DeclareMathOperator*{\plim}{plim}
+#+LATEX_HEADER: \newcommand{\plimn}{\plim_{n \rightarrow \infty}}
+
+
+* Introduction
+
+This lecture reviews what we have learned about the linear time series
+models, namely, AR, MA, and ARMA models. These models are the
+foundation of what we are going to learn in the following lectures. The
+review is far from comprehensive but gives you a big picture regarding
+these models and links them with what to be learned next.
+
+
+* Financial Time Series Data
+
+This course mainly concerns time-series data of the returns to
+financial assets. Let $P_t$ be the price of an financial asset at time
+$t$. Then, what we are mostly interested is the following
+
+\[ r_t = ln(P_t) - ln(P_{t-1}) \]
+
+$\{r_t\}$ is the series of asset returns for $t = 1, \ldots, T$.
+
+
+* Weak Stationarity
+
+The foundation of time series analysis is the concept of stationarity. Mostly, we
+focus on *weak stationarity*.
+
+A series $\{r_t\}$ is weakly stationary if
+1) $E(r_t) = \mu < \infty$ where $\mu$ is a constant
+2) $\cov(r_t, r_{t-\ell}) = \gamma_{\ell} < \infty$, which only depends on $\ell$.
+
+It follows that $\var(r_t) = \gamma_0 < \infty$, which is also a
+constant.
+
+
+* The ACF and the Ljung-Box Test
+
+We can use *the autocorrelation function (ACF)* to characterize the
+influence of the past value of the series $r_{t-i}$ for $i = 1,
+\ldots, T$ on the current value $r_t$.
+
+- The *lag-\ell ACF* of the series $\{r_t\}$ is
+  \[ \rho_{\ell} = \frac{\cov(r_t, r_{t-\ell})}{\sqrt{\var(r_t)\var(r_{t-\ell})}} = \frac{\gamma_{\ell}}{\gamma_0} \]
+
+- The *sample lag-\ell ACF* is computed as
+  \[ \hat{\rho}_{\ell} = \frac{\sum_{t=\ell+1}^T (r_t -
+  \bar{r})(r_{t-\ell} - \bar{r})}{\sum_{t=1}^T (r_t - \bar{r})^2},\; 0
+  \leq \ell < T-1 \]
+
+  Note that when defining ACF, we implicitly assume $r_t$ is weakly
+  stationary. 
+
+- When {$r_t$} is weakly stationary, say an ARMA proess, then we know
+  the asymptotic distribution is 
+  \[ \hat{\rho}_{\ell} \sim N \left(0, \frac{1}{T}(1+2\sum_{i=1}^q
+  \hat{\rho}_i^2) \right) \text{ for } \ell > q \]
+
+- The *Ljung-Box test* is commonly used to test the existence of
+  autocorrelation in $\{r_t\}$.
+
+  The null hypothesis is
+  \[ H_0: \rho_1 = \cdots = \rho_m = 0,\; H_1: \rho_i \neq 0 \text{
+  for some } i \in \{1, \ldots, m\} \]
+
+  The test statistic is
+  \[ Q(m) = T(T+2)\sum_{\ell=1}^m \frac{\hat{\rho}^2_{\ell}}{T-\ell}
+  \sim \chi^2(m) \]
+  When $Q(m) > \chi^2_{\alpha}$, where $\chi^2_{\alpha}$ is the
+  critical value at the significance level of $\alpha$ of a
+  chi-squared distribution with $m$ degree of freedom.
+
+  We often use correlogram to display the ACF of a series. Figure
+  [[fig:ibm-return-acf]] shows the ACF of the monthly return of IBM
+  stock. 
+  - The sample ACFs are all within their two standard error
+    limits, indicating that they are not significantly different from
+    zero at the 5% level.
+  - For the simple returns, the Ljung–Box statistics give $Q(5) =
+    3.37$ and $Q(10) = 13.99$, which correspond to p values of 0.64
+    and 0.17, based on the chi-squared distributions with 5 and 10
+    degrees of freedom.
+  - For the log returns, we have $Q(5) = 3.52$ and $Q(10) = 13.39$
+    with p values 0.62 and 0.20, respectively. 
+
+  The joint tests confirm that monthly IBM stock returns have no
+  significant serial correlations.
+  
+  #+CAPTION: Sample autocorrelation functions of monthly (a) simple returns and (b) log returns of IBM stock from January 1926 to December 2008. In each plot, two horizontal dashed lines denote two standard error limits of sample ACF
+  #+NAME: fig:ibm-return-acf
+  #+ATTR_LATEX: :width 0.8\textwidth
+  [[file:img/ibm_return.png]]
+
+
+* The Linear Time Series Models
+
+** The ARMA Model
+
+Autoregressive moving-average models $\mathrm{ARMA}(p, q)$
+encompass autoregressive models $\mathrm{AR}(p)$ and
+moving-average models $\mathrm{MA}(q)$.
+
+A general $\mathrm{ARMA}(p, q)$ model is in the form of
+\begin{equation}
+\label{eq:armapq}
+r_t = \phi_0 + \sum_{i=1}^p \phi_i r_{t-i} + a_t - \sum_{i=1}^q \theta_i a_{t-i}
+\end{equation}
+where $\{a_t\}$ is a white noise series, i.e., $a_t \sim
+\mathrm{i.i.d.}(0, \sigma^2_a)$.
+
+From the general $\mathrm{ARMA}(p, q)$ model, we know that $\mathrm{AR}(p)$ models are
+simply $\mathrm{ARMA}(p, 0)$ and $\mathrm{MA}(q)$ models are $\mathrm{ARMA}(0, q)$ for $p, q >
+0$.
+
+What we are interested in these models can be summarized by the
+following items:
+- The stationarity condition
+- The statistical properties
+  - The (un)conditional mean, $E(r_t)$
+  - The (un)conditional variance, $\var(r_t)$.
+  - The ACF, $\rho_{\ell}$ for $\ell > 0$.
+- Estimation and model checking
+- Forecasting
+
+
+** The Stationarity Condition
+
+- The *characteristic equation* of all $\mathrm{ARMA}(p, q)$ models
+  comes from the homogeneous part of Equation eqref:eq:armapq, that
+  is, 
+  \[ r_t - \phi_1 r_{t-1} - \cdots - \phi_p r_{t-p} = 0  \]
+
+  Therefore, the characteristic equation is
+  \begin{equation}
+  \label{eq-chareq}
+  \alpha^p - \phi_1 \alpha^{p-1} - \cdots - \phi_p = 0
+  \end{equation}
+  The solutions to this equation are the *characteristic roots*.
+
+- The weak stationarity requires that *the characteristic roots be less
+  than one in modulus* (i.e., they are within a unit circle).
+  - If the root is a real number, $\alpha$, then weak stationarity
+    requires $|\alpha| < 1$.
+  - If the root is a complex number, $\alpha = a + bi$ where $i =
+    \sqrt{-1}$, then weak stationarity requires $r = \sqrt{a^2 + b^2} < 1$.
+
+- $\mathrm{AR}(p)$ and $\mathrm{ARMA}(p,q)$ share the same
+  characteristic equation as Equation eqref:eq-chareq so that their
+  stationarity conditions are also the same.
+
+- $\mathrm{MA}(q)$ models are always weakly stationary as long as the
+  $\{a_t\}$ series is white noise.
+
+
+** The AR Model
+
+*** The simple $\mathrm{AR}(1)$ model
+
+We review the properties of $\mathrm{AR}(p)$ model using the simple
+$\mathrm{AR}(1)$ process,
+\begin{equation}
+\label{eq-ar1}
+r_t = \phi_0 + \phi_1 r_{t-1} + a_t,\; a_t \sim i.i.d.(0, \sigma^2_a)
+\end{equation}
+
+*** The stationarity condition
+
+The characteristic equation of Equation eqref:eq-ar1 is
+\[ \alpha - \phi_1 = 0 \]
+The characteristic root is simply $\alpha = \phi_1$. Thus, the
+stationarity condition of an $\mathrm{AR}(1)$ process is
+$|\phi_1|<1$.
+
+Remember that when we derive the unconditional mean, variance and ACF
+of $r_t$, we always assume that $\{r_t\}$ is weakly stationary that is
+$|\phi_1| < 1$.
+
+*** The expectations
+
+- The unconditional mean of $r_t$ is
+  \[ E(r_t) = \mu = \frac{\phi_0}{1 - \phi_1} \]
+  Because $\{r_t\}$ is weakly stationary, its mean is constant over
+  time.
+
+- The conditional mean of $r_t$ given the information at $t-1$ is
+  \[ E(r_t \mid r_{t-1}) = \phi_0 + \phi_1 r_{t-1} \]
+
+*** The variance
+
+- The unconditional variance of $r_t$ is
+  \[ \var(r_t) = \frac{\sigma^2_a}{1 - \phi_1^2} \]
+  The unconditional variance is also a constant because of weak
+  stationarity. The existence of the unconditional mean and variance
+  of $r_t$ requires $|\phi_1| < 1$, which is also the sufficient
+  condition for weak stationarity.
+
+- The conditional variance of $r_t$ given $r_{t-1}$ is
+  \[ \var(r_t \mid r_{t-1}) = \var(a_t) = \sigma^2_a \]
+
+*** The ACF
+
+The ACF of $\mathrm{AR}(1)$ is
+\[\rho_0 = 1,\; \rho_{\ell} = \phi_1 \rho_{\ell-1}, \text{ for }
+\ell>0 \]
+It says that the ACF of a weakly stationary AR(1) series decays
+exponentially with rate $\phi_1$ and starting value $\rho_0=1$.
+
+#+NAME: fig:acf-ar1
+#+CAPTION: Autocorrelation function of an AR(1) model: (a) for $\phi_1 = 0.8$ and (b) for $\phi_1 = −0.8$
+#+ATTR_LATEX: :width 0.8\textwidth :height 0.3\textheight
+[[file:img/acf_ar1.png]]
+
+*** The ACF for the general AR(p) model
+
+For a general $AR(p)$ model,
+\begin{equation}
+\label{eq-arp}
+r_t = \phi_0 + \sum_{i=1}^p \phi_i r_{t-i} + a_t,\; a_t \sim i.i.d.(0, \sigma^2_a)
+\end{equation}
+
+- The unconditional mean is
+  \[ E(r_t) = \frac{\phi_0}{1 - \sum_{i=1}^p \phi_i} \]
+
+- The ACF of {$r_t$} is governed by the following difference equation
+  \[ \rho_{\ell} = \phi_1 \rho_{\ell-1} + \phi_2 \rho_{\ell-2} +
+  \cdots + \phi_p \rho_{\ell-p} \]
+  Rewritten with the lag operator $L$, we have
+  \[ (1 - \phi_1 L - \cdots - \phi_p L^p) \rho_{\ell} = 0 \]
+  where $1 - \phi_1 L - \cdots - \phi_p L^p=0$ is the inverse
+  characteristic equation.
+
+- An $\mathrm{AR}(p)$ series is weakly stationary when all the roots
+  of the inverse characteristic equation are greater than one in
+  modulus.
+
+*** Estimation and model checking of $\mathrm{AR}(p)$ models
+
+- We can use the sample ACF, the sample PACF (partial ACF), AIC, and BIC to determine the order of the
+  AR process. Especially, the PACF of an $\mathrm{AR}(p)$ series exhibits a
+  noticeable cut-off towards zero at the lag $\ell$ for $\ell > p$.
+
+- We use the ordinary least squares (OLS) method to estimate an
+  $\mathrm{AR}(p)$ model with the appropriate order $p$.
+
+- We use the Ljung-Box test to check whether the residual series
+  {$\hat{a}_t$} is a white noise series.
+
+*** Forecasting
+
+The \ell-step-ahead forecast at time $h$ is
+\[ \hat{r}_h(\ell) = \phi_0 + \sum_{i=1}^p \phi_i \hat{r}_h(\ell-i) \]
+
+The stationary $\mathrm{AR}(p)$ model is said to be *mean reversion*
+because as $\ell \rightarrow \infty$, $\hat{r}_h(\ell) \rightarrow
+E(r_t)$.
+
+
+** The MA Model
+
+*** The simple $\mathrm{MA}(1)$ model
+
+The simple $\mathrm{MA}(1)$ model takes the form as
+\begin{equation}
+\label{eq-ma1}
+r_t = c_0 + a_t - \theta_1 a_{t-1},\; a_t \sim i.i.d.(0, \sigma^2_a)
+\end{equation}
+
+*** The stationarity condition
+
+An $\mathrm{MA}(1)$ series is always weakly stationary. That is because
+- $E(r_t) = c_0$ is a constant;
+- $\gamma_0 = \var(r_t) = (1 + \theta_1^2) \sigma^2_a$
+- $\gamma_1 = \cov(r_t, r_{t-1}) = -\theta_1 \sigma^2_a,\;
+  \gamma_{\ell} = 0, \text{ for } \ell>0$.
+
+*** The ACF
+
+The ACF of $\mathrm{MA}(1)$ is
+\[\rho_0 = 1,\; \rho_1 = -\frac{\theta_1}{1+\theta^2_1},\; \rho_{\ell}
+= 0, \text{ for } \ell>1 \]
+
+*** The general $\mathrm{MA}(q)$ model
+
+The general $\mathrm{MA}(q)$ model is
+\begin{equation}
+\label{eq-maq}
+r_t = c_0 + a_t - \sum_{i=1}^q \theta_i a_{t-i},\; a_t \sim i.i.d.(0, \sigma^2_a)
+\end{equation}
+
+An $\mathrm{MA}(q)$ model is always weakly stationary. The ACFs from
+lag 1 to lag q are not zero, while $\rho_{\ell} > 0$ when $\ell > q$.
+
+*** Estimation and model checking
+
+- Use the sample ACF to determine the order of $\mathrm{MA}(q)$.
+
+- $\mathrm{MA}(q)$ models can be estimated using either the
+  conditional maximum likelihood method or the exact maximum
+  likelihood method.
+
+- Use the Ljung-Box test to check whether the residuals are white
+  noise.
+
+*** Forecasting
+
+For an $\mathrm{MA}(1)$ model, the \ell-step-ahead forecast is
+\begin{align*}
+\hat{r}_h(1) &= c_0 - \theta_1 a_{h-1} \\
+\hat{r}_h(\ell) &= 0 \text{ for } \ell > 1
+\end{align*}
+That is, the forecasts go to the mean of {$r_t$} after 1 step.
+
+For an $\mathrm{MA}(q)$ model, the \ell-step-ahead forecasts go to
+the mean after the first q steps.
+
+
+** The ARMA Model
+
+*** The simple $\mathrm{ARMA}(1,1)$ model
+
+A time series {$r_t$} follows an $\mathrm{ARMA}(1,1)$ model if it
+satisfies
+\begin{equation}
+\label{eq-arma11}
+r_t = \phi_0 + \phi_1 r_{t-1} + a_t - \theta_1 a_{t-1}
+\end{equation}
+where {$a_t$} is a white noise series.
+
+*** The expectation and variance of $\mathrm{ARMA}(1,1)$
+
+- The unconditional expectation of an $\mathrm{ARMA}(1, 1)$ series is
+  \[E(r_t) = \frac{\phi_0}{1 - \phi_1}\]
+
+- The unconditional variance is
+  \[ \gamma_0 = \var(r_t) = \frac{(1-2\phi_1 \theta_1 + \theta_1^2) \sigma^2_a}{1-\phi_1^2} \]
+
+*** The ACF of $\mathrm{ARMA}(1,1)$
+
+The ACF of an $\mathrm{ARMA}(1,1)$ series is governed by the following
+difference equation
+\[ \rho_0 = 1,\; \rho_1 = \phi_1 - \frac{\theta_1
+\sigma^2_a}{\gamma_0},\; \rho_{\ell} = \phi_1 \rho_{\ell-1}, \text{
+for } \ell>1 \]
+
+The ACF exhibits a similar pattern to an $\mathrm{AR}(1)$ model except
+that the exponential decay starts with lag 2 instead of lag 1.
+
+*** The estimation, model checking, and forecasting
+
+- The order of an $\mathrm{ARMA}(p,q)$ model can be determined by EACF
+  (extended ACF), AIC, and BIC.
+- The estimation method is either the conditional likelihood method or
+  the exact likelihood method.
+- The Ljung-Box test is used to check whether the residual series is a
+  white noise series.
+- The \ell-step-ahead forecast is
+  \[ \hat{r}_h(\ell) = E(r_{h+\ell} \mid F_h) = \phi_0 + \sum_{i=1}^p
+  \phi_i \hat{r}_h(\ell-i) - \sum_{i=1}^q \theta_i a_h(\ell-i) \]
+
+
+* Random Walk and Unit-Root Nonstationarity
+
+The AR, MA, and ARMA models are all models for stationary time series,
+whereas not all time series data are stationary. Next, we review the
+models for unit-root nonstationary data, including random walk, random
+walk with a drift, the trend-stationary model, and $\mathrm{ARIMA}(p, d, q)$.
+
+** Random Walk and Random Walk with a Drift
+
+Consider the following models
+\begin{align}
+p_t &= \phi_1 p_{t-1} + e_t  \label{eq:ar1a} \\
+p_t &= \mu + \phi_1 p_{t-1} + e_t \label{eq:ar1b}
+\end{align}
+When $|\phi_1| < 1$, we know that both Equations (\ref{eq:ar1a}) and
+(\ref{eq:ar1b}) are stationary $\mathrm{AR}(1)$ processes.
+
+If $\phi_1 = 1$, then Equation (\ref{eq:ar1a}) turns to a *random
+walk* model, and Equation (\ref{eq:ar1b}) turns to a *random walk with
+a drift* model. Since $\phi_1$ is the root of the characteristic
+equations for Equations (\ref{eq:ar1a}) and (\ref{eq:ar1b}), the random
+walk and random walk with a drift models are all *unit-root*
+nonstationary models.
+
+*** Random walk
+
+The log price of a stock usually follows a random walk process.
+\begin{equation}
+\label{eq:randwalk}
+p_t = p_{t-1} + a_t,\; a_t \sim i.i.d.(0, \sigma^2_a)
+\end{equation}
+
+- The MA representation of Equation (\ref{eq:randwalk}) is
+  \[ p_t = p_0 + a_t + a_{t-1} + \cdots + a_1 \]
+  which implies that the past shocks have permanent non-diminishing
+  effects on the current price.
+
+- The \ell-step-ahead forecast is
+  \[ \hat{p}_h(\ell) = E(p_{h+\ell} \mid p_h, p_{h-1}, \ldots) = p_h,
+  \text{ for } \ell > 0 \]
+  It says that for all forecast horizons, the point forecasts of a
+  random-walk model are simply the value of the series at the forecast
+  origin.
+
+- The forecast error is
+  \[ e_h(\ell) = a_{h+\ell} + \cdots + a_{h+1} \]
+  of which $\var[e_h(\ell)] = \ell \sigma^2_a$. It implies that the
+  forecast errors will increase infinitely as $\ell \rightarrow \infty$.
+
+*** Random walk with a drift
+
+A random walk series with a drift takes the following form
+\begin{equation}
+\label{eq:randwalkdr}
+p_t = \mu + p_{t-1} + a_t,\; a_t \sim i.i.d.(0, \sigma^2_a)
+\end{equation}
+
+- The existence of $\mu$ add a time trend to {$p_t$}. That is, we can
+  rewrite Equation (\ref{eq:randwalkdr}) as
+  \[ p_t = t\mu + p_0 + a_t + a_{t-1} + \cdots + a_1 \]
+
+*** Trend-stationary time series
+
+\begin{equation}
+\label{eq:time-stationary}
+p_t = \beta_0 + \beta_1 t + r_t
+\end{equation}
+
+where $r_t$ is a stationary series. Assuming $E(r_t) = 0$, we have 
+- $E(p_t) = \beta_0 + \beta_1 t$;
+- $\var(p_t) = \var(r_t)$. 
+
+
+** $\mathrm{ARIMA}(p,d,q)$
+
+If an ARMA series has a unit root, it turns into an Integrated ARMA,
+i.e., ARIMA, process.
+
+- $y_t$ is an $\mathrm{ARIMA}(p, d, q)$ process when its d^{th}-order
+  difference, $\Delta^d y_t$, is an $\mathrm{ARMA}(p,
+  q)$ process.
+
+- If $y_t$ is an $\mathrm{ARIMA}(p, 1, q)$ process, we should
+  generate its first-order difference series, $\Delta y_t = y_t -
+  y_{t-1}$, to have an $\mathrm{ARMA}(p, q)$ series.
+
+
+** Unit-Root Tests
+
+*** The Dickey-Fuller test
+
+We use the Dickey-Fuller test to test if a series {$p_t$} is a random
+walk or a random walk with a drift. The hypotheses to be tested are
+\[H_0:\; \phi_1 = 0,\: H_1:\; \phi_1 < 1  \]
+for Equations (\ref{eq:ar1a}) and (\ref{eq:ar1b}).
+
+The Dickey-Fuller test statistic is
+\begin{equation}
+\label{eq:df-test}
+\mathrm{DF} = \frac{\hat{\phi}_1 - 1}{\mathrm{std}(\hat{\phi}_1)} = \frac{\sum_{t=1}^T p_{t-1} e_t}{\hat{\sigma}_e \sqrt{\sum_{t=1}^T p^2_{t-1}}}
+\end{equation}
+The DF statistic follows a simulated Dickey-Fuller distribution.
+
+*** The augmented Dickey-Fuller test
+
+The augmented Dickey-Fuller test is to test the existence of
+unit-roots in an $\mathrm{ARIMA}(p, d, q)$ series {$x_t$}. The
+augmented Dickey-Fuller test is based on the following regression
+\[
+x_t = c_t + \beta x_{t-1} + \sum_{i=1}^{p-1} \phi_i \Delta x_{t-i} +
+e_t \]
+
+The hypotheses are
+\[H_0:\; \beta = 1,\: H_1:\; \beta < 1\]
+
+The augmented DF test statistic is
+\[ \mathrm{ADF} = \frac{\hat{\beta}-1}{\mathrm{std}(\hat{\beta})} \sim
+\text{ Dickey-Fuller distribution}\]
+where $\hat{\beta}$ is the least squares estimate of $\beta$.
+
+
+* The Basic R functions for Financial Data
+
+The documentation for the functions in R to handle financial data is
+written with R Markdown, which is a type of Markdown files, enabling
+to make research reproducible.
+
+See [[file:rdocs/lecture_1_R.pdf][R documentation]].

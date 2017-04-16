@@ -1,1 +1,0 @@
-This repository contains the instructions and starter code for the course project of the course, Financial Data Analysis, offered by Zheng Tian at ISEM, CUEB, summer, 2017.  

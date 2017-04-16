@@ -1,0 +1,137 @@
+#+TITLE: Lecture 2: The ARCH Model
+#+AUTHOR: Zheng Tian
+#+EMAIL:
+#+DATE: 
+#+OPTIONS: H:3 num:2 toc:nil ^:{} todo:nil
+#+PROPERTY: header-args:R  :session *R*
+#+FILETAGS:
+
+#+LATEX_CLASS: article
+#+LATEX_CLASS_OPTIONS: [a4paper,11pt]
+#+LATEX_HEADER: \usepackage[margin=1in]{geometry}
+#+LATEX_HEADER: \usepackage{setspace}
+#+LATEX_HEADER: \onehalfspacing
+#+LATEX_HEADER: \usepackage{parskip}
+#+LATEX_HEADER: \usepackage{mathtools}
+#+LATEX_HEADER: \usepackage{hyperref}
+#+LATEX_HEADER: \hypersetup{colorlinks,citecolor=black,filecolor=black,linkcolor=black,urlcolor=black}
+#+LATEX_HEADER: \usepackage{graphicx}
+#+LATEX_HEADER: \usepackage{tabularx}
+#+LATEX_HEADER: \usepackage{color}
+#+LATEX_HEADER: \usepackage[font={footnotesize}]{caption}
+#+LATEX_HEADER: \newtheorem{mydef}{Definition}
+#+LATEX_HEADER: \newtheorem{mythm}{Theorem}
+#+LATEX_HEADER: \newcommand{\dx}{\mathrm{d}}
+#+LATEX_HEADER: \newcommand{\var}{\mathrm{Var}}
+#+LATEX_HEADER: \newcommand{\cov}{\mathrm{Cov}}
+#+LATEX_HEADER: \newcommand{\corr}{\mathrm{Corr}}
+#+LATEX_HEADER: \newcommand{\pr}{\mathrm{Pr}}
+#+LATEX_HEADER: \newcommand{\rarrowd}[1]{\xrightarrow{\text{ \textit #1 }}}
+#+LATEX_HEADER: \DeclareMathOperator*{\plim}{plim}
+#+LATEX_HEADER: \newcommand{\plimn}{\plim_{n \rightarrow \infty}}
+
+
+* The Volatility of Asset Returns
+
+This lecture focuses on the volatility of asset returns. Here
+volatility refers to the *conditional variance* of a time series. That
+is, for a return series {$r_t$}, we are now interested in 
+\[\sigma^2_t = \var(r_t \mid F_{t-1})\]
+where $F_{t-1}$ is the information set at time $t-1$. 
+
+** Characteristics of volatility
+
+In practice, we have observed some stylized facts about volatility,
+and some volatility models are proposed to characterize them. These
+properties of volatility include:
+
+1. There exist volatility clusters. That is, volatility may be high
+   for certain time periods and low for other periods. Figure
+   [[fig:nyse-us-100]] shows the daily changes in the log of the NYSE
+   U.S. 100 stock price index. As seen, a cluster of tranquil periods
+   from 2003 to 2007 is followed by a cluster of drastic volatile
+   periods from 2008 to 2010. 
+
+   #+CAPTION: Percentage Change in the NYSE U.S. 100
+   #+NAME: fig:nyse-us-100
+   #+ATTR_LATEX: :width \textwidth
+   [[file:img/nyse_us100.png]]
+   
+2. Volatility evolves over time in a continuous manner. That is,
+   volatility jumps are rare. In Figure [[fig:realgdp]], the change of the
+   volatility of the annualized real GDP growth rate of the U.S. is
+   relatively smooth. 
+
+   #+CAPTION: Annualized Growth Rate of Real GDP
+   #+NAME: fig:realgdp
+   #+ATTR_LATEX: :width \textwidth
+   [[file:img/readgdp.png]]
+
+3. Volatility does not diverge to infinity. That is, volatility varies
+   within some fixed range. Statistically speaking, this means that
+   volatility is often stationary.
+
+4. Volatility seems to react differently to a big price increase or a
+   big price drop, referred to as the leverage effect. 
+
+   
+* TODO The Structure of a Volatility Model
+
+** DONE The basic idea of building a volatility model
+CLOSED: [2017-04-13 Thu 16:15]
+
+Consider the log return series {$r_t$}. The basic idea of a volatility
+model is that {$r_t$} may appear to be either serially uncorrelated or
+serially correlated with a minor order, but {$r_t$} is a dependent
+series and the dependence arises from its conditional variance. 
+
+#+CAPTION: Time plot of monthly log returns of Intel stock from January 1973 to December 2008
+#+NAME: fig:intel-return
+#+ATTR_LATEX: :width \textwidth
+[[file:img/intel.png]]
+
+#+CAPTION: Sample ACF and PACF of various functions of monthly log stock returns of Intel Corporation from January 1973 to December 2008: (a) ACF of the log returns, (b) ACF of the squared log returns, (c) ACF of the absolute log returns, and (d) PACF of the squared log returns.
+#+NAME: fig:acf-intel-return
+#+ATTR_LATEX: :width \textwidth
+[[file:img/acf_intel.png]]
+
+ For illustration, consider the monthly log stock returns of Intel
+ Corporation from January 1973 to December 2008 shown in Figure
+ [[fig:intel-return]]. 
+
+ Figure [[fig:acf-intel-return]] displays the sample ACF and PACF of the
+ log return. 
+ - Figure [[fig:acf-intel-return]](a) shows the sample ACF of the log
+   return series {$r_t$}, which suggests no significant serial correlations
+   except for a minor one at lag 7. 
+ - Figure [[fig:acf-intel-return]](b) shows the sample ACF of the squared log returns
+   {$r^2_t$}. 
+ - Figure  [[fig:acf-intel-return]](c) shows the sample ACF of the absolute log returns,
+
+ These two plots clearly suggest that the monthly log returns are not
+ serially independent. Combining the three plots, it seems that the
+ log returns are indeed serially uncorrelated but
+ dependent. Volatility models attempt to capture such dependence in
+ the return series.
+
+** TODO The mean equation and the volatility equation
+
+** TODO The procedure of building a volatility model
+
+** TODO Testing for the presence of ARCH effect
+
+
+* TODO The ARCH Model
+
+** TODO The ARCH(m) Model
+
+** TODO The properties of ARCH models
+
+** TODO Order determination
+
+** TODO Estimation 
+
+** TODO Model checking
+
+
+* TODO Applications with R

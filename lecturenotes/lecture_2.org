@@ -1,9 +1,0 @@
-#+TITLE: Lecture 2: The ARCH Model
-#+AUTHOR: Zheng Tian
-#+EMAIL: zngtian@gmail.com
-#+DATE: 
-#+OPTIONS: H:3 num:2 toc:nil ^:{}
-#+PROPERTY: header-args:R  :session *R*
-#+FILETAGS:
-
-
