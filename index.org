@@ -17,7 +17,7 @@ Please first read the syllabus carefully. [[file:syllabus/syllabus_financial_dat
 ** Lecture 1: Review on Linear Time Series Models and R Applications
 
 - Review on Linear Time Series Models ([[file:lecturenotes/lecture_1/lecture_1.pdf][pdf]])
-- Basic R Functions of Handling Financial Data ([[file:lecturenotes/lecture_1/rdocs/quantmod-vignette.pdf][pdf]] and [[file:lecturenotes/lecture_1/rdocs.zip][zip file]])
+- Basic R Functions of Handling Financial Data ([[file:lecturenotes/lecture_1/rdocs/lecture_1_R.pdf][pdf]] and [[file:lecturenotes/lecture_1/rdocs.zip][zip file]])
 - A Brief R Markdown Tutorial ([[file:lecturenotes/rmarkdown_tutorial/rmarkdown_tutorial.pdf][pdf]] and [[file:lecturenotes/rmarkdown_tutorial/rmarkdown.zip][zip]]) and a cheat sheet of R
   Markdown ([[file:lecturenotes/rmarkdown_tutorial/rmarkdown_cheatsheet.pdf][pdf]])
 
