@@ -1,0 +1,3 @@
+[submodule "lecturenotes/git_tutorial/demo/github_test"]
+	path = lecturenotes/git_tutorial/demo/github_test
+	url = https://github.com/zngtian/github_test.git
