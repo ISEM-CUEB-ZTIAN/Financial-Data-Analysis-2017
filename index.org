@@ -31,5 +31,4 @@ Please first read the syllabus carefully. [[file:syllabus/syllabus_financial_dat
 * Assignments
 
 ** Course project
-
 - A template of the course project ([[file:course_project/project_report_template.pdf][pdf]] and [[file:course_project/project_report_template.Rmd][Rmarkdown]]). 
