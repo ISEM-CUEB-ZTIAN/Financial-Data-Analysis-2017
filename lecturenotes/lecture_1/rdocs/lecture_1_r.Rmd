@@ -2,8 +2,14 @@
 title: "Basic R Functions of Handling Financial Data"
 author: "Zheng Tian"
 output:
-  pdf_document: default
-  html_document: default
+  html_document:
+    number_sections: yes
+    toc: yes
+    toc_depth: 1
+  pdf_document:
+    number_sections: yes
+    toc: yes
+    toc_depth: 1
 ---
 
 # Basic R Functions for Financial Data

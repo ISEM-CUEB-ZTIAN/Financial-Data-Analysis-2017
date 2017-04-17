@@ -6,29 +6,48 @@
 * Introduction
 
 This website contains the teaching materials for the second half of
-the course of Financial Data Analysis in the spring semester, 2017. 
+the course of Financial Data Analysis in the spring semester, 2017.
+
+All the teaching materials can be downloaded from
+https://github.com/ISEM-CUEB-ZTIAN/Financial-Data-Analysis-2017. The
+recommended way to download the whole package is typing the following
+in terminal
+#+BEGIN_SRC shell
+git clone https://github.com/ISEM-CUEB-ZTIAN/Financial-Data-Analysis-2017.git
+#+END_SRC
+
 
 * Syllabus
 
-Please first read the syllabus carefully. [[file:syllabus/syllabus_financial_data_web.org][Syllabus]]
+Please first read the syllabus carefully ([[file:syllabus/syllabus_financial_data.pdf][pdf]] and [[file:syllabus/syllabus_financial_data_web.html][html]]).
 
 * Lectures
 
 ** Lecture 1: Review on Linear Time Series Models and R Applications
 
 - Review on Linear Time Series Models ([[file:lecturenotes/lecture_1/lecture_1.pdf][pdf]])
-- Basic R Functions of Handling Financial Data ([[file:lecturenotes/lecture_1/rdocs/lecture_1_R.pdf][pdf]] and [[file:lecturenotes/lecture_1/rdocs.zip][zip file]])
+- Basic R Functions of Handling Financial Data ([[file:lecturenotes/lecture_1/rdocs/lecture_1_r.pdf][pdf]] and [[file:lecturenotes/lecture_1/rdocs.zip][zip]])
 - A Brief R Markdown Tutorial ([[file:lecturenotes/rmarkdown_tutorial/rmarkdown_tutorial.pdf][pdf]] and [[file:lecturenotes/rmarkdown_tutorial/rmarkdown.zip][zip]]) and a cheat sheet of R
-  Markdown ([[file:lecturenotes/rmarkdown_tutorial/rmarkdown_cheatsheet.pdf][pdf]])
+  Markdown ([[file:lecturenotes/rmarkdown_tutorial/rmarkdown_cheatsheet.pdf][pdf]]). More documents about R Markdown can be found in
+  http://rmarkdown.rstudio.com/.
+
 
 ** TODO Lecture 2: Modeling volatility
 
 - Modeling volatility ([[file:lecturenotes/lecture_2/lecture_2.pdf][pdf]])
 - A brief Git and GitHub tutorial ([[file:lecturenotes/git_tutorial/git_tutorial.pdf][pdf]])
 - Installers for Git and GitHub:
-  Download from: https://pan.baidu.com/s/1miLo5b6, Password: c7um
+  链接: https://pan.baidu.com/s/1nvCzcDz 密码: pcz4
 
 * Assignments
 
 ** Course project
-- A template of the course project ([[file:course_project/project_report_template.pdf][pdf]] and [[file:course_project/project_report_template.Rmd][Rmarkdown]]). 
+
+I have created a template for the course project (See [[file:assignments/course_project/project_report_template.pdf][pdf]] and
+[[file:assignments/course_project/project_report_template.Rmd][Rmarkdown]] files). Your course project can be based on this
+template. The final report should contain the following items:
+- Narrative description, explaining your research question, data
+  source, modeling procedure, and result analysis.
+- R code, which can be either embedded within the report or
+  appended after the report.
+- Tables and graphs if necessary.

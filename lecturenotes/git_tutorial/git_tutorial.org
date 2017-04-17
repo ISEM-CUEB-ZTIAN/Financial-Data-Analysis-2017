@@ -162,6 +162,7 @@ call GitHub Desktop and set up the repository in your computer.
 Another way is the ~HTTPS~ of the repository and type the following
 command, assuming that you are under a folder in which you want this new
 repository to be downloaded.
+
 #+BEGIN_SRC shell
 $ git clone https://github.com/zngtian/github_test.git
 $ git status
@@ -205,6 +206,16 @@ git can know and records such changes.
 
 
 ** TODO Upload your work to GitHub
+
+Suppose we are still working on the project ~github_test~ that has
+been cloned from GitHub. In this project, we have added a new
+file, ~README.md~, and made a commit.
+
+Now let's upload the change to GitHub.
+#+BEGIN_SRC shell
+git push
+#+END_SRC
+
 
 
 * TODO A Workflow of Group Working

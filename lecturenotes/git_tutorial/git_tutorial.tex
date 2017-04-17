@@ -1,4 +1,4 @@
-% Created 2017-04-12 Wed 17:28
+% Created 2017-04-17 Mon 11:30
 % Intended LaTeX compiler: pdflatex
 \documentclass[a4paper,11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -35,10 +35,10 @@
 
 
 \section{What are Git and GitHub?}
-\label{sec:orgf3949f2}
+\label{sec:orga6a35b3}
 
 \subsection{What is Git?}
-\label{sec:orgf22681d}
+\label{sec:org9b6e266}
 
 \begin{itemize}
 \item Git is a version control system (VCS) that records changes to a file
@@ -50,7 +50,7 @@ lose files, you can easily recover.
 \end{itemize}
 
 \subsection{How does Git work?}
-\label{sec:orgd5f4b4c}
+\label{sec:org94651da}
 
 \begin{itemize}
 \item Git takes a snapshot of a whole project whenever you make a commit
@@ -59,12 +59,12 @@ to the changes.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=.9\linewidth]{img/snapshots.png}
-\caption{\label{fig:org2bd9b65}
+\caption{\label{fig:org8e73f72}
 Storing data as snapshots of the project over time}
 \end{figure}
 
 \subsection{The basic workflow of Git goes like this}
-\label{sec:orge82cbb1}
+\label{sec:org59be77f}
 
 \begin{enumerate}
 \item You modify files in your working tree.
@@ -76,12 +76,12 @@ area and stores that snapshot permanently to your Git directory.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=.9\linewidth]{img/threestages.png}
-\caption{\label{fig:org0db337a}
+\caption{\label{fig:org82a7936}
 Working tree, staging area, and Git directory}
 \end{figure}
 
 \subsection{What is GitHub?}
-\label{sec:orgb2dfedb}
+\label{sec:org589da8b}
 
 \begin{itemize}
 \item GitHub is the single largest host for Git repositories, and is the
@@ -93,19 +93,19 @@ projects.
 
 
 \section{Get Started}
-\label{sec:org42e11c0}
+\label{sec:orga7edbb8}
 
 \subsection{Install Git and GitHub Desktop}
-\label{sec:org059b3f1}
+\label{sec:orgc314b8f}
 
 \subsubsection*{Download and install Git}
-\label{sec:orgf6fe525}
+\label{sec:org1c4ba51}
 
 You can download the installers of Git for Windows, MacOS, and Linux at
 \url{https://git-scm.com/downloads}.
 
 \subsubsection*{Download and install GitHub Desktop}
-\label{sec:org6fd8b6a}
+\label{sec:org180f644}
 
 \begin{itemize}
 \item GitHub Desktop is a GUI for Git and integrate your repositories on
@@ -115,7 +115,7 @@ GitHub with local counterparts.
 \end{itemize}
 
 \subsection{Configure Git}
-\label{sec:org46d8df8}
+\label{sec:org9c46bac}
 
 Next, follow the steps of configuration at
 \url{https://help.github.com/articles/set-up-git/}.
@@ -171,7 +171,7 @@ window will pop up asking for your GitHub account.
 \end{enumerate}
 
 \subsection{Book: \emph{Pro Git}}
-\label{sec:org4960d6f}
+\label{sec:orgc775018}
 
 \begin{itemize}
 \item Git is fully documented in this book,
@@ -179,20 +179,20 @@ window will pop up asking for your GitHub account.
 \end{itemize}
 
 
-\section{{\bfseries\sffamily TODO} Git Basics [1/4]}
-\label{sec:org71acf4f}
+\section{{\bfseries\sffamily TODO} Git Basics [1/2]}
+\label{sec:org5f69744}
 
 This section introduces the very basic commands of Git.
 
 \subsection{{\bfseries\sffamily DONE} Create a Git repository}
-\label{sec:orgb9aef2a}
+\label{sec:org151593c}
 A Git repository is simply a folder containing the files pertaining to
 a project that you want to have versions controlled. Within the
 folder, there is a sub-folder, usually invisible, called. \texttt{.git},
 where all data regarding each different version are stored.
 
 \subsubsection*{Create a Git repository in a computer}
-\label{sec:orgd2e355b}
+\label{sec:orgf6c6725}
 
 Let us first create a git repository in our computer. We do the
 following things
@@ -212,7 +212,7 @@ $ git status
 We use \texttt{git status} to check the status of the repository.
 
 \subsubsection*{Create a Git repository in GitHub}
-\label{sec:org5420443}
+\label{sec:org6468ef4}
 
 At \url{https:github.com}, click \textbf{New Repository} and follow the instruction
 to create a new repository, names \texttt{github\_test}. This repository is
@@ -223,26 +223,24 @@ call GitHub Desktop and set up the repository in your computer.
 Another way is the \texttt{HTTPS} of the repository and type the following
 command, assuming that you are under a folder in which you want this new
 repository to be downloaded.
+
 \begin{verbatim}
 $ git clone https://github.com/zngtian/github_test.git
 $ git status
 \end{verbatim}
 
 
-\subsection{{\bfseries\sffamily TODO} Make a change and commit it}
-\label{sec:orgf8d3668}
-
-\subsubsection*{A life-cycle of a file in a git repository}
-\label{sec:org130743d}
+\subsection{A life-cycle of a file in a git repository}
+\label{sec:orgd44358f}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.8\textwidth]{img/lifecycle.png}
-\caption{\label{fig:orgb95c3c7}
+\caption{\label{fig:org98f3548}
 The lifecycle of the status of your files}
 \end{figure}
 
-Figure \ref{fig:orgb95c3c7}  displays a life cycle of a file in a git
+Figure \ref{fig:org98f3548}  displays a life cycle of a file in a git
 repository.
 \begin{itemize}
 \item When a file is first created, its status in git is \textbf{untracked}. For
@@ -259,21 +257,24 @@ and committing.
 All these things are implemented with the following command.
 \begin{verbatim}
 $ touch README.md
+$ git status
 $ git add README.md
+$ git status
 $ git commit -m "add a README.md file"
+$ git status
 \end{verbatim}
 
+If there are more than one files that we have made some changes, we
+can use \texttt{git add -A} to stage all files.
 
-\subsection{{\bfseries\sffamily TODO} What if I change my mind?}
-\label{sec:org50824d4}
+Removing and renaming files also need to be staged so that
+git can know and records such changes.
 
 
-
-\subsection{{\bfseries\sffamily TODO} Make a new branch}
-\label{sec:org22d3bb1}
-
+\subsection{{\bfseries\sffamily TODO} Upload your work to GitHub}
+\label{sec:orgf314fd6}
 
 
 \section{{\bfseries\sffamily TODO} A Workflow of Group Working}
-\label{sec:orgc5355a5}
+\label{sec:orgcb4f5f1}
 \end{document}
