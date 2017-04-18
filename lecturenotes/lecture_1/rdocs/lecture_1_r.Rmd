@@ -12,55 +12,55 @@ output:
     toc_depth: 1
 ---
 
-# Basic R Functions for Financial Data
+<!-- # Basic R Functions for Financial Data -->
 
-## Downloading Financial Data
+<!-- ## Downloading Financial Data -->
 
-We can download financial data with the function `getSymbols()` in the package `quantmod` in R from open sources, like Yahoo Finance, Google Finance, and the Federal Reserve Bank of St. Louis (FRED).
+<!-- We can download financial data with the function `getSymbols()` in the package `quantmod` in R from open sources, like Yahoo Finance, Google Finance, and the Federal Reserve Bank of St. Louis (FRED). -->
 
-```{r, results='hide'}
-library(quantmod, quietly = TRUE)
-options("getSymbols.warning4.0"=FALSE)
-getSymbols('AAPL', src = "yahoo", from="2005-01-02", to="2010-12-31")
-```
+<!-- ```{r} -->
+<!-- library(quantmod, quietly = TRUE) -->
+<!-- options("getSymbols.warning4.0" = FALSE) -->
+<!-- getSymbols('AAPL', src = "yahoo", from="2005-01-02", to="2010-12-31") -->
+<!-- ``` -->
 
-The data object obtained through `getSymbols()` is `xts`, i.e., extensible time series.
-```{r}
-class(AAPL)
-```
+<!-- The data object obtained through `getSymbols()` is `xts`, i.e., extensible time series. -->
+<!-- ```{r} -->
+<!-- class(AAPL) -->
+<!-- ``` -->
 
-We can check the data using `head()` and `tail`. And we can select a subset of the data within a range by calling the row names in the format as `yyyy-mm-dd`.
+<!-- We can check the data using `head()` and `tail`. And we can select a subset of the data within a range by calling the row names in the format as `yyyy-mm-dd`. -->
 
-```{r}
-# Look at the first three observations
-head(AAPL, n = 3)
+<!-- ```{r} -->
+<!-- # Look at the first three observations -->
+<!-- head(AAPL, n = 3) -->
 
-# Look at the observations from December 1st, 2010 to December 7th, 2010
-AAPL["2010-12-01::2010-12-07"]
-```
+<!-- # Look at the observations from December 1st, 2010 to December 7th, 2010 -->
+<!-- AAPL["2010-12-01::2010-12-07"] -->
+<!-- ``` -->
 
 
-## Visualizing Financial Data
+<!-- ## Visualizing Financial Data -->
 
-We can visualize the downloaded financial data with the function
-`chartSeries()`.
+<!-- We can visualize the downloaded financial data with the function -->
+<!-- `chartSeries()`. -->
 
-```{r, fig.width=8, fig.height=5}
-chartSeries(AAPL, subset = "2007::2009", theme = "white")
-```
+<!-- ```{r, fig.width=8, fig.height=5} -->
+<!-- chartSeries(AAPL, subset = "2007::2009", theme = "white") -->
+<!-- ``` -->
 
-Since the data set comforms with an `OHLC` data format, we can plot the range of stock prices with a trading period with bar charts. In the following chart, we converted the daily stock prices to weekly prices using the function `to.weekly()`, and removed the trade volumn by setting `TA = NULL`.
-```{r, fig.width=8, fig.height=5}
-barChart(to.weekly(AAPL), subset = "2008:01::2009:01",
-         theme='white.mono', TA = NULL, bar.type='ohlc')
-```
+<!-- Since the data set comforms with an `OHLC` data format, we can plot the range of stock prices with a trading period with bar charts. In the following chart, we converted the daily stock prices to weekly prices using the function `to.weekly()`, and removed the trade volumn by setting `TA = NULL`. -->
+<!-- ```{r, fig.width=8, fig.height=5} -->
+<!-- barChart(to.weekly(AAPL), subset = "2008:01::2009:01", -->
+<!--          theme='white.mono', TA = NULL, bar.type='ohlc') -->
+<!-- ``` -->
 
-Next we can generate the log return series, and plot it.
-```{r, fig.width=8, fig.height=5}
-aapl.rtn <- diff(log(AAPL))
-chartSeries(aapl.rtn, subset = "2007::2009", type = 'line',
-            TA = NULL, theme = "white")
-```
+<!-- Next we can generate the log return series, and plot it. -->
+<!-- ```{r, fig.width=8, fig.height=5} -->
+<!-- aapl.rtn <- diff(log(AAPL)) -->
+<!-- chartSeries(aapl.rtn, subset = "2007::2009", type = 'line', -->
+<!--             TA = NULL, theme = "white") -->
+<!-- ``` -->
 
 
 # Linear Time Series Models with R
