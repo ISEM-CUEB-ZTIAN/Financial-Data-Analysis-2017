@@ -2,11 +2,11 @@
 title: "Basic R Functions of Handling Financial Data"
 author: "Zheng Tian"
 output:
-  html_document:
+  pdf_document:
     number_sections: yes
     toc: yes
     toc_depth: 1
-  pdf_document:
+  html_document:
     number_sections: yes
     toc: yes
     toc_depth: 1

@@ -1,0 +1,242 @@
+#+TITLE: Lecture 2: The ARCH Model
+#+AUTHOR: Zheng Tian
+#+DATE:
+#+STARTUP: beamer
+#+OPTIONS: toc:1 H:2
+#+LATEX_CLASS: beamer
+#+LATEX_CLASS_OPTIONS: [presentation,10pt]
+#+BEAMER_THEME: CambridgeUS
+#+BEAMER_COLOR_THEME: beaver
+#+COLUMNS: %45ITEM %10BEAMER_env(Env) %10BEAMER_act(Act) %4BEAMER_col(Col) %8BEAMER_opt(Opt)
+#+PROPERTY: BEAMER_col_ALL 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 0.0 :ETC
+
+#+LATEX_HEADER: \usepackage{amsthm}
+#+LATEX_HEADER: \usepackage{amsmath}
+#+LATEX_HEADER: \usepackage{amssymb}
+#+LATEX_HEADER: \usepackage{mathtools}
+#+LATEX_HEADER: \newtheorem{mydef}{Definition}
+#+LATEX_HEADER: \newtheorem{mythm}{Theorem}
+#+LATEX_HEADER: \newcommand{\dx}{\mathrm{d}}
+#+LATEX_HEADER: \newcommand{\var}{\mathrm{Var}}
+#+LATEX_HEADER: \newcommand{\cov}{\mathrm{Cov}}
+#+LATEX_HEADER: \newcommand{\corr}{\mathrm{corr}}
+#+LATEX_HEADER: \newcommand{\pr}{\mathrm{Pr}}
+#+LATEX_HEADER: \newcommand{\rarrowd}[1]{\xrightarrow{\text{ \textit #1 }}}
+#+LATEX_HEADER: \DeclareMathOperator*{\plim}{plim}
+#+LATEX_HEADER: \newcommand{\plimn}{\plim_{n \rightarrow \infty}}
+#+LATEX_HEADER: \usepackage{booktabs}
+#+LATEX_HEADER: \usepackage{color}
+#+LATEX_HEADER: \usepackage{caption}
+#+LATEX_HEADER: \usepackage{subcaption}
+#+LATEX_HEADER: \def\mathbi#1{\textbf{\em #1}}
+#+LATEX_HEADER: \setlength{\parskip}{1em}
+
+* The Volatility of Asset Returns
+
+** Volatility is measured with the conditional variance
+
+- Volatility here refers to the *conditional variance* of a time series.
+
+- For a return series {$r_t$}, we are now interested in 
+  \[\sigma^2_t = \var(r_t \mid F_{t-1})\]
+  where $F_{t-1}$ is the information set at time $t-1$. 
+
+** Characteristics of volatility (1)
+
+1. *There exist volatility clusters.* That is, volatility may be high
+   for certain time periods and low for other periods. 
+   #+CAPTION: Percentage Change in the NYSE U.S.100 stock price index
+   #+NAME: fig:nyse-us-100
+   #+ATTR_LATEX: :width 0.7\textwidth
+   [[file:img/nyse_us100.png]]
+   
+** Characteristics of volatility (2)
+
+2. Volatility evolves over time in a continuous manner. That is,
+   volatility jumps are rare.
+   #+CAPTION: Annualized Growth Rate of Real GDP
+   #+NAME: fig:realgdp
+   #+ATTR_LATEX: :width 0.7\textwidth
+   [[file:img/readgdp.png]]
+
+** Characteristics of volatility (3)
+
+3. Volatility does not diverge to infinity. That is, volatility varies
+   within some fixed range. Statistically speaking, this means that
+   volatility is often stationary.
+
+\vspace{0.5cm}
+
+4. Volatility seems to react differently to a big price increase or a
+   big price drop, referred to as the leverage effect. 
+   
+* The Structure of a Volatility Model
+
+** The basic idea of building a volatility model
+
+Consider the log return series {$r_t$}. The basic idea of a volatility
+model is 
+- {$r_t$} may appear to be either serially uncorrelated or
+  serially correlated with a minor order. 
+- However, {$r_t$} is a dependent series and the dependence arises
+  from its conditional variance.
+
+#+CAPTION: Time plot of monthly log returns of Intel stock from January 1973 to December 2008
+#+NAME: fig:intel-return
+#+ATTR_LATEX: :width 0.7\textwidth :height 0.4\textheight
+[[file:img/intel.png]]
+
+** The sample ACF of {$r_t$} and {$r^2_t$}
+
+#+CAPTION: Sample ACF and PACF of various functions of monthly log stock returns of Intel Corporation from January 1973 to December 2008: (a) ACF of the log returns, (b) ACF of the squared log returns, (c) ACF of the absolute log returns, and (d) PACF of the squared log returns.
+#+NAME: fig:acf-intel-return
+#+ATTR_LATEX: :width 0.9\textwidth :height 0.5\textheight
+[[file:img/acf_intel.png]]
+
+** Decompose $r_t$ into the mean and variance equations
+
+To capture the dependence in a time series through its second moment
+but not the mean, we model the mean process and the variance process
+separately. 
+
+For a return series {$r_t$}, we can model it as
+\begin{equation}
+\label{eq:mean-plus-var}
+r_t = \mu_t + a_t
+\end{equation}
+where $\mu_t$ represents the conditional mean and $a_t$ is
+modeled to capture the conditional variance.
+
+** The mean equation
+
+\begin{align}
+&\mu_t = E(r_t \mid F_{t-1}) = \sum_{i=1}^p \phi_i y_{t-i} - \sum_{i=1}^q \theta_i a_{t-i} \label{eq:mean-equation} \\
+&y_t = r_t - \phi_0 - \sum_{i=1}^k \beta_i x_{it} \nonumber
+\end{align}
+$F_{t-1}$ is the information set at time $t-1$. 
+
+\vspace{0.5cm}
+
+If you combine these two equations, and let $\mu_t = r_t - a_t$, you
+will find that it is just an ARMA$(p, q)$ model with additional
+regressors $x_{it}$.
+
+** The variance equation
+
+Denote the conditional variance of $r_t$ with $\sigma^2_t$.
+\begin{equation*}
+\begin{split}
+\sigma^2_t = \var(r_t \mid F_{t-1}) &= E\left( (r_t - E(r_t | F_{t-1}))^2 | F_{t-1} \right) \\
+&= E\left( (r_t - \mu_t)^2 \mid F_{t-1} \right) \\
+&= \var(a_t \mid F_{t-1})
+\end{split}
+\end{equation*}
+
+** The variance equation (cont'd)
+
+- If we assume that $E(a_t \mid F_{t-1}) = 0$, we can see that
+  $\sigma^2_t = E(a^2_t \mid F_{t-1})$. 
+
+  \vspace{0.3cm}
+
+  This result motivates us to use
+  the series of {$a^2_t$} to model the conditional variance
+  $\sigma^2_t$. 
+
+- The simplest model is a linear model, like the following
+  \[ \sigma^2_t = \alpha_0 + \alpha_1 a^2_{t-1} + \cdots + \alpha_m a^2_{t-m} \]
+
+- Let $a^2_t = \sigma^2_t + \nu_t$ where $\nu_t$ is a white noise
+  series. The above equation turns into an AR$(m)$ model for {$a^2_t$}
+  as follows
+  \[a^2_t = \alpha_0 + \alpha_1 a^2_{t-1} + \cdots + \alpha_m
+  a^2_{t-m} + \nu_t \]
+  This equation represents the essential idea of an ARCH model with just
+  a little modification. 
+
+** The procedure of building a volatility model
+
+Building a volatility model for an asset return series consists of
+four steps:
+
+1. Specify a mean equation by testing for serial dependence in the
+   data and, if necessary, building an econometric model (e.g., an
+   ARMA model) for the return series to remove any linear dependence.
+
+3. Use the squared residuals of the mean equation to test for ARCH
+   effects.
+
+4. Specify a volatility model if ARCH effects are statistically
+   significant, and perform a joint estimation of the mean and
+   volatility equations.
+
+5. Check the fitted model carefully and refine it if necessary.
+
+** Testing for the presence of ARCH effect
+
+*** The Ljung-Box test for the series of $a^2_t$
+
+Upon obtaining the residuals from the estimation
+of an adequate mean equation, we can use the squared residuals
+{$\hat{a}_t^2$} to test the existence of autocorrelation. 
+- The Ljung-Box test is used to test the null hypothesis
+  $H_0: \rho_1 = \cdots = \rho_m = 0$.
+- The $Q(m)$ statistic is
+  calculated and compared with the critical value from $\chi^2(m)$
+  distribution at the desired significance level.
+- The rejection of the
+  null hypothesis implies that there is autoregressive conditional
+  heteroskedastic (ARCH) effect. 
+
+** The LM test
+
+*** An auxiliary regression
+We estimate a AR$(m)$ model regarding {$\hat{a}^2_t$}, that is,
+\[ \hat{a}^2_t = \alpha_0 + \alpha_1 \hat{a}_{t-1}^2 + \cdots +
+\alpha_m \hat{a}^2_{t-m} + e_t \]
+
+*** The LM test
+With this model, we test the joint hypothesis
+\[H_0: \alpha_1 = \cdots = \alpha_m = 0 \]
+- The LM statistic is $NR^2$ where $N$ is the sample size of this
+  regression and $R^2$ is the coefficient of the determination of this
+  regression. 
+- Given the null hypothesis is true, this statistic follows
+  a $\chi^2(m)$ distribution. 
+
+** The LM test (cont'd)
+
+Alternatively, we can use F statistic to test the joint
+hypothesis. 
+- Let $SSR_0 = \sum_{t=m+1}^{T} (\hat{a}^2_{t} -
+  \bar{\omega})^2$, where $\bar{\omega} = (1/T) \sum_{t=1}^T
+  \hat{a}^2_t$.
+- Let $SSR_1 = \sum_{t=m+1}^T \hat{e}^2_t$ where $\hat{e}_t$ is the
+  residuals from the regression. 
+- The F statistic is
+  \[F = \frac{(SSR_0 - SSR_1)/m}{SSR_1/(T-2m-1)} \sim F(m, T-2m-1)\]
+- Rejecting the null hypothesis motivates us to model the possible
+  ARCH effect.
+
+** An example
+
+Go back to Figure [[fig:acf-intel-return]]. Since the return series is
+already stationary, we directly test the squared return series to
+check the ARCH effect. 
+
+- In the LM test of the ARCH effect, $F = 53.62$ and the p value is
+  close to zero.
+- The Ljung–Box statistics of the $a^2_t$ series also
+  shows strong ARCH effects with $Q(12) = 89.85$, the p value of which is
+  close to zero.
+- Therefore, we can confirm that the return series of
+  Intel stock has an ARCH effect, and next we need to model such an
+  effect. 
+
+
+
+
+
+
+
+
