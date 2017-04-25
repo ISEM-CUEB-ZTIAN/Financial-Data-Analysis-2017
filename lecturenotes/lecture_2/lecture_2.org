@@ -3,7 +3,7 @@
 #+EMAIL:
 #+DATE: 
 #+OPTIONS: H:3 num:2 toc:nil ^:{} todo:nil
-#+PROPERTY: header-args:R  :session *R*
+#+PROPERTY: header-args:R  :session *myR*
 #+FILETAGS:
 
 #+LATEX_CLASS: article
@@ -160,11 +160,11 @@ $\sigma^2_t = E(a^2_t \mid F_{t-1})$. This result motivates us to use
 the series of {$a^2_t$} to model the conditional variance
 $\sigma^2_t$. The simplest model is a linear model, like the following
 \[ \sigma^2_t = \alpha_0 + \alpha_1 a^2_{t-1} + \cdots + \alpha_m a^2_{t-m} \]
-Let $a^2_t = \sigma^2_t + \nu_t$ where $\nu_t$ is a white noise
+Let $a^2_t = \sigma^2_t + \eta_t$ where $\eta_t$ is a white noise
 series. The above equation turns into an AR$(m)$ model for {$a^2_t$}
 as follows
 \[a^2_t = \alpha_0 + \alpha_1 a^2_{t-1} + \cdots + \alpha_m
-a^2_{t-m} + \nu_t \]
+a^2_{t-m} + \eta_t \]
 This equation represents the essential idea of an ARCH model with just
 a little modification. 
 
@@ -253,17 +253,175 @@ Intel stock has an ARCH effect, and next we need to model such an
 effect. 
 
 
-* TODO COMMENT The ARCH Model
+* TODO The ARCH Model
 
-** TODO The ARCH(m) Model
+** The ARCH(m) Model
 
-** TODO The properties of ARCH models
+*** The basic idea of an ARCH model
 
-** TODO Order determination
+Consider a series of shocks {$a_t$} in a return series {$r_t$}. The
+basic idea of an Autoregressive Conditional Heteroskedasticity (ARCH)
+model is
+1. the shock $a_t$ of the return series is serially uncorrelated but
+   dependent; and,
+2. the dependence of $a_t$ can be modeled through an autoregressive
+   process of $a^2_t$. 
 
-** TODO Estimation 
+*** The ARCH(m) model
 
-** TODO Model checking
+An ARCH(m) model takes the following form
+\begin{equation}
+\label{eq:archm}
+a_t = \sigma_t \epsilon_t,\; \sigma^2_t = \alpha_0 + \alpha_1 a^2_{t-1} + \cdots + \alpha_m a^2_{t-m}
+\end{equation}
+where $\epsilon_t \sim i.i.d.(0, 1)$, $\alpha_0 > 0$ and $\alpha_i
+\geq 0$ for $i=1, \ldots, m$. 
+- The assumption of $\var(\epsilon_t)=1$ is to make the analysis
+  regarding the properties of the ARCH(m) model easy;
+- The assumption of $\alpha_0 > 0$ and $\alpha_i \geq 0$ is to ensure
+  the conditional variance of $a_t$ is positive. 
+- $\alpha_1, \ldots, \alpha_m$ should also satisfy some regularity
+  conditions to ensure the unconditional variance of $a_t$ is finite. 
+
+  
+** The Properties of an ARCH Model
+
+Let's take an ARCH(1) model as an example to discuss the properties of
+ARCH model and see how such a model can capture the basic idea mentioned
+above and the stylized fact that highly volatile periods tend to be followed by
+high volatility periods. 
+
+Assume an ARCH(1) model as follows
+\begin{equation}
+\label{eq:arch1}
+a_t = \sigma_t \epsilon_t,\; \sigma^2_t = \alpha_0 + \alpha_1 a^2_{t-1},\; \epsilon_t \sim i.i.d.(0, 1)
+\end{equation}
+where $a_0 > 0$ and $a_1 \geq 0$. 
+
+*** The unconditional mean of $a_t$
+
+\begin{equation*}
+E(a_t) & = E(\sigma_t \epsilon_t) = E(\sigma_t) E(\epsilon_t) = 0
+\end{equation*}
+The second equality is ensured because $\sigma_t$ and $\epsilon_t$ are
+independent, and the third equality comes from the assumption of
+$E(\epsilon_t)=0$. 
+
+*** The unconditional variance of $a_t$
+
+\begin{equation*}
+\begin{split}
+\var(a_t) &= E(a^2_t) = E(\sigma^2_t \epsilon^2_t) \\
+&= E(\alpha_0 + \alpha_1 a^2_{t-1}) \cdot 1 = \alpha_0 + \alpha_1\var(a_{t-1})
+\end{split}
+\end{equation*}
+Assuming the unconditional mean of $a_t$ is a constant(why?), we can
+have 
+\[\var(a_t) = \frac{\alpha_0}{1-\alpha_1} \]
+Since the variance should be positive and finite, we must have $0 \leq
+\alpha_1 < 1$. 
+
+The reason that we need to assume the unconditional mean of $a_t$ to
+be constant and finite is that we assume the return series {$r_t$}
+itself is constant. Keep in mind that a complete ARCH model also
+includes a mean equation for the return series, say, an ARMA model. 
+
+*** The unconditional covariance of $a_t$
+
+Since $\epsilon_t$ and $\epsilon_{t-i}$ for $i \neq 0$ are independent, 
+\begin{equation*}
+\begin{split}
+\cov(a_t, a_{t-i}) &= E(a_t a_{t-i}) = E(\sigma_t \epsilon_t \sigma_{t-i} \epsilon_{t-i}) \\
+&= E(\sigma_t \sigma_{t-i}) E(\epsilon_t \epsilon_{t-i}) = 0
+\end{split}
+\end{equation*}
+
+Now we know that $a_t$ has constant unconditional mean and variance,
+and it is serially uncorrelated, satisfying the basic idea of building
+an ARCH model.
+
+*** The kurtosis of $a_t$
+
+Sometimes, we may also require the fourth moment of $a_t$ to be finite
+so that the variance of $a_t$ will not go wild without bounds. 
+
+Assume that $\epsilon \sim N(0, 1)$, implying that $E(\epsilon^4_t) =
+3$. Thus, we have
+\begin{equation*}
+\begin{split}
+E(a^4_t) &= E(\sigma^4_t \epsilon_t^4) = E(\sigma^4_t) E(\epsilon^4_t) = 3 E(\sigma^4_t) \\
+&= 3 E\left( E_{t-1}(\sigma^4_t) \right) = 3 E\left( E_{t-1}(\alpha_0 + \alpha_1 a^2_{t-1})^2  \right) \\
+&= 3 E(\alpha_0 + \alpha_1 a^2_{t-1})^2 \\
+&= 3\left(\alpha^2_0 + 2\alpha_0\alpha_1 E(a^2_{t-1}) + \alpha^2_1 E(a^4_{t-1}) \right)
+\end{split}
+\end{equation*}
+
+Assume that $a_t$ is fourth-order stationary so that we can define
+$m_4 = E(a^4_t) = E(a^4_{t-1})$. Then, using the fact that $E(a^2_t) =
+\alpha_0 /(1-\alpha_1)$, we can solve $m_4$ from the
+above equation.
+\[m_4 = \frac{3\alpha^2_0(1+\alpha_1)}{(1-\alpha_1)(1-3\alpha^2_1)} \]
+
+This result has two important implications: 
+1) Since the fourth moment of $a_t$ is positive, we see that $\alpha_1$ must
+   also satisfy the condition $1-3\alpha_1^2 > 0$, that is, $0 \leq
+   \alpha^2_1 < \frac{1}{3}$.
+2) The kurtosis of $a_t$ is
+   \[\text{kurtosis} = \frac{E(a^4_t)}{E(a^2_t)^2} =
+   \frac{3\alpha^2_0(1+\alpha_1)}{(1-\alpha_1)(1-3\alpha^2_1)} \cdot
+   \frac{(1-\alpha_1)^2}{\alpha_0^2} =
+   \frac{3(1-\alpha^2_1)}{1-3\alpha_1^2}  > 3\]
+
+   Thus, the the excess kurtosis of $a_t$ is positive and the tail
+   distribution of $a_t$ is heavier than that of a normal
+   distribution. 
+
+   In other words, the shock $a_t$ of a conditional Gaussian ARCH(1) model
+   is more likely than a Gaussian white noise series to produce
+   “outliers”. 
+
+*** The conditional mean and variance
+
+From nown on, let's write $E_{t-1}(a_t)$ to represent the conditional mean given the
+information set $F_{t-1}$, i.e., $E(E(a_t \mid F_{t-1}))$. 
+Since $\epsilon_t$ is i.i.d, we have $E_{t-1}(\epsilon_t) =
+E(\epsilon_t) = 0$. Thus,
+\begin{equation*}
+\begin{split}
+E_{t-1}(a_t) &= E_{t-1}(\sigma_t \epsilon_t) = E_{t-1}\left((\alpha_0 + \alpha_1 a^2_{t-1})^{1/2} \epsilon_t\right) \\
+&= (\alpha_0 + \alpha_1 a^2_{t-1})^{1/2} E_{t-1}(\epsilon_t) = 0
+\end{split}
+\end{equation*}
+
+The conditional variance of $a_t$ is 
+\begin{equation*}
+\begin{split}
+\var_{t-1}(a_t) &= E_{t-1}(a^2_t) = E_{t-1} \left( \sigma^2_t \epsilon_t^2 \right) \\
+&= E_{t-1}\left((\alpha_0 + \alpha_1 a^2_{t-1}) \epsilon^2_t \right) \\
+&= E_{t-1}(\alpha_0 + \alpha_1 a^2_{t-1}) E_{t-1}(\epsilon^2_t) \\
+&= (\alpha_0 + \alpha_1 a^2_{t-1}) E(\epsilon^2_t) \\
+&= \alpha_0 + \alpha_1 a^2_{t-1} = \sigma^2_t
+\end{split}
+\end{equation*}
+
+By calculating the conditional variance, we see that if the realized
+value of $a^2_{t-1}$ is large, the conditional variance of $a_t$ will
+be large as well. This essentially captures the stylized fact of
+volatility that high-volatility periods tend to follow previous
+high-volitility periods. 
+
+Let $a^2_t = \sigma^2_t + \eta_t$, where $\eta_t \sim i.i.d.(0,
+\sigma^2_h)$. We can rewrite an ARCH(1) process as
+\[ a^2_t = \alpha_0 + \alpha_1 a^2_{t-1} + \eta_t \]
+Since $0 \leq \alpha_1 < 1$, we know that an ARCH(1) process is
+actually an AR(1) process regarding {$a^2_t$}. 
+
+
+** TODO COMMENT Order determination
+
+** TODO COMMENT Estimation 
+
+** TODO COMMENT Model checking
 
 
 * TODO COMMENT Applications with R
