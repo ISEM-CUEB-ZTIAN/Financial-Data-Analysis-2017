@@ -16,6 +16,24 @@ in terminal
 git clone https://github.com/ISEM-CUEB-ZTIAN/Financial-Data-Analysis-2017.git
 #+END_SRC
 
+* Announcement
+
+** [2017-05-02 Tue]
+
+- Homework due on [2017-05-09 Tue]:
+
+  After today's lecture, you will be able to perform the
+  basic functions of Git and GitHub. This homework asks
+  - Each study group to create your course project repository, naming
+    it as the format of ~FDA_project_group_1~.
+  - The group leader performs the role of the maintainer of the
+    project of which the repository is the ~main~ remote repository.
+  - The maintainer should add all the group members AND me as
+    collaborator. You can find me by searching ~zngtian~.
+  - Include a ~README.md~ file to briefly introduce your project and
+    who are the group members.
+  - Each group member should complete at least one commit by adding
+    some content in the ~main~ repository.
 
 * Syllabus
 

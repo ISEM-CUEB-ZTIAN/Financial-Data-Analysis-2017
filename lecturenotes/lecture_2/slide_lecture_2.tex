@@ -1,4 +1,4 @@
-% Created 2017-04-25 Tue 10:37
+% Created 2017-05-01 Mon 20:44
 % Intended LaTeX compiler: pdflatex
 \documentclass[presentation,10pt]{beamer}
 \usepackage[utf8]{inputenc}
@@ -56,9 +56,9 @@
 
 
 \section{The Volatility of Asset Returns}
-\label{sec:orgaf3c5d5}
+\label{sec:orgeef5cc0}
 
-\begin{frame}[label={sec:org997c24c}]{Volatility is measured with the conditional variance}
+\begin{frame}[label={sec:org0745415}]{Volatility is measured with the conditional variance}
 \begin{itemize}
 \item Volatility here refers to the \alert{conditional variance} of a time series.
 
@@ -68,33 +68,33 @@ where \(F_{t-1}\) is the information set at time \(t-1\).
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label={sec:orgb8c5e37}]{Characteristics of volatility (1)}
+\begin{frame}[label={sec:org114e90d}]{Characteristics of volatility (1)}
 \begin{enumerate}
 \item \alert{There exist volatility clusters.} That is, volatility may be high
 for certain time periods and low for other periods. 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.7\textwidth]{img/nyse_us100.png}
-\caption{\label{fig:orgccdf087}
+\caption{\label{fig:org2968b36}
 Percentage Change in the NYSE U.S.100 stock price index}
 \end{figure}
 \end{enumerate}
 \end{frame}
 
-\begin{frame}[label={sec:org202fb6f}]{Characteristics of volatility (2)}
+\begin{frame}[label={sec:org143da87}]{Characteristics of volatility (2)}
 \begin{enumerate}
 \item Volatility evolves over time in a continuous manner. That is,
 volatility jumps are rare.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.7\textwidth]{img/readgdp.png}
-\caption{\label{fig:org7a24e53}
+\caption{\label{fig:org6becf0d}
 Annualized Growth Rate of Real GDP}
 \end{figure}
 \end{enumerate}
 \end{frame}
 
-\begin{frame}[label={sec:orgca44cc3}]{Characteristics of volatility (3)}
+\begin{frame}[label={sec:org055e6fd}]{Characteristics of volatility (3)}
 \begin{enumerate}
 \item Volatility does not diverge to infinity. That is, volatility varies
 within some fixed range. Statistically speaking, this means that
@@ -110,9 +110,9 @@ big price drop, referred to as the leverage effect.
 \end{frame}
 
 \section{The Structure of a Volatility Model}
-\label{sec:orgbb0552a}
+\label{sec:org5b6b34d}
 
-\begin{frame}[label={sec:org58aa1f9}]{The basic idea of building a volatility model}
+\begin{frame}[label={sec:org0de5a0d}]{The basic idea of building a volatility model}
 Consider the log return series \{\(r_t\)\}. The basic idea of a volatility
 model is 
 \begin{itemize}
@@ -125,21 +125,21 @@ from its conditional variance.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.7\textwidth,height=0.4\textheight]{img/intel.png}
-\caption{\label{fig:orgfa5cc38}
+\caption{\label{fig:org3b1a877}
 Time plot of monthly log returns of Intel stock from January 1973 to December 2008}
 \end{figure}
 \end{frame}
 
-\begin{frame}[label={sec:orgbea4688}]{The sample ACF of \{\(r_t\)\} and \{\(r^2_t\)\}}
+\begin{frame}[label={sec:org34a0aff}]{The sample ACF of \{\(r_t\)\} and \{\(r^2_t\)\}}
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.9\textwidth,height=0.5\textheight]{img/acf_intel.png}
-\caption{\label{fig:org1ae9eec}
+\caption{\label{fig:org96628fd}
 Sample ACF and PACF of various functions of monthly log stock returns of Intel Corporation from January 1973 to December 2008: (a) ACF of the log returns, (b) ACF of the squared log returns, (c) ACF of the absolute log returns, and (d) PACF of the squared log returns.}
 \end{figure}
 \end{frame}
 
-\begin{frame}[label={sec:org5263004}]{Decompose \(r_t\) into the mean and variance equations}
+\begin{frame}[label={sec:org4cf6e4e}]{Decompose \(r_t\) into the mean and variance equations}
 To capture the dependence in a time series through its second moment
 but not the mean, we model the mean process and the variance process
 separately. 
@@ -153,7 +153,7 @@ where \(\mu_t\) represents the conditional mean and \(a_t\) is
 modeled to capture the conditional variance.
 \end{frame}
 
-\begin{frame}[label={sec:orgcbb8b96}]{The mean equation}
+\begin{frame}[label={sec:org0ac4bbb}]{The mean equation}
 \begin{align}
 &\mu_t = E(r_t \mid F_{t-1}) = \sum_{i=1}^p \phi_i y_{t-i} - \sum_{i=1}^q \theta_i a_{t-i} \label{eq:mean-equation} \\
 &y_t = r_t - \phi_0 - \sum_{i=1}^k \beta_i x_{it} \nonumber
@@ -167,7 +167,7 @@ will find that it is just an ARMA\((p, q)\) model with additional
 regressors \(x_{it}\).
 \end{frame}
 
-\begin{frame}[label={sec:orgad61cb1}]{The variance equation}
+\begin{frame}[label={sec:org664bf96}]{The variance equation}
 Denote the conditional variance of \(r_t\) with \(\sigma^2_t\).
 \begin{equation*}
 \begin{split}
@@ -178,31 +178,20 @@ Denote the conditional variance of \(r_t\) with \(\sigma^2_t\).
 \end{equation*}
 \end{frame}
 
-\begin{frame}[label={sec:org848f184}]{The variance equation (cont'd)}
+\begin{frame}[label={sec:org767b5ff}]{The variance equation (cont'd)}
 \begin{itemize}
 \item If we assume that \(E(a_t \mid F_{t-1}) = 0\), we can see that
-\(\sigma^2_t = E(a^2_t \mid F_{t-1})\). 
+\(\sigma^2_t = E(a^2_t \mid F_{t-1})\).
 
-\vspace{0.3cm}
-
-This result motivates us to use
-the series of \{\(a^2_t\)\} to model the conditional variance
-\(\sigma^2_t\).
+\item We can use the lagged value of \(a^2_t\) to represent the information
+set \(F_{t-1}\)
 
 \item The simplest model is a linear model, like the following
 \[ \sigma^2_t = \alpha_0 + \alpha_1 a^2_{t-1} + \cdots + \alpha_m a^2_{t-m} \]
-
-\item Let \(a^2_t = \sigma^2_t + \nu_t\) where \(\nu_t\) is a white noise
-series. The above equation turns into an AR\((m)\) model for \{\(a^2_t\)\}
-as follows
-\[a^2_t = \alpha_0 + \alpha_1 a^2_{t-1} + \cdots + \alpha_m
-  a^2_{t-m} + \nu_t \]
-This equation represents the essential idea of an ARCH model with just
-a little modification.
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label={sec:org25d6ea2}]{The procedure of building a volatility model}
+\begin{frame}[label={sec:orgecbbe0e}]{The procedure of building a volatility model}
 Building a volatility model for an asset return series consists of
 four steps:
 
@@ -222,7 +211,7 @@ volatility equations.
 \end{enumerate}
 \end{frame}
 
-\begin{frame}[label={sec:orgd92c1e3}]{Testing for the presence of ARCH effect}
+\begin{frame}[label={sec:orgf3878c5}]{Testing for the presence of ARCH effect}
 \begin{block}{The Ljung-Box test for the series of \(a^2_t\)}
 Upon obtaining the residuals from the estimation
 of an adequate mean equation, we can use the squared residuals
@@ -240,7 +229,7 @@ heteroskedastic (ARCH) effect.
 \end{block}
 \end{frame}
 
-\begin{frame}[label={sec:org3522f9f}]{The LM test}
+\begin{frame}[label={sec:org9de398f}]{The LM test}
 \begin{block}{An auxiliary regression}
 We estimate a AR\((m)\) model regarding \{\(\hat{a}^2_t\)\}, that is,
 \[ \hat{a}^2_t = \alpha_0 + \alpha_1 \hat{a}_{t-1}^2 + \cdots +
@@ -260,7 +249,7 @@ a \(\chi^2(m)\) distribution.
 \end{block}
 \end{frame}
 
-\begin{frame}[label={sec:org538d51b}]{The LM test (cont'd)}
+\begin{frame}[label={sec:orgad73270}]{The LM test (cont'd)}
 Alternatively, we can use F statistic to test the joint
 hypothesis. 
 \begin{itemize}
@@ -276,8 +265,8 @@ ARCH effect.
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label={sec:orgb442462}]{An example}
-Go back to Figure \ref{fig:org1ae9eec}. Since the return series is
+\begin{frame}[label={sec:orgfa8cb6e}]{An example}
+Go back to Figure \ref{fig:org96628fd}. Since the return series is
 already stationary, we directly test the squared return series to
 check the ARCH effect. 
 
@@ -294,9 +283,9 @@ effect.
 \end{frame}
 
 \section{The ARCH Model}
-\label{sec:orge4a36ec}
+\label{sec:org27c248e}
 
-\begin{frame}[label={sec:orgd40109c}]{The basic idea of an ARCH model}
+\begin{frame}[label={sec:org872579d}]{The basic idea of an ARCH model}
 Consider a series of shocks \{\(a_t\)\} in a return series \{\(r_t\)\}. The
 basic idea of an Autoregressive Conditional Heteroskedasticity (ARCH)
 model is
@@ -310,7 +299,7 @@ process of \(a^2_t\).
 \end{enumerate}
 \end{frame}
 
-\begin{frame}[label={sec:orgb9cfd4d}]{The ARCH(m) model}
+\begin{frame}[label={sec:orga01f558}]{The ARCH(m) model}
 An ARCH(m) model takes the following form
 \begin{equation}
 \label{eq:archm}
@@ -329,7 +318,7 @@ conditions to ensure the unconditional variance of \(a_t\) is finite.
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label={sec:org45fd19c}]{The Properties of an ARCH Model}
+\begin{frame}[label={sec:org6d7c046}]{The Properties of an ARCH Model}
 \begin{itemize}
 \item Let's take an ARCH(1) model as an example to discuss the properties of
 ARCH model.
@@ -346,7 +335,7 @@ a_t = \sigma_t \epsilon_t,\; \sigma^2_t = \alpha_0 + \alpha_1 a^2_{t-1},\; \epsi
 where \(a_0 > 0\) and \(a_1 \geq 0\). 
 \end{frame}
 
-\begin{frame}[label={sec:org2eff193}]{The unconditional mean and variance of \(a_t\)}
+\begin{frame}[label={sec:org706de2d}]{The unconditional mean and variance of \(a_t\)}
 \begin{block}{The unconditional mean}
 \begin{equation*}
 E(a_t) & = E(\sigma_t \epsilon_t) = E(\sigma_t) E(\epsilon_t) = 0
@@ -374,7 +363,7 @@ Since the variance should be positive and finite, we must have \(0 \leq
 \end{block}
 \end{frame}
 
-\begin{frame}[label={sec:org8193a36}]{The unconditional covariance of \(a_t\)}
+\begin{frame}[label={sec:org1bcf2ed}]{The unconditional covariance of \(a_t\)}
 Since \(\epsilon_t\) and \(\epsilon_{t-i}\) for \(i \neq 0\) are independent, 
 
 \begin{equation*}
@@ -393,7 +382,7 @@ Since \(\epsilon_t\) and \(\epsilon_{t-i}\) for \(i \neq 0\) are independent,
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label={sec:org0c2fc8f}]{The kurtosis of \(a_t\)}
+\begin{frame}[label={sec:orga952c3f}]{The kurtosis of \(a_t\)}
 \begin{itemize}
 \item Assume that \(\epsilon \sim N(0, 1)\), implying that \(E(\epsilon^4_t) =
   3\). Thus, we have
@@ -413,7 +402,7 @@ above equation.
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label={sec:orgadc777e}]{The kurtosis of \(a_t\) (cont'd)}
+\begin{frame}[label={sec:org9f8bd92}]{The kurtosis of \(a_t\) (cont'd)}
 This result regarding \(m_4\) has two important implications: 
 \begin{enumerate}
 \item Since the fourth moment of \(a_t\) is positive, we see that \(\alpha_1\) must
@@ -429,7 +418,7 @@ distribution.
 \end{enumerate}
 \end{frame}
 
-\begin{frame}[label={sec:orged6bd20}]{The conditional mean}
+\begin{frame}[label={sec:orgbeda375}]{The conditional mean}
 \begin{itemize}
 \item Let's write \(E_{t-1}(a_t)\) to represent the conditional mean given the
 information set \(F_{t-1}\), i.e., \(E(E(a_t \mid F_{t-1}))\).
@@ -446,7 +435,7 @@ E_{t-1}(a_t) &= E_{t-1}(\sigma_t \epsilon_t) = E_{t-1}\left((\alpha_0 + \alpha_1
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label={sec:org1054bca}]{The conditional variance}
+\begin{frame}[label={sec:org1246b88}]{The conditional variance}
 \begin{itemize}
 \item The conditional variance of \(a_t\) is 
 \begin{equation*}
@@ -463,16 +452,47 @@ E_{t-1}(a_t) &= E_{t-1}(\sigma_t \epsilon_t) = E_{t-1}\left((\alpha_0 + \alpha_1
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label={sec:org1d35dd4}]{An ARCH model is essentially an AR process}
-\begin{itemize}
-\item Let \(a^2_t = \sigma^2_t + \eta_t\), where \(\eta_t \sim i.i.d.(0,
-  \sigma^2_h)\). We can rewrite an ARCH(1) process as
-\[ a^2_t = \alpha_0 + \alpha_1 a^2_{t-1} + \eta_t \]
-Since \(0 \leq \alpha_1 < 1\), we know that an ARCH(1) process is
-actually an AR(1) process regarding \{\(a^2_t\)\}.
+\section{Estimation and Forecasting}
+\label{sec:org499dc0e}
 
-\item The properties regarding an ARCH(1) model can be easily extended to
-an ARCH(m) model.
+\begin{frame}[label={sec:orga538a75}]{Order determination}
+\begin{itemize}
+\item Before estimating an ARCH(m) model, we need to determine the order
+\(m\).
+
+\vspace{0.2cm}
+
+\item The basic idea is that we treat an ARCH(m) model as an AR process
+of \{\(a^2_t\)\}, and apply the partial autocorrelation function (PACF) to
+determine \(m\).
 \end{itemize}
+\end{frame}
+
+\begin{frame}[label={sec:org25793a0}]{Why using the PACF?}
+We justify the use of the PACF of \{\(a^2_t\)\} to determine \(m\) through
+two perspectives.
+
+\vspace{0.2cm}
+
+\begin{enumerate}
+\item We can consider \(a^2_t\) as an unbiased estimator of \(\sigma^2_t\)
+given the sample data because \(E_{t-1}(a^2_t) =
+   \sigma^2_t\). Therefore, we use \(a^2_t\) as an approximate to
+\(\sigma^2_t\).
+
+\vspace{0.2cm}
+
+\item We can define \(\eta_t = a^2_t - \sigma^2_t\). It can be shown that
+\begin{itemize}
+\item \(E(\eta_t) = 0\) and \(E(\eta_t \eta_{t-s})=0\) for \(s > 0\).
+\item But \(\eta_t\) is not i.i.d. because \(a^2_t\) is dependent.
+\end{itemize}
+\vspace{0.2cm}
+
+So an ARCH(m) model is essentially an AR(m) model, except
+that \(\eta_t\) is not i.i.d. That is,
+\[ a^2_t = \alpha_0 + \alpha_1 a^2_{t-1} + \cdots + \alpha_m
+   a^2_{t-m} + \eta_t \]
+\end{enumerate}
 \end{frame}
 \end{document}

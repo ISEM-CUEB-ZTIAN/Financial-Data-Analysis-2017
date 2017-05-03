@@ -69,7 +69,7 @@
 
 4. Volatility seems to react differently to a big price increase or a
    big price drop, referred to as the leverage effect. 
-   
+
 * The Structure of a Volatility Model
 
 ** The basic idea of building a volatility model
@@ -137,22 +137,11 @@ Denote the conditional variance of $r_t$ with $\sigma^2_t$.
 - If we assume that $E(a_t \mid F_{t-1}) = 0$, we can see that
   $\sigma^2_t = E(a^2_t \mid F_{t-1})$. 
 
-  \vspace{0.3cm}
-
-  This result motivates us to use
-  the series of {$a^2_t$} to model the conditional variance
-  $\sigma^2_t$. 
-
+- We can use the lagged value of $a^2_t$ to represent the information
+  set $F_{t-1}$
+  
 - The simplest model is a linear model, like the following
   \[ \sigma^2_t = \alpha_0 + \alpha_1 a^2_{t-1} + \cdots + \alpha_m a^2_{t-m} \]
-
-- Let $a^2_t = \sigma^2_t + \nu_t$ where $\nu_t$ is a white noise
-  series. The above equation turns into an AR$(m)$ model for {$a^2_t$}
-  as follows
-  \[a^2_t = \alpha_0 + \alpha_1 a^2_{t-1} + \cdots + \alpha_m
-  a^2_{t-m} + \nu_t \]
-  This equation represents the essential idea of an ARCH model with just
-  a little modification. 
 
 ** The procedure of building a volatility model
 
@@ -387,15 +376,42 @@ This result regarding $m_4$ has two important implications:
 
 - How does the conditional variance capture the stylized fact?
 
-** An ARCH model is essentially an AR process
+* Estimation and Forecasting
 
-- Let $a^2_t = \sigma^2_t + \eta_t$, where $\eta_t \sim i.i.d.(0,
-  \sigma^2_h)$. We can rewrite an ARCH(1) process as
-  \[ a^2_t = \alpha_0 + \alpha_1 a^2_{t-1} + \eta_t \]
-  Since $0 \leq \alpha_1 < 1$, we know that an ARCH(1) process is
-  actually an AR(1) process regarding {$a^2_t$}. 
+** Order determination
 
-- The properties regarding an ARCH(1) model can be easily extended to
-  an ARCH(m) model. 
+- Before estimating an ARCH(m) model, we need to determine the order
+  $m$.
+
+  \vspace{0.2cm}
+
+- The basic idea is that we treat an ARCH(m) model as an AR process
+  of {$a^2_t$}, and apply the partial autocorrelation function (PACF) to
+  determine $m$.
+
+** Why using the PACF?
+
+We justify the use of the PACF of {$a^2_t$} to determine $m$ through
+two perspectives.
+
+\vspace{0.2cm}
+
+1. We can consider $a^2_t$ as an unbiased estimator of $\sigma^2_t$
+   given the sample data because $E_{t-1}(a^2_t) =
+   \sigma^2_t$. Therefore, we use $a^2_t$ as an approximate to
+   $\sigma^2_t$.
+
+   \vspace{0.2cm}
+
+2. We can define $\eta_t = a^2_t - \sigma^2_t$. It can be shown that
+   - $E(\eta_t) = 0$ and $E(\eta_t \eta_{t-s})=0$ for $s > 0$.
+   - But $\eta_t$ is not i.i.d. because $a^2_t$ is dependent.
+
+   \vspace{0.2cm}
+
+   So an ARCH(m) model is essentially an AR(m) model, except
+   that $\eta_t$ is not i.i.d. That is,
+   \[ a^2_t = \alpha_0 + \alpha_1 a^2_{t-1} + \cdots + \alpha_m
+   a^2_{t-m} + \eta_t \]
 
 
