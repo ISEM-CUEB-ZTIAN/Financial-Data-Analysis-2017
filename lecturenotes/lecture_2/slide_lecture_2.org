@@ -430,7 +430,7 @@ L(\boldsymbol{\theta} | \mathbf{y}^T) = \prod_{t=1}^T f(y_t | \mathbf{y}^{t-1}, 
 And the log-likelihood function is
 \begin{equation}
 \label{eq:depend-logL}
-\ell(\mathbf{y}^T | \boldsymbol{\theta}) = \sum_{t=1}^T \ell_t(\boldsymbol{\theta} | \mathbf{y}^{t})
+\ell(\boldsymbol{\theta} | \mathbf{y}^T) = \sum_{t=1}^T \ell_t(\boldsymbol{\theta} | \mathbf{y}^{t})
 \end{equation}
 
 ** The maximum likelihood (ML) estimator
@@ -439,7 +439,7 @@ And the log-likelihood function is
   parameter space in which $\boldsymbol{\theta}$ lies in.
 
   \begin{equation}
-  \operatorname*{max}_{\{\theta \in \Theta\}}\: \ell(\mathbf{y}^T | \boldsymbol{\theta}) = \sum_{t=1}^T \ell_t(\boldsymbol{\theta} | \mathbf{y}^t)
+  \operatorname*{max}_{\{\theta \in \Theta\}}\: \ell(\boldsymbol{\theta} | \mathbf{y}^T) = \sum_{t=1}^T \ell_t(\boldsymbol{\theta} | \mathbf{y}^t)
   \end{equation}
 
 - The ML estimator is usually obtained by computational methods, like
