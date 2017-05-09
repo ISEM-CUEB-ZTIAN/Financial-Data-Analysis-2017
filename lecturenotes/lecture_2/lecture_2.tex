@@ -1,4 +1,4 @@
-% Created 2017-05-02 Tue 14:35
+% Created 2017-05-08 Mon 19:03
 % Intended LaTeX compiler: pdflatex
 \documentclass[a4paper,11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -35,7 +35,7 @@
 \newcommand{\rarrowd}[1]{\xrightarrow{\text{ \textit #1 }}}
 \DeclareMathOperator*{\plim}{plim}
 \newcommand{\plimn}{\plim_{n \rightarrow \infty}}
-\setcounter{secnumdepth}{2}
+\setcounter{secnumdepth}{3}
 \author{Zheng Tian}
 \date{}
 \title{Lecture 2: The ARCH Model}
@@ -44,7 +44,7 @@
  pdftitle={Lecture 2: The ARCH Model},
  pdfkeywords={},
  pdfsubject={},
- pdfcreator={Emacs 25.1.1 (Org mode 9.0.3)},
+ pdfcreator={Emacs 25.1.1 (Org mode 9.0.3)}, 
  pdflang={English}}
 \begin{document}
 
@@ -52,7 +52,7 @@
 
 
 \section{The Volatility of Asset Returns}
-\label{sec:orgd466e43}
+\label{sec:org68b8f6f}
 
 This lecture focuses on the volatility of asset returns. Here
 volatility refers to the \textbf{conditional variance} of a time series. That
@@ -61,7 +61,7 @@ is, for a return series \{\(r_t\)\}, we are now interested in
 where \(F_{t-1}\) is the information set at time \(t-1\).
 
 \subsection{Characteristics of volatility}
-\label{sec:org615522d}
+\label{sec:orge9a9568}
 
 In practice, we have observed some stylized facts about volatility,
 and some volatility models are proposed to characterize them. These
@@ -70,7 +70,7 @@ properties of volatility include:
 \begin{enumerate}
 \item \textbf{There exist volatility clusters.} That is, volatility may be high
 for certain time periods and low for other periods. Figure
-\ref{fig:org0af5884} shows the daily changes in the log of the NYSE
+\ref{fig:org0ea4102} shows the daily changes in the log of the NYSE
 U.S. 100 stock price index. As seen, a cluster of tranquil periods
 from 2003 to 2007 is followed by a cluster of drastic volatile
 periods from 2008 to 2010.
@@ -78,19 +78,19 @@ periods from 2008 to 2010.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{img/nyse_us100.png}
-\caption{\label{fig:org0af5884}
+\caption{\label{fig:org0ea4102}
 Percentage Change in the NYSE U.S. 100}
 \end{figure}
 
 \item \textbf{Volatility evolves over time in a continuous manner.} That is,
-volatility jumps are rare. In Figure \ref{fig:orgf479ba2}, the change of the
+volatility jumps are rare. In Figure \ref{fig:org46e4ddc}, the change of the
 volatility of the annualized real GDP growth rate of the U.S. is
 relatively smooth.
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{img/readgdp.png}
-\caption{\label{fig:orgf479ba2}
+\caption{\label{fig:org46e4ddc}
 Annualized Growth Rate of Real GDP}
 \end{figure}
 
@@ -104,10 +104,10 @@ big price drop, referred to as \textbf{the leverage effect}.
 
 
 \section{The Structure of a Volatility Model}
-\label{sec:org3c7ac18}
+\label{sec:org0d7726f}
 
 \subsection{The basic idea of building a volatility model}
-\label{sec:orgaf9b3ec}
+\label{sec:orgc3d104d}
 
 Consider the log return series \{\(r_t\)\}. The basic idea of a volatility
 model is that \{\(r_t\)\} may appear to be either serially uncorrelated or
@@ -117,31 +117,31 @@ series and the dependence arises from its conditional variance.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{img/intel.png}
-\caption{\label{fig:org539a725}
+\caption{\label{fig:orgfb8e11d}
 Time plot of monthly log returns of Intel stock from January 1973 to December 2008}
 \end{figure}
 
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=\textwidth]{img/acf_intel.png}
-\caption{\label{fig:org9e2640c}
+\caption{\label{fig:org9148e1a}
 Sample ACF and PACF of various functions of monthly log stock returns of Intel Corporation from January 1973 to December 2008: (a) ACF of the log returns, (b) ACF of the squared log returns, (c) ACF of the absolute log returns, and (d) PACF of the squared log returns.}
 \end{figure}
 
 For illustration, consider the monthly log stock returns of Intel
 Corporation from January 1973 to December 2008 shown in Figure
-\ref{fig:org539a725}.
+\ref{fig:orgfb8e11d}.
 
-Figure \ref{fig:org9e2640c} displays the sample ACF and PACF of the
+Figure \ref{fig:org9148e1a} displays the sample ACF and PACF of the
 log return.
 \begin{itemize}
-\item Figure \ref{fig:org9e2640c}(a) shows the sample ACF of the log
+\item Figure \ref{fig:org9148e1a}(a) shows the sample ACF of the log
 return series \{\(r_t\)\}, which suggests no significant serial correlations
 except for a minor one at lag 7.
-\item Figure \ref{fig:org9e2640c}(b) shows the sample ACF of the squared log returns
+\item Figure \ref{fig:org9148e1a}(b) shows the sample ACF of the squared log returns
 \{\(r^2_t\)\}, which shows strong autocorrelation in the first few
 lags.
-\item Figure  \ref{fig:org9e2640c}(c) shows the sample ACF of the
+\item Figure  \ref{fig:org9148e1a}(c) shows the sample ACF of the
 absolute log returns, also showing strong autocorrelation.
 \end{itemize}
 
@@ -153,7 +153,7 @@ the return series.
 
 
 \subsection{The mean equation and the volatility equation}
-\label{sec:org9271fcf}
+\label{sec:org57433cb}
 
 To capture the dependence in a time series through its second moment
 but not the mean, we model the mean process and the variance process
@@ -167,8 +167,8 @@ r_t = \mu_t + a_t
 where \(\mu_t\) represents the conditional mean and \(a_t\) is
 modeled to capture the conditional variance.
 
-\subsubsection*{The mean equation}
-\label{sec:org41fbd05}
+\subsubsection{The mean equation}
+\label{sec:org27659a9}
 
 The mean equation is essentially an ARMA(p, q) model that is defined in
 terms of the conditional mean.
@@ -181,8 +181,8 @@ terms of the conditional mean.
 two equations, and let \(\mu_t = r_t - a_t\), you will find that it is
 just an ARMA\((p, q)\) model with additional regressors \(x_{it}\).
 
-\subsubsection*{The variance equation}
-\label{sec:org54ae666}
+\subsubsection{The variance equation}
+\label{sec:orgd4b481d}
 
 Let's see what is the conditional mean of \(r_t\). Denote the
 conditional variance of \(r_t\) with \(\sigma^2_t\).
@@ -204,7 +204,7 @@ The equation above captures the essence of an ARCH model as we will
 explain later.
 
 \subsection{The procedure of building a volatility model}
-\label{sec:org33a762a}
+\label{sec:org32e6f93}
 
 Building a volatility model for an asset return series consists of
 four steps:
@@ -229,10 +229,10 @@ volatility equations.
 
 
 \subsection{Testing for the presence of ARCH effect}
-\label{sec:org20eccf8}
+\label{sec:org5095325}
 
-\subsubsection*{The Ljung-Box test for the series of \(a^2_t\)}
-\label{sec:org88a836a}
+\subsubsection{The Ljung-Box test for the series of \(a^2_t\)}
+\label{sec:org76c0a28}
 
 Upon obtaining the residuals from the estimation
 of an adequate mean equation, we can use the squared residuals
@@ -245,8 +245,8 @@ distribution at the desired significance level. The rejection of the
 null hypothesis implies that there is autoregressive conditional
 heteroskedastic (ARCH) effect.
 
-\subsubsection*{The LM test}
-\label{sec:org6d4307e}
+\subsubsection{The LM test}
+\label{sec:org14ab4b0}
 
 We estimate a AR\((m)\) model regarding \{\(\hat{a}^2_t\)\}, that is,
 \[ \hat{a}^2_t = \alpha_0 + \alpha_1 \hat{a}_{t-1}^2 + \cdots +
@@ -281,10 +281,10 @@ distributed as a \(\chi^2(m)\) distribution.
 ARCH effect.
 \end{itemize}
 
-\subsubsection*{An example}
-\label{sec:orgd134f8a}
+\subsubsection{An example}
+\label{sec:orge69d2c3}
 
-Go back to Figure \ref{fig:org9e2640c}. Since the return series is
+Go back to Figure \ref{fig:org9148e1a}. Since the return series is
 already stationary, we directly test the squared return series to
 check the ARCH effect.
 
@@ -297,13 +297,13 @@ effect.
 
 
 \section{The ARCH Model}
-\label{sec:org39c6158}
+\label{sec:orgf2213c9}
 
 \subsection{The ARCH(m) Model}
-\label{sec:org83607b9}
+\label{sec:org4faa154}
 
-\subsubsection*{The basic idea of an ARCH model}
-\label{sec:orgbe1ab68}
+\subsubsection{The basic idea of an ARCH model}
+\label{sec:orgeac3a3b}
 
 Consider a series of shocks \{\(a_t\)\} in a return series \{\(r_t\)\}. The
 basic idea of an Autoregressive Conditional Heteroskedasticity (ARCH)
@@ -315,8 +315,8 @@ dependent; and,
 process of \(a^2_t\).
 \end{enumerate}
 
-\subsubsection*{The ARCH(m) model}
-\label{sec:orgd406cde}
+\subsubsection{The ARCH(m) model}
+\label{sec:org0e4e2d2}
 
 An ARCH(m) model takes the following form
 \begin{equation}
@@ -335,7 +335,7 @@ conditions to ensure the unconditional variance of \(a_t\) is finite.
 \end{itemize}
 
 \subsection{The Properties of an ARCH Model}
-\label{sec:org4c153e6}
+\label{sec:org8abd1be}
 
 Let's take an ARCH(1) model as an example to discuss the properties of
 ARCH model and see how such a model can capture the basic idea mentioned
@@ -349,8 +349,8 @@ a_t = \sigma_t \epsilon_t,\; \sigma^2_t = \alpha_0 + \alpha_1 a^2_{t-1},\; \epsi
 \end{equation}
 where \(a_0 > 0\) and \(a_1 \geq 0\).
 
-\subsubsection*{The unconditional mean of \(a_t\)}
-\label{sec:org5a29253}
+\subsubsection{The unconditional mean of \(a_t\)}
+\label{sec:org0ac0499}
 
 \begin{equation*}
 E(a_t) & = E(\sigma_t \epsilon_t) = E(\sigma_t) E(\epsilon_t) = 0
@@ -359,8 +359,8 @@ The second equality is ensured because \(\sigma_t\) and \(\epsilon_t\) are
 independent, and the third equality comes from the assumption of
 \(E(\epsilon_t)=0\).
 
-\subsubsection*{The unconditional variance of \(a_t\)}
-\label{sec:orgd9bd48e}
+\subsubsection{The unconditional variance of \(a_t\)}
+\label{sec:org47012cd}
 
 \begin{equation*}
 \begin{split}
@@ -379,8 +379,8 @@ be constant and finite is that we assume the return series \{\(r_t\)\}
 itself is constant. Keep in mind that a complete ARCH model also
 includes a mean equation for the return series, say, an ARMA model.
 
-\subsubsection*{The unconditional covariance of \(a_t\)}
-\label{sec:org6d47e40}
+\subsubsection{The unconditional covariance of \(a_t\)}
+\label{sec:orge3a2147}
 
 Since \(\epsilon_t\) and \(\epsilon_{t-i}\) for \(i \neq 0\) are independent,
 \begin{equation*}
@@ -394,8 +394,8 @@ Now we know that \(a_t\) has constant unconditional mean and variance,
 and it is serially uncorrelated, satisfying the basic idea of building
 an ARCH model.
 
-\subsubsection*{The kurtosis of \(a_t\)}
-\label{sec:orga14a8f5}
+\subsubsection{The kurtosis of \(a_t\)}
+\label{sec:org227f3ab}
 
 Sometimes, we may also require the fourth moment of \(a_t\) to be finite
 so that the variance of \(a_t\) will not go wild without bounds.
@@ -437,8 +437,8 @@ is more likely than a Gaussian white noise series to produce
 “outliers”.
 \end{enumerate}
 
-\subsubsection*{The conditional mean and variance}
-\label{sec:org120dba8}
+\subsubsection{The conditional mean and variance}
+\label{sec:orga3d1e7a}
 
 From nown on, let's write \(E_{t-1}(a_t)\) to represent the conditional mean given the
 information set \(F_{t-1}\), i.e., \(E(a_t \mid F_{t-1})\).
@@ -470,10 +470,10 @@ high-volitility periods.
 
 
 \section{Estimation and Forecasting}
-\label{sec:org8faa78b}
+\label{sec:orgf72397b}
 
 \subsection{Order determination}
-\label{sec:orgb902c7b}
+\label{sec:org5d05a77}
 
 Before estimating an ARCH(m) model, we need to determine the order
 \(m\). The basic idea is that we treat an ARCH(m) model as an AR process
@@ -501,4 +501,52 @@ that \(\eta_t\) is not i.i.d. That is,
 Therefore, we can use the PACF of \{\(a^2_t\)\} to determine the order
 \(m\). However, the PACF may not be effective when the sample size is
 small.
+
+
+\subsection{Maximum likelihood estimation}
+\label{sec:org3c5ee8a}
+
+\subsubsection{A brief introduction of maximum likelihood function}
+\label{sec:orgf001277}
+
+\paragraph*{Likelihood function when \(y_t\) is independent}
+\label{sec:orgad8a990}
+
+The likelihood function is the joint density function \(f(\mathbf{y} |
+\boldsymbol{\theta})\) when we consider it as a function of the
+parameters \(\boldsymbol{\theta}\) given a set of data \(\mathbf{y}\).
+\begin{itemize}
+\item \(\mathbf{y} = (y_1, y_2, \ldots, y_T)\) represents the observations,
+which are assumed to be identically independently distributed.
+\item \(\boldsymbol{\theta} = (\theta_1, \ldots, \theta_k)\) represents all
+parameters in the model (i.e., data generating process) that
+generates \(\mathbf{y}\).
+\end{itemize}
+
+For each observation, \(y_t\), the marginal density function is \(f(y_t |
+\boldsymbol{\theta})\) and because \(y_i\) is independent, \textbf{the
+likelihood function} is
+\begin{equation}
+\label{eq:general-likelihood}
+L(\boldsymbol{\theta} | \mathbf{y}) = \prod_{t=1}^T f(y_t | \boldsymbol{\theta})
+\end{equation}
+
+And the \textbf{log-likelihood} function is 
+\begin{equation}
+\label{eq:general-logL}
+l(\boldsymbol{\theta} | \mathbf{y}) = \sum_{t=1}^T l_t(y_t | \boldsymbol{\theta})
+\end{equation}
+where \(l_t(y_t | \boldsymbol{\theta}) = \ln\left(f(y_t |
+\boldsymbol{\theta})\right)\) is the \textbf{contribution} to the
+loglikelihood function. 
+
+\paragraph*{Likelihood function when \(y_t\) is dependent}
+\label{sec:org59de07e}
+
+\paragraph*{Maximum likelihood estimation}
+\label{sec:orgf794a21}
+
+
+\subsubsection{Maximum likelihood estimation of ARCH(m)}
+\label{sec:org953071f}
 \end{document}

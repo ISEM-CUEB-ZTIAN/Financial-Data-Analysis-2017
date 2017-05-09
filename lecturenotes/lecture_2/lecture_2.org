@@ -2,7 +2,7 @@
 #+AUTHOR: Zheng Tian
 #+EMAIL:
 #+DATE:
-#+OPTIONS: H:3 num:2 toc:nil ^:{} todo:nil
+#+OPTIONS: H:4 num:3 toc:nil ^:{} todo:nil
 #+PROPERTY: header-args:R  :session *myR*
 #+FILETAGS:
 
@@ -441,11 +441,81 @@ Therefore, we can use the PACF of {$a^2_t$} to determine the order
 $m$. However, the PACF may not be effective when the sample size is
 small.
 
-** TODO COMMENT Maximum likelihood estimation
+
+** TODO Maximum likelihood estimation
+
+*** A brief introduction of maximum likelihood function
+
+**** The likelihood function when $y_t$ is independent
+
+The likelihood function is the joint density function $f(\mathbf{y} |
+\boldsymbol{\theta})$ when we consider it as a function of the
+parameters $\boldsymbol{\theta}$ given a set of data $\mathbf{y}$.
+- $\mathbf{y} = (y_1, \ldots, y_T)$ represents the observations,
+  which are assumed to be identically independently distributed.
+- $\boldsymbol{\theta} = (\theta_1, \ldots, \theta_k)$ represents all
+  parameters in the model (i.e., data generating process) that
+  generates $\mathbf{y}$.
+
+For each observation, $y_t$, the marginal density function is $f(y_t |
+\boldsymbol{\theta})$ and because $y_i$ is independent, *the
+likelihood function* is
+\begin{equation}
+\label{eq:general-likelihood}
+L(\boldsymbol{\theta} | \mathbf{y}) = \prod_{t=1}^T f(y_t | \boldsymbol{\theta})
+\end{equation}
+
+And the *log-likelihood* function is
+\begin{equation}
+\label{eq:general-logL}
+l(\boldsymbol{\theta} | \mathbf{y}) = \sum_{t=1}^T l_t(y_t | \boldsymbol{\theta})
+\end{equation}
+where $l_t(y_t | \boldsymbol{\theta}) = \ln\left(f(y_t |
+\boldsymbol{\theta})\right)$ is the *contribution* to the
+loglikelihood function.
+
+**** The likelihood function when $y_t$ is dependent
+
+If $y_1, y_2, \ldots, y_T$ are dependent, their joint density can be
+written as
+\[ f(y_1, y_2, \ldots, y_T) = f(y_1) f(y_2 | y_1) \cdots f(y_T | y_1,
+\ldots, y_{T-1}) \]
+or conveniently denoted as
+\[f(\mathbf{y}^T) = \prod_{t=1}^T f(y_t | \mathbf{y}^{t-1}) \]
+
+When $\mathbf{y}$ is also dependent on $\boldsymbol{\theta}$, the
+likelihood function is then
+\begin{equation}
+\label{eq:depend-likelihood}
+f(\mathbf{y}^T | \boldsymbol{\theta}) = \prod_{t=1}^T f(y_t | \mathbf{y}^{t-1}, \boldsymbol{\theta})
+\end{equation}
+And the log-likelihood function is
+\begin{equation}
+\label{eq:depend-logL}
+\ell(\mathbf{y}^T | \boldsymbol{\theta}) = \sum_{t=1}^T \ell(y_t | \mathbf{y}^{t-1}, \boldsymbol{\theta})
+\end{equation}
+
+**** Maximum likelihood estimation
+
+- The ML estimator maximizes the log-likelihood function over the
+  parameter space in which $\boldsymbol{\theta}$ lies in.
+
+  \begin{equation}
+  \operatorname*{max}_{\theta}\: \ell(\mathbf{y}^T | \boldsymbol{\theta}) = \sum_{t=1}^T \ell(y_t | \mathbf{y}^{t-1}, \boldsymbol{\theta})
+  \end{equation}
+
+- The ML estimator is usually obtained by computational methods, like
+  the Newton or quasi-Newton method.
+
+*** Maximum likelihood estimation of ARCH(m)
+
+
 
 ** TODO COMMENT Model checking
 
+
 ** TODO COMMENT Forecasting
+
 
 ** TODO COMMENT The weakness of ARCH models
 

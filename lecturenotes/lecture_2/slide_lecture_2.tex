@@ -1,4 +1,4 @@
-% Created 2017-05-01 Mon 20:44
+% Created 2017-05-09 Tue 15:14
 % Intended LaTeX compiler: pdflatex
 \documentclass[presentation,10pt]{beamer}
 \usepackage[utf8]{inputenc}
@@ -34,6 +34,7 @@
 \usepackage{subcaption}
 \def\mathbi#1{\textbf{\em #1}}
 \setlength{\parskip}{1em}
+\newcommand{\undersetdisp}[2]{\underset{\displaystyle #1}{#2}}
 \usetheme{CambridgeUS}
 \usecolortheme{beaver}
 \author{Zheng Tian}
@@ -50,51 +51,50 @@
 
 \maketitle
 \begin{frame}{Outline}
-\setcounter{tocdepth}{1}
 \tableofcontents
 \end{frame}
 
 
 \section{The Volatility of Asset Returns}
-\label{sec:orgeef5cc0}
+\label{sec:org655231f}
 
-\begin{frame}[label={sec:org0745415}]{Volatility is measured with the conditional variance}
+\begin{frame}[label={sec:org445b797}]{Volatility is measured with the conditional variance}
 \begin{itemize}
 \item Volatility here refers to the \alert{conditional variance} of a time series.
 
-\item For a return series \{\(r_t\)\}, we are now interested in 
+\item For a return series \{\(r_t\)\}, we are now interested in
 \[\sigma^2_t = \var(r_t \mid F_{t-1})\]
 where \(F_{t-1}\) is the information set at time \(t-1\).
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label={sec:org114e90d}]{Characteristics of volatility (1)}
+\begin{frame}[label={sec:orge9b7cac}]{Characteristics of volatility (1)}
 \begin{enumerate}
 \item \alert{There exist volatility clusters.} That is, volatility may be high
-for certain time periods and low for other periods. 
+for certain time periods and low for other periods.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.7\textwidth]{img/nyse_us100.png}
-\caption{\label{fig:org2968b36}
+\caption{\label{fig:org66a9518}
 Percentage Change in the NYSE U.S.100 stock price index}
 \end{figure}
 \end{enumerate}
 \end{frame}
 
-\begin{frame}[label={sec:org143da87}]{Characteristics of volatility (2)}
+\begin{frame}[label={sec:org3935447}]{Characteristics of volatility (2)}
 \begin{enumerate}
 \item Volatility evolves over time in a continuous manner. That is,
 volatility jumps are rare.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.7\textwidth]{img/readgdp.png}
-\caption{\label{fig:org6becf0d}
+\caption{\label{fig:orgfc37718}
 Annualized Growth Rate of Real GDP}
 \end{figure}
 \end{enumerate}
 \end{frame}
 
-\begin{frame}[label={sec:org055e6fd}]{Characteristics of volatility (3)}
+\begin{frame}[label={sec:org395d0e1}]{Characteristics of volatility (3)}
 \begin{enumerate}
 \item Volatility does not diverge to infinity. That is, volatility varies
 within some fixed range. Statistically speaking, this means that
@@ -110,11 +110,11 @@ big price drop, referred to as the leverage effect.
 \end{frame}
 
 \section{The Structure of a Volatility Model}
-\label{sec:org5b6b34d}
+\label{sec:org0150574}
 
-\begin{frame}[label={sec:org0de5a0d}]{The basic idea of building a volatility model}
+\begin{frame}[label={sec:orgb38876d}]{The basic idea of building a volatility model}
 Consider the log return series \{\(r_t\)\}. The basic idea of a volatility
-model is 
+model is
 \begin{itemize}
 \item \{\(r_t\)\} may appear to be either serially uncorrelated or
 serially correlated with a minor order.
@@ -125,24 +125,24 @@ from its conditional variance.
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.7\textwidth,height=0.4\textheight]{img/intel.png}
-\caption{\label{fig:org3b1a877}
+\caption{\label{fig:org9298ac7}
 Time plot of monthly log returns of Intel stock from January 1973 to December 2008}
 \end{figure}
 \end{frame}
 
-\begin{frame}[label={sec:org34a0aff}]{The sample ACF of \{\(r_t\)\} and \{\(r^2_t\)\}}
+\begin{frame}[label={sec:orgca15f2c}]{The sample ACF of \{\(r_t\)\} and \{\(r^2_t\)\}}
 \begin{figure}[htbp]
 \centering
 \includegraphics[width=0.9\textwidth,height=0.5\textheight]{img/acf_intel.png}
-\caption{\label{fig:org96628fd}
+\caption{\label{fig:orgf025991}
 Sample ACF and PACF of various functions of monthly log stock returns of Intel Corporation from January 1973 to December 2008: (a) ACF of the log returns, (b) ACF of the squared log returns, (c) ACF of the absolute log returns, and (d) PACF of the squared log returns.}
 \end{figure}
 \end{frame}
 
-\begin{frame}[label={sec:org4cf6e4e}]{Decompose \(r_t\) into the mean and variance equations}
+\begin{frame}[label={sec:org7b0d5a3}]{Decompose \(r_t\) into the mean and variance equations}
 To capture the dependence in a time series through its second moment
 but not the mean, we model the mean process and the variance process
-separately. 
+separately.
 
 For a return series \{\(r_t\)\}, we can model it as
 \begin{equation}
@@ -153,12 +153,12 @@ where \(\mu_t\) represents the conditional mean and \(a_t\) is
 modeled to capture the conditional variance.
 \end{frame}
 
-\begin{frame}[label={sec:org0ac4bbb}]{The mean equation}
+\begin{frame}[label={sec:org9ef1f6a}]{The mean equation}
 \begin{align}
 &\mu_t = E(r_t \mid F_{t-1}) = \sum_{i=1}^p \phi_i y_{t-i} - \sum_{i=1}^q \theta_i a_{t-i} \label{eq:mean-equation} \\
 &y_t = r_t - \phi_0 - \sum_{i=1}^k \beta_i x_{it} \nonumber
 \end{align}
-\(F_{t-1}\) is the information set at time \(t-1\). 
+\(F_{t-1}\) is the information set at time \(t-1\).
 
 \vspace{0.5cm}
 
@@ -167,7 +167,7 @@ will find that it is just an ARMA\((p, q)\) model with additional
 regressors \(x_{it}\).
 \end{frame}
 
-\begin{frame}[label={sec:org664bf96}]{The variance equation}
+\begin{frame}[label={sec:orgf63218d}]{The variance equation}
 Denote the conditional variance of \(r_t\) with \(\sigma^2_t\).
 \begin{equation*}
 \begin{split}
@@ -178,7 +178,7 @@ Denote the conditional variance of \(r_t\) with \(\sigma^2_t\).
 \end{equation*}
 \end{frame}
 
-\begin{frame}[label={sec:org767b5ff}]{The variance equation (cont'd)}
+\begin{frame}[label={sec:org1fd2f68}]{The variance equation (cont'd)}
 \begin{itemize}
 \item If we assume that \(E(a_t \mid F_{t-1}) = 0\), we can see that
 \(\sigma^2_t = E(a^2_t \mid F_{t-1})\).
@@ -191,7 +191,7 @@ set \(F_{t-1}\)
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label={sec:orgecbbe0e}]{The procedure of building a volatility model}
+\begin{frame}[label={sec:org091ce45}]{The procedure of building a volatility model}
 Building a volatility model for an asset return series consists of
 four steps:
 
@@ -211,11 +211,11 @@ volatility equations.
 \end{enumerate}
 \end{frame}
 
-\begin{frame}[label={sec:orgf3878c5}]{Testing for the presence of ARCH effect}
+\begin{frame}[label={sec:org0bf4c4a}]{Testing for the presence of ARCH effect}
 \begin{block}{The Ljung-Box test for the series of \(a^2_t\)}
 Upon obtaining the residuals from the estimation
 of an adequate mean equation, we can use the squared residuals
-\{\(\hat{a}_t^2\)\} to test the existence of autocorrelation. 
+\{\(\hat{a}_t^2\)\} to test the existence of autocorrelation.
 \begin{itemize}
 \item The Ljung-Box test is used to test the null hypothesis
 \(H_0: \rho_1 = \cdots = \rho_m = 0\).
@@ -229,7 +229,7 @@ heteroskedastic (ARCH) effect.
 \end{block}
 \end{frame}
 
-\begin{frame}[label={sec:org9de398f}]{The LM test}
+\begin{frame}[label={sec:org00015b3}]{The LM test}
 \begin{block}{An auxiliary regression}
 We estimate a AR\((m)\) model regarding \{\(\hat{a}^2_t\)\}, that is,
 \[ \hat{a}^2_t = \alpha_0 + \alpha_1 \hat{a}_{t-1}^2 + \cdots +
@@ -249,9 +249,9 @@ a \(\chi^2(m)\) distribution.
 \end{block}
 \end{frame}
 
-\begin{frame}[label={sec:orgad73270}]{The LM test (cont'd)}
+\begin{frame}[label={sec:org38d59b5}]{The LM test (cont'd)}
 Alternatively, we can use F statistic to test the joint
-hypothesis. 
+hypothesis.
 \begin{itemize}
 \item Let \(SSR_0 = \sum_{t=m+1}^{T} (\hat{a}^2_{t} -
   \bar{\omega})^2\), where \(\bar{\omega} = (1/T) \sum_{t=1}^T
@@ -265,10 +265,10 @@ ARCH effect.
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label={sec:orgfa8cb6e}]{An example}
-Go back to Figure \ref{fig:org96628fd}. Since the return series is
+\begin{frame}[label={sec:org59046c4}]{An example}
+Go back to Figure \ref{fig:orgf025991}. Since the return series is
 already stationary, we directly test the squared return series to
-check the ARCH effect. 
+check the ARCH effect.
 
 \begin{itemize}
 \item In the LM test of the ARCH effect, \(F = 53.62\) and the p value is
@@ -283,9 +283,9 @@ effect.
 \end{frame}
 
 \section{The ARCH Model}
-\label{sec:org27c248e}
+\label{sec:orgc7f6593}
 
-\begin{frame}[label={sec:org872579d}]{The basic idea of an ARCH model}
+\begin{frame}[label={sec:org6d5dd12}]{The basic idea of an ARCH model}
 Consider a series of shocks \{\(a_t\)\} in a return series \{\(r_t\)\}. The
 basic idea of an Autoregressive Conditional Heteroskedasticity (ARCH)
 model is
@@ -299,14 +299,14 @@ process of \(a^2_t\).
 \end{enumerate}
 \end{frame}
 
-\begin{frame}[label={sec:orga01f558}]{The ARCH(m) model}
+\begin{frame}[label={sec:org5c06ec4}]{The ARCH(m) model}
 An ARCH(m) model takes the following form
 \begin{equation}
 \label{eq:archm}
 a_t = \sigma_t \epsilon_t,\; \sigma^2_t = \alpha_0 + \alpha_1 a^2_{t-1} + \cdots + \alpha_m a^2_{t-m}
 \end{equation}
 where \(\epsilon_t \sim i.i.d.(0, 1)\), \(\alpha_0 > 0\) and \(\alpha_i
-\geq 0\) for \(i=1, \ldots, m\). 
+\geq 0\) for \(i=1, \ldots, m\).
 
 \begin{itemize}
 \item The assumption of \(\var(\epsilon_t)=1\) is to make the analysis
@@ -318,7 +318,7 @@ conditions to ensure the unconditional variance of \(a_t\) is finite.
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label={sec:org6d7c046}]{The Properties of an ARCH Model}
+\begin{frame}[label={sec:org3b1102d}]{The Properties of an ARCH Model}
 \begin{itemize}
 \item Let's take an ARCH(1) model as an example to discuss the properties of
 ARCH model.
@@ -332,17 +332,17 @@ Assume an ARCH(1) model as follows
 \label{eq:arch1}
 a_t = \sigma_t \epsilon_t,\; \sigma^2_t = \alpha_0 + \alpha_1 a^2_{t-1},\; \epsilon_t \sim i.i.d.(0, 1)
 \end{equation}
-where \(a_0 > 0\) and \(a_1 \geq 0\). 
+where \(a_0 > 0\) and \(a_1 \geq 0\).
 \end{frame}
 
-\begin{frame}[label={sec:org706de2d}]{The unconditional mean and variance of \(a_t\)}
+\begin{frame}[label={sec:org52c233e}]{The unconditional mean and variance of \(a_t\)}
 \begin{block}{The unconditional mean}
 \begin{equation*}
 E(a_t) & = E(\sigma_t \epsilon_t) = E(\sigma_t) E(\epsilon_t) = 0
 \end{equation*}
 The second equality is ensured because \(\sigma_t\) and \(\epsilon_t\) are
 independent, and the third equality comes from the assumption of
-\(E(\epsilon_t)=0\). 
+\(E(\epsilon_t)=0\).
 \end{block}
 
 \begin{block}{The unconditional variance}
@@ -354,17 +354,17 @@ independent, and the third equality comes from the assumption of
 \end{equation*}
 
 Assuming the unconditional mean of \(a_t\) is a constant(why?), we can
-have 
+have
 
 \[\var(a_t) = \frac{\alpha_0}{1-\alpha_1} \]
 
 Since the variance should be positive and finite, we must have \(0 \leq
-\alpha_1 < 1\). 
+\alpha_1 < 1\).
 \end{block}
 \end{frame}
 
-\begin{frame}[label={sec:org1bcf2ed}]{The unconditional covariance of \(a_t\)}
-Since \(\epsilon_t\) and \(\epsilon_{t-i}\) for \(i \neq 0\) are independent, 
+\begin{frame}[label={sec:org828a4e9}]{The unconditional covariance of \(a_t\)}
+Since \(\epsilon_t\) and \(\epsilon_{t-i}\) for \(i \neq 0\) are independent,
 
 \begin{equation*}
 \begin{split}
@@ -382,7 +382,7 @@ Since \(\epsilon_t\) and \(\epsilon_{t-i}\) for \(i \neq 0\) are independent,
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label={sec:orga952c3f}]{The kurtosis of \(a_t\)}
+\begin{frame}[label={sec:org29dbb8c}]{The kurtosis of \(a_t\)}
 \begin{itemize}
 \item Assume that \(\epsilon \sim N(0, 1)\), implying that \(E(\epsilon^4_t) =
   3\). Thus, we have
@@ -402,8 +402,8 @@ above equation.
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label={sec:org9f8bd92}]{The kurtosis of \(a_t\) (cont'd)}
-This result regarding \(m_4\) has two important implications: 
+\begin{frame}[label={sec:orgae78f4b}]{The kurtosis of \(a_t\) (cont'd)}
+This result regarding \(m_4\) has two important implications:
 \begin{enumerate}
 \item Since the fourth moment of \(a_t\) is positive, we see that \(\alpha_1\) must
 also satisfy the condition \(1-3\alpha_1^2 > 0\), that is, \(0 \leq
@@ -418,13 +418,13 @@ distribution.
 \end{enumerate}
 \end{frame}
 
-\begin{frame}[label={sec:orgbeda375}]{The conditional mean}
+\begin{frame}[label={sec:orga160847}]{The conditional mean}
 \begin{itemize}
 \item Let's write \(E_{t-1}(a_t)\) to represent the conditional mean given the
 information set \(F_{t-1}\), i.e., \(E(E(a_t \mid F_{t-1}))\).
 
 \item Since \(\epsilon_t\) is i.i.d, we have \(E_{t-1}(\epsilon_t) =
-  E(\epsilon_t) = 0\). Thus, 
+  E(\epsilon_t) = 0\). Thus,
 
 \begin{equation*}
 \begin{split}
@@ -435,13 +435,13 @@ E_{t-1}(a_t) &= E_{t-1}(\sigma_t \epsilon_t) = E_{t-1}\left((\alpha_0 + \alpha_1
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label={sec:org1246b88}]{The conditional variance}
+\begin{frame}[label={sec:orgf6b706f}]{The conditional variance}
 \begin{itemize}
-\item The conditional variance of \(a_t\) is 
+\item The conditional variance of \(a_t\) is
 \begin{equation*}
 \begin{split}
 \var_{t-1}(a_t) &= E_{t-1}(a^2_t) = E_{t-1} \left( \sigma^2_t \epsilon_t^2 \right) \\
-&= E_{t-1}\left((\alpha_0 + \alpha_1 a^2_{t-1}) \epsilon^2_t \right) \\ 
+&= E_{t-1}\left((\alpha_0 + \alpha_1 a^2_{t-1}) \epsilon^2_t \right) \\
 &= E_{t-1}(\alpha_0 + \alpha_1 a^2_{t-1}) E_{t-1}(\epsilon^2_t) \\
 &= (\alpha_0 + \alpha_1 a^2_{t-1}) E(\epsilon^2_t) \\
 &= \alpha_0 + \alpha_1 a^2_{t-1} = \sigma^2_t
@@ -452,10 +452,168 @@ E_{t-1}(a_t) &= E_{t-1}(\sigma_t \epsilon_t) = E_{t-1}\left((\alpha_0 + \alpha_1
 \end{itemize}
 \end{frame}
 
-\section{Estimation and Forecasting}
-\label{sec:org499dc0e}
+\section{Maximum Likelihood Estimation}
+\label{sec:org13f9c95}
 
-\begin{frame}[label={sec:orga538a75}]{Order determination}
+\begin{frame}[label={sec:orgbd1e39e}]{The definition of the likelihood function}
+The likelihood function is the joint density function \(f(\mathbf{y} |
+\boldsymbol{\theta})\) when we consider it as a function of the
+parameters \(\boldsymbol{\theta}\) given a set of data \(\mathbf{y}\).
+
+\begin{itemize}
+\item \(\mathbf{y} = (y_1, \ldots, y_T)\) represents the observations,
+which are assumed to be identically independently distributed.
+\item \(\boldsymbol{\theta} = (\theta_1, \ldots, \theta_k)\) represents all
+parameters in the model (i.e., data generating process) that
+generates \(\mathbf{y}\).
+\item For each observation \(y_t\), its (marginal) PDF is \(f(y_t |
+  \boldsymbol{\theta})\).
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label={sec:orgfa2f1cd}]{The likelihood function when \(y_t\) is independent}
+\begin{block}{The likelihood function}
+\begin{equation}
+\label{eq:general-likelihood}
+L(\boldsymbol{\theta} | \mathbf{y}) = \prod_{t=1}^T f(y_t | \boldsymbol{\theta})
+\end{equation}
+\end{block}
+
+\begin{block}{The log-likelihood function}
+\begin{equation}
+\label{eq:general-logL}
+\ell(\boldsymbol{\theta} | \mathbf{y}) = \sum_{t=1}^T \ell_t(\boldsymbol{\theta} | y_t)
+\end{equation}
+where \(\ell_t(\boldsymbol{\theta} | y_t) = \ln\left(f(y_t |
+\boldsymbol{\theta})\right)\) is the \alert{contribution} to the
+loglikelihood function.
+\end{block}
+\end{frame}
+
+\begin{frame}[label={sec:orgd9dc07b}]{The joint density when \(y_t\) is dependent}
+If \(y_1, y_2, \ldots, y_T\) are dependent, their joint density can be
+written as
+\[ f(y_1, y_2, \ldots, y_T) = f(y_1) f(y_2 | y_1) \cdots f(y_T | y_1,
+\ldots, y_{T-1}) \]
+or conveniently denoted as
+\[f(\mathbf{y}^T) = \prod_{t=1}^T f(y_t | \mathbf{y}^{t-1}) \]
+\end{frame}
+
+\begin{frame}[label={sec:orgc103fb1}]{The likelihood and log-likelihood functions when \(y_t\) is dependent}
+When \(\mathbf{y}\) is also dependent on \(\boldsymbol{\theta}\), the
+likelihood function is then
+\begin{equation}
+\label{eq:depend-likelihood}
+L(\boldsymbol{\theta} | \mathbf{y}^T) = \prod_{t=1}^T f(y_t | \mathbf{y}^{t-1}, \boldsymbol{\theta})
+\end{equation}
+And the log-likelihood function is
+\begin{equation}
+\label{eq:depend-logL}
+\ell(\mathbf{y}^T | \boldsymbol{\theta}) = \sum_{t=1}^T \ell_t(\boldsymbol{\theta} | \mathbf{y}^{t})
+\end{equation}
+\end{frame}
+
+\begin{frame}[label={sec:org45916b1}]{The maximum likelihood (ML) estimator}
+\begin{itemize}
+\item The ML estimator maximizes the log-likelihood function over the
+parameter space in which \(\boldsymbol{\theta}\) lies in.
+
+\begin{equation}
+\operatorname*{max}_{\{\theta \in \Theta\}}\: \ell(\mathbf{y}^T | \boldsymbol{\theta}) = \sum_{t=1}^T \ell_t(\boldsymbol{\theta} | \mathbf{y}^t)
+\end{equation}
+
+\item The ML estimator is usually obtained by computational methods, like
+the Newton or quasi-Newton method.
+\end{itemize}
+\end{frame}
+
+\section{Estimation of an ARCH(m) model}
+\label{sec:orgf7cb5f6}
+
+\begin{frame}[label={sec:org6a4ce4c}]{The assumption of the distribution of \(\epsilon_t\)}
+Consider an ARCH(m) model
+
+\begin{equation*}
+a_t = \sigma_t \epsilon_t,\; \sigma^2_t = \alpha_0 + \alpha_1 a^2_{t-1} + \cdots + \alpha_m a^2_{t-m}
+\end{equation*}
+
+\begin{itemize}
+\item Assume that \(\epsilon_t \sim N(0, 1)\) and \(\epsilon_t\) is i.i.d.
+
+\item How can we get the likelihood function of an ARCH(m) model based on
+this assumption?
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label={sec:org3c4068e}]{The distribution of \(a_t\)}
+\begin{block}{The conditional distribution of \(a_t\)}
+\[ \epsilon_t \sim N(0, 1) \Rightarrow a_t \mid F_{t-1} \sim N(0,
+\sigma^2_t) \] 
+where \(\sigma^2_t\) is given by the ARCH(m) model. The
+conditional PDF of each \(a_t\) for \(t=1, \ldots, T\) is
+\end{block}
+
+\begin{block}{The conditional PDF of \(a_t\)}
+\[
+f(a_t | F_{t-1}) = \frac{1}{\sqrt{2 \pi \sigma^2_t}} \exp
+\left(-\frac{a^2_t}{2\sigma^2_t}\right)
+\] 
+where \(F_{t-1}\) is the information set represented by \((a_1, \ldots,
+a_{t-1})\).
+\end{block}
+\end{frame}
+
+\begin{frame}[label={sec:orgea3cce9}]{The joint density for \(a_1, \ldots, a_T\) given the parameter vector \(\mathbf{\alpha}\)}
+\begin{itemize}
+\item For convenience, we suppress \(\boldsymbol{\alpha} = (\alpha_0,
+  \alpha_1, \ldots, \alpha_m)\) in the
+conditional joint density \(f(a_1, \ldots, a_T \mid
+  \boldsymbol{\alpha})\).
+
+\item Since \(a_1, \ldots, a_T\) are not independent, we have the joint
+density as
+\begin{align}
+f(a_1, a_2, \ldots, a_T) &= f(a_T | F_{T-1}) f(a_{T-1} | F_{T-2}) \cdots f(a_{m+1} | F_m) f(a_1, \ldots, a_m) \nonumber \\
+&= \prod_{t=m+1}^T \frac{1}{\sqrt{2 \pi \sigma^2_t}} \exp \left(-\frac{a^2_t}{2\sigma^2_t}\right) \times f(a_1, \ldots, a_m)
+\end{align}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label={sec:org0814384}]{The conditional likelihood function}
+Dropping \(f(a_1, \ldots, a_m)\) because the exact form of it is often
+complicated, we get the conditional likelihood function
+\begin{equation}
+\label{eq:arch-likelihood}
+L(\boldsymbol{\alpha} |a_1, \ldots, a_T) = \prod_{t=m+1}^T \frac{1}{\sqrt{2 \pi \sigma^2_t}} \exp \left(-\frac{a^2_t}{2\sigma^2_t}\right)
+\end{equation}
+
+\begin{itemize}
+\item \(\boldsymbol{\alpha}\) enters the likelihood function through 
+\[\sigma^2_t = \alpha_0 + \alpha_1 a^2_{t-1} + \cdots + \alpha_m
+  a^2_{t-m} \]
+
+\item Maximizing the likelihood function results in the maximum likelihood
+estimator under the normality assumption.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label={sec:org48f9e86}]{The conditional log-likelihood function}
+Taking logarithm of the likelihood function yields the log-likelihood
+function
+\begin{equation}
+\label{eq:arch-logL}
+\ell(\boldsymbol{\alpha} | a_1, \ldots, a_T) = 
+\sum_{t=m+1}^T \left[ -\frac{1}{2} \ln(2\pi) - \frac{1}{2} \ln(\sigma^2_t) - \frac{1}{2} \frac{a^2_t}{\sigma^2_t}  \right]
+\end{equation}
+
+The log-likelihood function can be simplified as 
+\[
+\ell(\boldsymbol{\alpha} | a_1, \ldots, a_T) = -\frac{1}{2}
+\sum_{t=m+1}^T \left[\ln(\sigma^2_t) + \frac{a^2_t}{\sigma^2_t}  \right]
+\]
+\end{frame}
+
+\begin{frame}[label={sec:org40fa0d9}]{Order determination}
 \begin{itemize}
 \item Before estimating an ARCH(m) model, we need to determine the order
 \(m\).
@@ -468,7 +626,7 @@ determine \(m\).
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label={sec:org25793a0}]{Why using the PACF?}
+\begin{frame}[label={sec:orgff52ba7}]{Why using the PACF?}
 We justify the use of the PACF of \{\(a^2_t\)\} to determine \(m\) through
 two perspectives.
 
@@ -494,5 +652,102 @@ that \(\eta_t\) is not i.i.d. That is,
 \[ a^2_t = \alpha_0 + \alpha_1 a^2_{t-1} + \cdots + \alpha_m
    a^2_{t-m} + \eta_t \]
 \end{enumerate}
+\end{frame}
+
+\begin{frame}[label={sec:org5abdafe}]{Alternative distribution assumptions of \(\epsilon_t\)}
+\begin{itemize}
+\item \(\epsilon_t\) has a Student-t distribution: capture the heavy-tail
+of volatility.
+
+\item \(\epsilon_t\) has a skew-Student-t distribution: capture the skewness
+of asset return.
+
+\item \(\epsilon_t\) has a general error distribution: enclose the normal
+distribution and heavy-tail distributions.
+\end{itemize}
+\end{frame}
+
+\section{Model checking and forecasting}
+\label{sec:orgb776779}
+
+\begin{frame}[label={sec:org9b34623}]{Model checking}
+\begin{block}{The standardized residuals}
+Compute the standardized residuals
+\[ \tilde{a}_t = \frac{\hat{a}_t}{\hat{\sigma}_t} \]
+which should mimic the behavior of \(\epsilon_t\). 
+\end{block}
+
+\begin{block}{Check the mean equation}
+\begin{itemize}
+\item Use the Ljung-Box statistic for \{\(\tilde{a}_t\)\}.
+\end{itemize}
+\end{block}
+
+\begin{block}{Check the volatility equation}
+\begin{itemize}
+\item Use the Ljung-Box statistic for \{\(\tilde{a}_t\)\}.
+\item Use the QQ plot or the Shapiro-Wilk test for normality assumption.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[label={sec:org415520a}]{Forecasting}
+\begin{block}{1-step-ahead forecast}
+\[\sigma^2_h(1) = \alpha_0 + \alpha_1 a^2_h + \cdots + \alpha_m
+a^2_{h+1-m} \]
+\end{block}
+
+\begin{block}{2-step-ahead forecast}
+\[ \sigma^2_h(2) = \alpha_0 + \alpha_1 \sigma^2_h(1) + \alpha_2
+a^2_h + \cdots + \alpha_m a^2_{h+2-m}  \]
+\end{block}
+
+\begin{block}{\(\ell\)-step-ahead forecast}
+\[ \sigma^2_h(\ell) = \alpha_0 + \sum_{i=1}^m \alpha_i
+\sigma^2_h(\ell-i) \]
+\end{block}
+\end{frame}
+
+\section{Applications of ARCH Models}
+\label{sec:org5823b7e}
+
+\begin{frame}[label={sec:orgab7fcca}]{An ARCH model for the monthly log returns of Intel stock}
+\begin{block}{The proposed model}
+\[ r_t = \mu + \alpha_t, a_t = \sigma_t \epsilon_t, \sigma^2_t =
+\alpha_0 + \alpha_1 a^2_{t-1} + \alpha_2 a^2_{t-2} + \alpha_3 a^2_{t-3} \]
+\end{block}
+
+\begin{block}{The estimated model}
+\[ r_t = \underset{(0.0057)}{0.0122} + a_t, 
+\sigma^2_t = \underset{(0.0010)}{0.0106} + 
+             \underset{(0.0757)}{0.2131}a^2_{t-1} +
+             \underset{(0.0480)}{0.0770}a^2_{t-2} + 
+             \underset{(0.0688)}{0.0599}a^2_{t-3}
+\]
+
+Since \(\alpha_2\) and \(\alpha_3\) are statistically insignificant, we
+drop the last two terms and re-estimate the model.
+\[
+r_t = \underset{(0.0053)}{0.0126} + a_t, 
+\sigma^2_t = \underset{(0.0010)}{0.0111} + \underset{(0.0761)}{0.3560}a^2_{t-1}
+\]
+\end{block}
+\end{frame}
+
+\begin{frame}[label={sec:org4477461}]{Model checking}
+\begin{block}{The Ljung-Box test}
+\begin{itemize}
+\item \(Q(10)\) for \{\(\tilde{a}_t\)\} is 12.64, p-value = 0.24 \(\Rightarrow\) no
+autocorrelation.
+\item \(Q(10)\) for \{\(\tilde{a}^2_t\)\} is 14.75, p-value = 0.14 \(\Rightarrow\)
+no autocorrelation.
+\end{itemize}
+\end{block}
+
+\begin{block}{The sample ACF}
+\begin{center}
+\includegraphics[width=0.9\textwidth,height=0.6\textheight]{img/intel_arch.png}
+\end{center}
+\end{block}
 \end{frame}
 \end{document}
