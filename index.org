@@ -50,12 +50,16 @@ Please first read the syllabus carefully ([[file:syllabus/syllabus_financial_dat
   http://rmarkdown.rstudio.com/.
 
 
-** TODO Lecture 2: Modeling volatility
+** Lecture 2: The ARCH Model
 
-- Modeling volatility ([[file:lecturenotes/lecture_2/lecture_2.pdf][pdf]])
+- Lecture notes ([[file:lecturenotes/lecture_2/slide_lecture_2.pdf][pdf]])
 - A brief Git and GitHub tutorial ([[file:lecturenotes/git_tutorial/git_tutorial.pdf][pdf]])
 - Installers for Git and GitHub:
   链接: https://pan.baidu.com/s/1nvCzcDz 密码: pcz4
+
+** Lecture 3: The GARCH Model
+
+- Lecture notes ([[file:lecturenotes/lecture_3/slide_lecture_3.pdf][pdf]])
 
 * Assignments
 

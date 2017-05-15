@@ -642,3 +642,4 @@ r_t = \underset{(0.0053)}{0.0126} + a_t,
 
 #+ATTR_LATEX: :width 0.9\textwidth :height 0.6\textheight
 [[file:img/intel_arch.png]]
+

@@ -1,0 +1,304 @@
+#+TITLE: Lecture 3: The GARCH Model
+#+AUTHOR: Zheng Tian
+#+DATE:
+#+STARTUP: beamer
+#+OPTIONS: toc:t H:2
+#+LATEX_CLASS: beamer
+#+LATEX_CLASS_OPTIONS: [presentation,10pt]
+#+BEAMER_THEME: CambridgeUS
+#+BEAMER_COLOR_THEME: beaver
+#+COLUMNS: %45ITEM %10BEAMER_env(Env) %10BEAMER_act(Act) %4BEAMER_col(Col) %8BEAMER_opt(Opt)
+#+PROPERTY: BEAMER_col_ALL 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 0.0 :ETC
+
+#+LATEX_HEADER: \usepackage{amsthm}
+#+LATEX_HEADER: \usepackage{amsmath}
+#+LATEX_HEADER: \usepackage{amssymb}
+#+LATEX_HEADER: \usepackage{mathtools}
+#+LATEX_HEADER: \newtheorem{mydef}{Definition}
+#+LATEX_HEADER: \newtheorem{mythm}{Theorem}
+#+LATEX_HEADER: \newcommand{\dx}{\mathrm{d}}
+#+LATEX_HEADER: \newcommand{\var}{\mathrm{Var}}
+#+LATEX_HEADER: \newcommand{\cov}{\mathrm{Cov}}
+#+LATEX_HEADER: \newcommand{\corr}{\mathrm{corr}}
+#+LATEX_HEADER: \newcommand{\pr}{\mathrm{Pr}}
+#+LATEX_HEADER: \newcommand{\rarrowd}[1]{\xrightarrow{\text{ \textit #1 }}}
+#+LATEX_HEADER: \DeclareMathOperator*{\plim}{plim}
+#+LATEX_HEADER: \newcommand{\plimn}{\plim_{n \rightarrow \infty}}
+#+LATEX_HEADER: \usepackage{booktabs}
+#+LATEX_HEADER: \usepackage{color}
+#+LATEX_HEADER: \usepackage{caption}
+#+LATEX_HEADER: \usepackage{subcaption}
+#+LATEX_HEADER: \def\mathbi#1{\textbf{\em #1}}
+#+LATEX_HEADER: \setlength{\parskip}{1em}
+#+LATEX_HEADER: \newcommand{\undersetdisp}[2]{\underset{\displaystyle #1}{#2}}
+
+
+* The Problem of ARCH Models
+
+** The problem of ARCH models
+
+*** The principle of parsimony
+
+- Merriam-Webster:
+  1) the quality of being careful with money or resources
+  2) the quality or state of being stingy
+
+- Econometric modeling
+  - Use a concise model specification
+  - Object to overparameterization
+
+*** The problem of ARCH model
+
+- Estimate so many parameters to fully capture higher-order
+  autoregressive relationship in $a^2_t$.
+
+- Think of how many parameters in an ARCH(m) model?
+
+
+* What is the GARCH Model?
+
+** The GARCH model
+
+*** Generalized ARCH model
+
+- Bollerslev (1986) proposes an extension of ARCH, known as the
+  Generalized ARCH (GARCH) model.
+
+- A high-order ARCH model may have a more parsimonious GARCH
+  representation.
+
+*** The mean equation
+
+\[ r_t = \mu_t + a_t \]
+where 
+- $\mu_t$ is modeled with an appropriate regression model or some
+  ARMA specification.
+- $a_t$ is the innovation at time $t$. 
+
+*** The volatility equation
+
+\[ \sigma^2_t = \var(\alpha^2_t | F_{t-1}) \]
+
+** The GARCH(m, s) model
+
+\begin{equation}
+\label{eq:garchms}
+a_t = \sigma_t \epsilon_t,\; \sigma^2_t = \alpha_0 + \sum_{i=1}^m \alpha_i a^2_{t-i} + \sum_{j=1}^s \beta_j \sigma^2_{t-j}
+\end{equation}
+where
+- $\epsilon_t \sim i.i.d.(0, 1)$ is a white noise process
+- $\alpha_0 > 0$, $\alpha_i \geq 0$ (at least one $\alpha_i > 0$),
+  $\beta_j \geq 0$
+- $\sum_{i=1}^{\mathrm{max}(m,s)}(\alpha_i + \beta_i) < 1$, in which $\alpha_i
+  = 0$ for $i > m$ and $\beta_i = 0$ for $j > s$. 
+
+** ARCH and GARCH model
+
+*** When $\beta_j = 0$ for all $j = 1, \ldots, s$
+
+\[ GARCH(m, s) \Rightarrow ARCH(m) \]
+
+*** GARCH v.s. ARCH and AR v.s. ARMA
+
+- An ARCH model can be considered as an AR process of $a^2_t$. 
+- A GARCH model can be considered as an ARMA process of $a^2_t$.
+- That is why we can write a higher-order ARCH(m) process with a
+  /parsimonious/ GARCH(1, 1) process. 
+  - What is the AR representation of ARMA?
+** ARMA representation of GARCH
+
+- Let $\eta_t = \alpha^2_t - \sigma^2_t$.
+
+- $E(\eta_t) = 0$, $\cov(\eta_t, \eta_{t-i}) = 0$ for $i \geq 1$, but
+  usually $\eta_t$ is not i.i.d.
+
+- A GARCH(m, s) model can be written as
+  \begin{equation*}
+  a^2_t = \alpha_0 + \sum_{i=1}^{\mathrm{max}(m, s)} (\alpha_i + \beta_i) a^2_{t-i} + \eta_t - \sum_{j=1}^s \beta_j \eta_{t-j}
+  \end{equation*}
+  which can be regarded as an ARMA form for the squared series
+  $a^2_t$.
+
+- For stationarity of $a^2_t$, we must require that the characteristic
+  roots of the above ARMA representation lie within the unit circle.
+
+
+* Properties of GARCH(1, 1)
+
+** The Properties of GARCH(1, 1)
+
+Consider a GARCH(1, 1)
+\[ \sigma^2_t = \alpha_0 + \alpha_1 a^2_{t-1} + \beta_1 \sigma^2_{t-1} \]
+where 
+$$\alpha_0 > 0, 0 < \alpha_1 \leq 1, 0 \leq \beta_1 \leq 1,
+\text{ and } \alpha_1 + \beta_1 < 1$$
+
+*** The mean of $a_t$
+
+- The unconditional mean: $E(a_t) = E(\sigma_t \epsilon_t) = E(\sigma_t) E(\epsilon_t) = 0$
+
+- The conditional mean: $E_{t-1}(a_t) = \sigma_t E_{t-1}(\epsilon_t) = \sigma_t
+  E(\epsilon_t) = 0$
+
+** The variance of $\epsilon_t$
+
+*** The conditional variance
+$$E_{t-1}(a^2_t) = \sigma^2_t = \alpha_0 + \alpha_1 \alpha^2_{t-1} +
+\beta_1 \sigma^2_{t-1}$$
+
+*** The unconditional variance
+\begin{align*}
+& \alpha^2_t = \epsilon^2_t (\alpha_0 + \alpha_1 \alpha^2_{t-1} +
+\beta_1 \sigma^2_{t-1}) \\
+\Rightarrow & E(a^2_t) = E(\epsilon^2_t) \left[\alpha_0 + \alpha_1 E(a^2_{t-1}) +
+\beta_1 E(\sigma^2_{t-1}) \right] \\
+\Rightarrow & E(a^2_t) = \alpha_0 + (\alpha_1 + \beta_1) E(a^2_{t-1}) 
+\end{align*}
+
+Let $E(a^2_t) = E(a^2_{t-1})$. We have
+\[ E(a^2_t) = \frac{\alpha_0}{1 - \alpha_1 - \beta_1} \]
+
+For the variance must be positive, we require $\alpha_1 + \beta_1 <
+1$. 
+
+** The variance of $\epsilon_t$ (cont'd)
+
+From the ARMA representation of a GARCH(m, s) model
+\begin{equation*}
+a^2_t = \alpha_0 + 
+\sum_{i=1}^{\mathrm{max}(m,s)}(\alpha_i + \beta_i) a^2_{t-i} + \eta_t - \sum_{j=1}^s \beta_j \eta_{t-j}
+\end{equation*}
+we can also derive the unconditional variance of a stationary $a_t^2$ series
+is 
+\begin{equation*}
+E(a^2_t) = \frac{\alpha_0}{1-\sum_{i=1}^{\mathrm{max}(m,s)}(\alpha_i + \beta_i)}
+\end{equation*}
+in which we must require $\sum_{i=1}^{\mathrm{max}(m,s)}(\alpha_i +
+\beta_i) <1$. 
+
+** The autocorrelation and kurtosis
+
+*** The autocorrelation function
+
+$$E(a_t a_{t-i}) = E(\sigma_t \epsilon_t \sigma_{t-i} \epsilon_{t-i})
+= 0$$
+
+*** The kurtosis
+
+Assume that $\epsilon_t \sim N(0, 1)$. Given that $1 - (\alpha_1 +
+\beta_1)^2 - 2\alpha^2_1 > 0$, the kurtosis of $a_t$ is
+\begin{equation*}
+\frac{3[1 - (\alpha_1 + \beta_1)^2]}{1 - (\alpha_1 + \beta_1)^2 - 2\alpha^2_1} > 3
+\end{equation*}
+That is, the tail distribution of a GARCH(1, 1) process is heavier
+than that of a normal distribution. 
+
+** Volatility persistence
+
+The roles of $\alpha_1$ and $\beta_1$ in volatility persistence are different
+- The larger is $\alpha_1$, the larger is the response of $\sigma^2_t$
+  to new information. 
+  \[\text{A shock of } \epsilon_t \rightarrow a_t \rightarrow
+  \sigma^2_{t+1} \]
+
+- The larger is $\beta_1$, the more persistence is the conditional
+  variance. 
+  \[\text{A shock of } \epsilon_t \rightarrow a_t \rightarrow
+  \sigma^2_{t+1} \rightarrow \sigma^2_{t+2} \]
+
+** Volatility persistence
+
+Consider two GARCH(1, 1) models
+\begin{gather*}
+\sigma^2_t = 1 + 0.6 a^2_{t-1} + 0.2 \sigma^2_{t-1} \\
+\sigma^2_t = 1 + 0.2 a^2_{t-1} + 0.6 \sigma^2_{t-1}
+\end{gather*}
+#+ATTR_LATEX: :width 0.9\textwidth :height 0.6\textheight :float t
+[[file:img/volatile_persist.png]]
+
+
+* Estimation and forecasting
+
+** Maximum likelihood estimation
+
+The conditional log-likelihood function is similar to that of ARCH model
+\begin{equation}
+\label{eq:arch-logL}
+\ell(\boldsymbol{\alpha}, \boldsymbol{\beta} | a_1, \ldots, a_T) = 
+\sum_{t=1}^T \left[ -\frac{1}{2} \ln(2\pi) - \frac{1}{2} \ln(\sigma^2_t) - \frac{1}{2} \frac{a^2_t}{\sigma^2_t}  \right]
+\end{equation}
+
+The difference is that now $\sigma^2_t$ is a GARCH model
+\[\sigma^2_t = \alpha_0 + \sum_{i=1}^m \alpha_i a^2_{t-i} +
+\sum_{j=1}^s \beta_j \sigma^2_{t-j} \]
+
+** Check model adequacy 
+
+*** Compute the standardized residuals
+
+\[ \tilde{a}_t = \frac{\hat{a}_t}{\hat{\sigma}_t} \]
+
+*** Check the mean equation
+
+Use the Ljung-Box statistic for {$\tilde{a}_t$}.
+
+*** Check the volatility equation
+
+Use the Ljung-Box statistic for {$\tilde{a}_t$}.
+
+** Model diagnosis 
+
+*** Goodness of fit
+- SSR. Since $\epsilon_t = a^2_t / \sigma^2_t$, we can compute SSR as
+  \[ SSR = \sum_{t=1}^T \frac{\hat{a}^2_t}{\hat{\sigma}^2_t} \]
+
+- The log-likelihood function. 
+
+  \[2\ell = \sum_{t=1}^T \left[ \ln(\hat{\sigma}^2_t) + \frac{\hat{a}^2_t}{\hat{\sigma}^2_t}
+  \right] - T\ln(2\pi) \] 
+
+*** Information criteria
+
+- $AIC = -2\ell + 2n$
+- $BIC = -2\ell + n \ln(T)$
+
+
+
+** Forecasting
+
+*** 1-step-ahead forecast
+
+\begin{equation*}
+\sigma^2_h(1) = \alpha_0 + \alpha_1 a^2_h + \beta_1 \sigma^2_h
+\end{equation*}
+
+*** 2-step-ahead forecast
+\begin{equation}
+\begin{split}
+\sigma^2_{h+2} &= \alpha_0 + \alpha_1 a^2_{h+1} + \beta_1 \sigma^2_{h+1} \\
+&= \alpha_0 + (\alpha_1 + \beta_1) \sigma^2_{h+1} + \alpha_1 \sigma^2_{h+1}(\epsilon^2_{h+1}-1)
+\end{split}
+\end{equation}
+
+Given that $E(\epsilon^2_{h+1} - 1 | F_h) = 0$, the 2-step-ahead
+forecast is
+\[ \sigma^2_h(2) = \alpha_0 + (\alpha_1 + \beta_1)\sigma^2_h(1) \]
+
+** Forecasting (cont'd)
+
+*** The \ell-step-ahead forecast
+
+\[ \sigma^2_h(\ell) = \alpha_0 + (\alpha_1 +
+\beta_1)\sigma^2_h(\ell-1), \text{ for } \ell > 1 \]
+
+*** As $\ell \rightarrow \infty$
+\begin{equation*}
+\sigma^2(\ell) =
+\frac{\alpha_0\left[1-(\alpha_1+\beta_1)^{\ell-1}\right]}{1-\alpha_1-\beta_1}
++ (\alpha_1+\beta_1)^{\ell-1}\sigma^2_h(1)
+\end{equation*}
+Therefore,
+\begin{equation*}
+\sigma^2(\ell) \rightarrow \frac{\alpha_0}{1-\alpha_1-\beta_1}, \text{ as } \ell\rightarrow\infty
+\end{equation*}
+provided that $\alpha_1+\beta_1<1$. 

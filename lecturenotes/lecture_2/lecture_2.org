@@ -414,7 +414,7 @@ volatility that high-volatility periods tend to follow previous
 high-volitility periods.
 
 
-* TODO Estimation and Forecasting
+* Estimation and Forecasting
 
 ** Order determination
 
@@ -442,7 +442,7 @@ $m$. However, the PACF may not be effective when the sample size is
 small.
 
 
-** TODO Maximum likelihood estimation
+** Maximum likelihood estimation
 
 *** A brief introduction of maximum likelihood function
 
@@ -511,8 +511,7 @@ And the log-likelihood function is
 
 
 
-** TODO COMMENT Model checking
-
+** TODO Model checking
 
 ** TODO COMMENT Forecasting
 
@@ -520,5 +519,6 @@ And the log-likelihood function is
 ** TODO COMMENT The weakness of ARCH models
 
 - Postpone this discussion when starting GARCH models.
+
 
 * TODO COMMENT Applications with R
