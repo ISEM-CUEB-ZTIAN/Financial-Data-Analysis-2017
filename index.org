@@ -49,7 +49,6 @@ Please first read the syllabus carefully ([[file:syllabus/syllabus_financial_dat
   Markdown ([[file:lecturenotes/rmarkdown_tutorial/rmarkdown_cheatsheet.pdf][pdf]]). More documents about R Markdown can be found in
   http://rmarkdown.rstudio.com/.
 
-
 ** Lecture 2: The ARCH Model
 
 - Lecture notes ([[file:lecturenotes/lecture_2/slide_lecture_2.pdf][pdf]])
@@ -60,6 +59,10 @@ Please first read the syllabus carefully ([[file:syllabus/syllabus_financial_dat
 ** Lecture 3: The GARCH Model
 
 - Lecture notes ([[file:lecturenotes/lecture_3/slide_lecture_3.pdf][pdf]])
+
+** Lecture 4: Alternative Volatility Models
+
+- Lecture notes ([[file:lecturenotes/lecture_4/slides_lecture_4.pdf][pdf]])
 
 * Assignments
 
