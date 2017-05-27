@@ -1,0 +1,287 @@
+% Created 2017-05-27 Sat 13:09
+% Intended LaTeX compiler: pdflatex
+\documentclass[presentation,10pt]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\newtheorem{mydef}{Definition}
+\newtheorem{mythm}{Theorem}
+\newcommand{\dx}{\mathrm{d}}
+\newcommand{\var}{\mathrm{Var}}
+\newcommand{\cov}{\mathrm{Cov}}
+\newcommand{\corr}{\mathrm{corr}}
+\newcommand{\pr}{\mathrm{Pr}}
+\newcommand{\rarrowd}[1]{\xrightarrow{\text{ \textit #1 }}}
+\DeclareMathOperator*{\plim}{plim}
+\newcommand{\plimn}{\plim_{n \rightarrow \infty}}
+\usepackage{booktabs}
+\usepackage{color}
+\usepackage{caption}
+\usepackage{subcaption}
+\def\mathbi#1{\textbf{\em #1}}
+\setlength{\parskip}{1em}
+\newcommand{\undersetdisp}[2]{\underset{\displaystyle #1}{#2}}
+\usetheme{CambridgeUS}
+\usecolortheme{beaver}
+\author{Zheng Tian}
+\date{}
+\title{Lecture 4: Alternative Volatility Models}
+\hypersetup{
+ pdfauthor={Zheng Tian},
+ pdftitle={Lecture 4: Alternative Volatility Models},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 25.1.1 (Org mode 9.0.3)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\begin{frame}{Outline}
+\tableofcontents
+\end{frame}
+
+
+
+\section{The IGARCH Model}
+\label{sec:orgbbb9d90}
+
+\section{The GARCH-M Model}
+\label{sec:org1fa1522}
+
+\section{Models with Asymmetry: EGARCH and TGARCH}
+\label{sec:orgb56056f}
+
+\begin{frame}[label={sec:orgfee991a}]{EGARCH(m, s): general case}
+\begin{itemize}
+\item EGARCH(m, s)
+
+\begin{align*}
+a_t &= \sigma_t \epsilon_t,\; \epsilon_t \sim i.i.d.(0, 1) \\
+\ln(\sigma^2_t)&= \alpha_0 + \frac{1 + \beta_1 B + \cdots + \beta_{s-1} B^{s-1}}{1 - \alpha_1 B - \cdots - \alpha_m B^m} g(\epsilon_{t-1})
+\end{align*}
+
+\item Asymmetry via \(g(\epsilon_t)\)
+
+\begin{align*}
+g(\epsilon_t) &= \theta \epsilon_t + \gamma \left[ \left| \epsilon_t \right| - E \left( |\epsilon_t| \right)  \right] \\
+&=
+\begin{cases}
+(\theta + \gamma)\epsilon_t - \gamma E(|\epsilon_t|), \text{ when } \epsilon_t \geq 0  \\
+(\theta - \gamma)\epsilon_t - \gamma E(|\epsilon_t|), \text{ when } \epsilon_t < 0
+\end{cases}
+\end{align*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[shrink,label={sec:org599b799}]{Example: EGARCH(1, 1)}
+\begin{itemize}
+\item EGARCH(1, 1)
+\begin{align*}
+a_t &= \sigma_t \epsilon_t,\; \epsilon_t \sim i.i.d. N(0, 1) \text{ and } E(|\epsilon_t|) = \sqrt{2/\pi} \\ \\
+\ln(\sigma^2_t)&= \alpha_0 + \frac{1}{1 - \alpha B} g(\epsilon_{t-1}) \\
+g(\epsilon_t) &= \theta \epsilon_t + \gamma \left( |\epsilon_t| - \sqrt{2/\pi} \right)
+\end{align*}
+
+\item Derive \(\sigma^2_t\)
+\begin{equation*}
+(1 - \alpha B) \ln(\sigma^2_t) = 
+\begin{cases}
+\alpha^{*} + (\theta + \gamma) \epsilon_{t-1},\; \text{ when } \epsilon_{t-1} \geq 0 \\
+\alpha^{*} + (\theta - \gamma) \epsilon_{t-1},\; \text{ when } \epsilon_{t-1} < 0
+\end{cases}
+\end{equation*}
+where \(\alpha^{*} = \alpha_0(1 - \alpha) - \gamma
+  \sqrt{2/\pi}\). Therefore, 
+\begin{equation*}
+\sigma^2_t = \sigma^2_{t-1} \exp(\alpha^{*}) 
+\begin{cases}
+\exp \left( (\gamma+\theta) \frac{a_{t-1}}{\sigma_{t-1}} \right) \\
+\exp \left( (\gamma-\theta) \frac{|a_{t-1}|}{\sigma_{t-1}} \right)
+\end{cases}
+\end{equation*}
+\end{itemize}
+\end{frame}
+
+\section{The CHARMA model}
+\label{sec:org5e505bb}
+
+\begin{frame}[label={sec:orga1f3b54}]{What is a CHARMA model?}
+\begin{itemize}
+\item CHARMA: Conditional heteroskedasticity ARMA model (Tsay, 1987)
+\end{itemize}
+
+\vspace{0.05cm}
+
+\begin{itemize}
+\item A general CHARMA model
+\begin{align*}
+r_t &= \mu_t + a_t \\
+a_t &= \delta_{1t} a_{t-1} + \delta_{25} a_{t-2} + 
+       \cdots + \delta_{mt} a_{t-m} + \eta_t
+\end{align*}
+
+\item Gaussian white noise: \(\eta_t \sim i.i.d. N(0, \sigma^2_{\eta})\)
+\end{itemize}
+
+\vspace{0.05cm}
+
+\begin{itemize}
+\item Random coefficient: \(\boldsymbol{\delta}_t = (\delta_{1t},
+  \delta_{2t}, \ldots, \delta_{mt})^{\prime}\).
+\end{itemize}
+
+\vspace{0.05cm}
+
+\begin{itemize}
+\item Let \(\mathrm{a}_{t-1} = (a_{t-1}, \ldots, a_{t-m})\). Then CHARMA
+model is rewritten as 
+\[ a_t = \mathrm{a}_{t-1}^{\prime} \boldsymbol{\delta}_t + \eta_t \]
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label={sec:orgbb8d9d2}]{Random coefficients}
+\begin{itemize}
+\item \(\{\boldsymbol{\delta}_t\} = \{(\delta_{1t}, \delta_{2t}, \ldots,
+  \delta_{mt})^{\prime}\}\) is a sequence of i.i.d. random vectors.
+\end{itemize}
+
+\vspace{0.1cm}
+
+\begin{itemize}
+\item \(\{\boldsymbol{\delta}_t\}\) is independent of \(\{\eta_t\}\).
+\end{itemize}
+
+\vspace{0.1cm}
+
+\begin{itemize}
+\item \(E(\boldsymbol{\delta}_t) = \mathbf{0}\) and \(E(\boldsymbol{\delta}_t
+  \boldsymbol{\delta}_t^{\prime}) = \boldsymbol{\Omega}\).
+\begin{equation*}
+\boldsymbol{\Omega} = 
+\begin{pmatrix}
+\omega_{11} & \omega_{12} & \cdots & \omega_{1m} \\
+\omega_{21} & \omega_{22} & \cdots & \omega_{2m} \\
+\vdots      & \vdots      & \ddots & \vdots \\
+\omega_{m1} & \omega_{m2} & \cdots & \omega_{mm} \\
+  \end{pmatrix}
+\end{equation*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label={sec:org7e1926a}]{Conditional variance of \(a_t\) in CHARMA}
+\begin{itemize}
+\item The conditional variance of \(a_t\), i.e. \(\var_{t-1}(a_t) = \sigma^2_t\):
+\begin{equation*}
+\begin{split}
+  \sigma^2_t &= \sigma^2_{\eta} + \mathbf{a}_{t-1}^{\prime} \boldsymbol{\Omega} \mathbf{a}_{t-1} \\
+             &= \sigma^2_{\eta} + (a_{t-1}, \ldots, a_{t-m})\boldsymbol{\Omega} (a_{t-1}, \ldots, a_{t-m})^{\prime}
+\end{split}
+\end{equation*}
+\end{itemize}
+
+\vspace{0.1cm}
+
+\begin{itemize}
+\item Since \(\boldsymbol{\Omega}\) is positive semi-definite, \(\sigma^2_t
+  \geq \sigma^2_{\eta} > 0\) is always true.
+\end{itemize}
+
+\vspace{0.1cm}
+
+\begin{itemize}
+\item The conditional variance is similar to ARCH but with difference.
+
+\begin{itemize}
+\item When \(m = 1\), \(\sigma^2_t = \sigma^2_{\eta} + \omega_{11} a_{t-1}^2\).
+
+\item When \(m =2\), \(\sigma^2_t = \sigma^2_{\eta} + \omega_{11} a_{t-1}^2 +
+    \underbrace{2\omega_{12} a_{t-1} a_{t-2}}_{\text{cross-product term}} + \omega_{22} a^2_{t-2}\).
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label={sec:org09ff7b6}]{Problem of CHARMA}
+\begin{itemize}
+\item The number of cross-product terms increases with the order of \(m\).
+\end{itemize}
+
+\vspace{0.1cm}
+
+\begin{itemize}
+\item The higher-order properties are hard to derive.
+\end{itemize}
+\end{frame}
+
+\section{Random Coefficient Autoregressive Model (RCA)}
+\label{sec:org98ba0cb}
+
+\begin{frame}[label={sec:org2da6093}]{Why use random coefficient autoregressive model?}
+\begin{itemize}
+\item Random coefficient: account for variability among different subjects.
+\begin{itemize}
+\item Panel data; hierarchical models
+\end{itemize}
+\end{itemize}
+
+\vspace{0.2cm}
+
+\begin{itemize}
+\item Time series model: the coefficients in the mean equation evolve over time.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label={sec:org445e853}]{RCA(p)}
+\begin{itemize}
+\item The mean equation
+
+\begin{equation*}
+r_t = \phi_0 + \sum_{i=1}^p (\phi_i + \delta_{it}) r_{t-i} + a_t
+\end{equation*}
+
+\item Random coefficients
+
+\[\{\boldsymbol{\delta}_t\} = \{(\delta_{1t}, \delta_{2t}, \ldots,
+  \delta_{pt})^{\prime}\}\]
+
+\begin{itemize}
+\item Independent series;
+\item \(E(\boldsymbol{\delta}_t) = \mathbf{0}\) and
+\(\var{\boldsymbol{\delta}_t} = \boldsymbol{\Omega}_{\delta}\);
+\item \(\{\boldsymbol{\delta}_t\}\) is independent of \(\{\mathbf{a}_t\}\)
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label={sec:orga3c595c}]{Conditional mean and variance}
+\begin{itemize}
+\item The conditional mean
+
+\[\mu_t = E_{t-1}(r_t) = \phi_0 + \sum_{i=1}^p \phi_i r_{t-i} \]
+
+\item The conditional variance
+
+\begin{equation*}
+\begin{split}
+\sigma^2_t &= E_{t-1} \left((r_t - \mu_t)^2 \right) = E_{t-1} \left((\mathbf{r}_{t-1})^{\prime} \boldsymbol{\delta}_t + a_t)^2 \right) \\
+&= \sigma^2_a + (r_{t-1}, \ldots, r_{t-p}) \boldsymbol{\Omega}_{\delta} (r_{t-1}, \ldots, r_{t-p})^{\prime}
+\end{split}
+\end{equation*}
+
+\item Similar to CHARMA but with the quadratic function of \(r_{t-i}\).
+\end{itemize}
+\end{frame}
+\end{document}

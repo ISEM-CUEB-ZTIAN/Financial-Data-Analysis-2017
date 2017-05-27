@@ -1,0 +1,210 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+%\usepackage{mathtools}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+  \onehalfspacing
+\usepackage{hyperref}
+\hypersetup{colorlinks,citecolor=black,filecolor=black,linkcolor=black,urlcolor=black}
+\usepackage{tabularx}
+\usepackage[round]{natbib}
+
+\title{A Study on the Volatility of Stock Returns of Intel Corporation}
+\author{Zheng Tian \\
+        Zheng Tian}
+
+\begin{document}
+
+\maketitle
+\section{Introduction}
+\label{sec:intro}
+
+This document is to show an application of modeling volatility of stock returns using ARCH and GARCH models. The detailed explanation is in Chapter 4 in \citet{Tsay2013}. 
+
+<<echo=FALSE>>=
+knitr::opts_chunk$set(echo=FALSE)
+@
+
+<<load-lib,  results='hide', message=FALSE>>=
+library(fBasics)
+library(xtable)
+@
+
+\section{Data Description}
+\label{sec:data_descrip}
+
+\subsection*{Basic description}
+
+The data source that we consider is the monthly log stock returns of Intel Corporation from January 1973 to December 2009 for 444 observations. Table \ref{tab:descp_stats} shows the descriptive statistics, and Figure \ref{fig:plot-lnrtn} displays the time plot of the returns. 
+
+<<read-data>>=
+da <- read.table("m-intcsp7309.txt", header = TRUE)
+intc <- log(da$intc + 1)
+@
+
+<<sum-stats, results='asis'>>=
+rtn <- ts(intc, frequency = 12, start = c(1973,1))
+# get summary statistics d
+rtn_sumstat <- basicStats(rtn)
+rtn_sumstat <- as.matrix(rtn_sumstat)[c("nobs", "Minimum", "Maximum", 
+                                        "1. Quartile", "3. Quartile", 
+                                        "Stdev", "Skewness", "Kurtosis"), ]
+print(xtable(t(rtn_sumstat), 
+       caption = "The descriptive statistics of the monthly
+                  log stock returns of Intel Corp.", 
+       label = "tab:descp_stats"), 
+      caption.placement = "top")
+@
+
+<<plot-lnrtn, fig.align='center', fig.width=7, fig.height=4, fig.cap="Time plot of the monthly log returns of Intel stock">>=
+plot(rtn, type = 'l', xlab = 'years', ylab = "log(returns)")
+@
+
+\subsection*{Checking stationarity of the Intel stock returns series}
+
+<<stationary-test, results='asis'>>=
+# Ljung-Box test
+box_rtn <- Box.test(rtn, lag = 12, type = 'Ljung')
+box_absrtn <- Box.test(abs(rtn), lag = 12, type = 'Ljung')
+@
+
+Figure \ref{fig:plot-acf} shows that sample ACF of the log returns and the absolute log returns. There is no significant serial correlations in the log returns except for some minor ones at lags 7 and 14. The Ljung-Box statistic for $\log(r_t)$ shows that $Q(12)$ = \Sexpr{round(box_rtn$stat, 2)}, and the p-value is \Sexpr{round(box_rtn$p.value, 4)}, confirming that there is no serial correlation at the first 12 lags. On the other hand, the Ljung-Box statistic for $|\log(r_t)|$ shows that $Q(12)$ = \Sexpr{round(box_absrtn$stat, 2)} with the p-value being \Sexpr{round(box_absrtn$p.value, 4)}, rejecting the null hypothesis of no serial correlation. Consequently, the monthly log returns of Intel stock are serially correlated but dependent. 
+
+<<plot-acf, fig.align='center', fig.width=7, fig.height=5, fig.cap="Sample ACF of the monthly log returns of Intel stock">>=
+# Plot ACFs
+op <- par(mfcol = c(2,1))
+acf(rtn, lag = 24, main = "log(return) series") # ACF plots
+acf(abs(rtn), lag = 24, main = "abs(log(return)) series") 
+par(op)
+@
+
+\subsection*{Detecting ARCH effect}
+
+<<arch-test, results='hide'>>=
+## ARCH test
+# The Ljung-Box test for the squared innovations
+y <- rtn - mean(rtn)
+arch_box <- Box.test(y^2, lag = 12, type = 'Ljung')
+
+# LM test
+source("archTest.R")  # R script available on the book web site.
+archTest(rtn, 12) 
+@
+
+We can use the Ljung-Box test for {$a^2_t$} to test whether there is an ARCH effect in the innovation series calculated from the log return series. The Ljung-Box statistic, $Q(12)$, is \Sexpr{round(arch_box$stat, 2)} with the p-value being \Sexpr{round(arch_box$p.value, 4)}, rejecting the null hypothesis and confirming the ARCH effects. 
+
+\section{The Volatility Model}
+\label{sec:volatility_model}
+
+\subsection*{The ARCH model}
+
+We first build an ARCH(3) model with the Gaussian $\epsilon_t$ and then estimate an ARCH(1) model because only $\alpha_1$ is significant in the ARCH(3) model. Then, we replace the normal distribution with a Student-t distribution. All the results are reported in Table \ref{tab:arch-results}. 
+
+\begin{equation}
+r_t = \mu + a_t,\, 
+a_t = \sigma_t \epsilon_t,\, 
+\epsilon^2_{t}=\alpha_0 + \alpha_1 a^2_{t-1} + \alpha_2 a^2_{t-2} 
++ \alpha_3 a^2_{t-3}
+\end{equation}
+
+<<estimate-arch-norm, results='hide'>>=
+library(fGarch) # Load package 
+
+# ARCH(3)
+m1 <- garchFit(~ 1 + garch(3,0), data=rtn, trace=F) # Fit an ARCH(3) model
+summary(m1)
+# ARCH(1)
+m2 <- garchFit(~ 1 + garch(1,0), data=rtn, trace=F)
+summary(m2)
+@
+
+
+<<estimate-arch-std, results='hide', message=FALSE>>=
+m3 <- garchFit(~1 + garch(1,0), data=rtn, trace=F, cond.dist="std")
+summary(m3)
+@
+
+
+<<report-arch, results='asis', message=FALSE>>=
+library(stargazer)
+stargazer(m1, m2, m3, 
+          title = "The Estimation Results of ARCH Models", 
+          label = "tab:arch-results",
+          dep.var.labels.include = FALSE, 
+          header = FALSE, float = TRUE)
+@
+
+The log-likelihood function and AIC point to the ARCH(1) model, while BIC points to the ARCH(3) model. We check the model adequacy by testing autocorrelation in the stardardized residuals and squared residuals. 
+
+<<model-checking-resid, fig.cap="Model checking of the Gaussian ARCH(1) model", fig.width=7, fig.height=6>>=
+resi <- residuals(m2, standardize=T)
+tdx <- c(1:444)/12 + 1973
+
+op <- par(mfcol=c(3, 1))
+plot(tdx, resi, xlab='year', ylab='stand-resi', type='l')
+acf(resi, lag=20)
+pacf(resi^2, lag=20) 
+par(op)
+# plot(m2)
+@
+
+\subsection*{The GARCH model}
+
+While the ARCH models fit the data well, there is still some correlation in the squared standardized residuals at the lags after 10. Instead of adding many lagged terms in an ARCH model, we entertain a GARCH(1, 1,) model for the log return series for the sake of parsimony. 
+
+A GARCH(1, 1) model is as follows
+\begin{align*}
+r_t &= \mu + a_t,\, a_t = \sigma_t \epsilon_t,\, \epsilon_t \sim N(0, 1) \\
+\sigma^2_t &= \alpha_0 + \alpha_1 a^2_{t-1} + \beta_1 \sigma^2_{t-1}
+\end{align*}
+
+We plot the fitted volatility and the standardized residuals from the GARCH(1, 1) model in Figure \ref{fig:plot-garch}. Next, we check model adequacy the ACF of {$\tilde{a}_t$} and {$\tilde{a}^2_t$} in Figure \ref{fig:model-chk-garch}. And add the predicative intervals to the log return series in Figure \ref{fig:predict-intval}.
+
+<<estimate-garch, results='hide'>>=
+m4 <- garchFit(~ 1 + garch(1, 1), data=rtn, trace=F)
+summary(m4)
+v1 <- volatility(m4)  # Obtain volatility
+resi <- residuals(m4, standardize = T) # Standardized residuals
+vol <- ts(v1, frequency = 12, start = c(1973,1))
+res <- ts(resi, frequency = 12, start = c(1973,1))
+@
+
+<<plot-garch, fig.cap="Time plots for a fitted Gaussian GARCH(1, 1) model", fig.width=7, fig.height=6>>=
+op <- par(mfcol = c(2, 1))  # Show volatility and residuals
+plot(vol, xlab='year', ylab='volatility', type='l')
+plot(res, xlab='year', ylab='st. resi', type='l') 
+par(op)
+@
+
+<<model-chk-garch, fig.cap="Sample ACF and PACF of the standardized residuals and their squared series of a Gaussian GARCH(1,1) model", fig.width=7, fig.height=6>>=
+op <- par(mfcol=c(2, 2)) # Obtain ACF & PACF
+acf(resi, lag = 24)
+pacf(resi, lag = 24)
+acf(resi^2, lag = 24)
+pacf(resi^2, lag = 24) 
+par(op)
+@
+
+<<predict-intval, fig.cap="Time plot of the monthly log returns of Intel stock with the point-wise predicative intervals", fig.width=7, fig.height=6>>=
+op <- par(mfcol = c(1,1))
+mu <- coef(m4)["mu"]
+upp <- mu + 2 *v1
+low <- mu - 2 * v1
+tdx <- c(1:444)/12 + 1973
+plot(tdx, rtn, xlab='year', ylab='series', type='l', ylim=c(-0.6, 0.6))
+lines(tdx, upp, lty=2, col='red')
+lines(tdx, low, lty=2, col='red')
+abline(h = c(mu))
+@
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+\bibliography{fda}
+\bibliographystyle{unsrtnat}
+
+
+\end{document}

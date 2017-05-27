@@ -1,0 +1,61 @@
+\documentclass[a4paper,11pt]{article}
+%\usepackage[utf8]{inputenc}
+%\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+  \onehalfspacing
+\usepackage{hyperref}
+\hypersetup{colorlinks,citecolor=black,filecolor=black,linkcolor=black,urlcolor=black}
+\usepackage{tabularx}
+
+\title{A Study on the Volatility of Stock Returns of Intel Corporation}
+\author{Zheng Tian \\
+        Zheng Tian}
+
+
+\begin{document}
+
+\maketitle
+\section{Introduction}
+\label{sec:intro}
+
+In this study we study the volatilty of stock returns of Intel Corporation from January 1973 to December 2009. 
+
+
+\section{Data Description}
+\label{sec:data_descrip}
+
+Read the data. 
+<<ln_rtn, echo=FALSE, fig.align='center', fig.width=7, fig.height=5, fig.cap="Time plot of the monthly log returns of Intel stock">>=
+da <- read.table("ch4data/m-intcsp7309.txt", header = TRUE)
+# head(da)
+intc <- log(da$intc + 1)
+rtn <- ts(intc, frequency = 12, start = c(1973,1))
+plot(rtn, type = 'l', xlab = 'year', ylab = 'ln-rtn')
+@
+
+
+\section{The Volatility Model}
+\label{sec:volatility_model}
+
+\subsection*{The ARCH model}
+
+We build an ARCH(3) model.
+
+\begin{equation}
+r_t = \mu + a_t, a_t = \sigma_t \epsilon_t, 
+\end{equation}
+
+\subsection*{The GARCH model}
+
+
+\subsection*{Model diagnosis and comparison}
+
+
+\section{Conclusion}
+\label{sec:conclusion}
+
+\end{document}
